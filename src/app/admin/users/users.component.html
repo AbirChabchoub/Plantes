@@ -1,0 +1,37 @@
+<div class="row">
+  <!-- [ Hover-table ] start -->
+  <div class="col-md-12">
+    <div class="table-responsive">
+      <table class="table table-hover">
+        <thead>
+          <tr>
+          
+            <th>Nom</th>
+            <th>Prénom</th>
+            <th>Adresse email</th>
+            <th>Numéro de téléphone</th>
+            <th>Adresse</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let x of users">
+           
+            <td>{{x.firstName}}</td>
+            <td>{{x.lastName}}</td>
+            <td>{{x.email}}</td>
+            <td>{{x.tel}}</td>
+            <td>{{x.address}}</td>
+            <td>
+              <button class="btn btn-success button" (click)='deleteUser(x._id)'>Supprimer</button>
+              <button class="btn btn-secondary button" (click)='updateUser(x._id)'>Modifer</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+  <!-- [ Hover-table ] end -->
+
+</div>

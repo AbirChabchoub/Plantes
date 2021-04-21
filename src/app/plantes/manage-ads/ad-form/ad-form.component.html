@@ -1,0 +1,105 @@
+<!-- Start Banner Area -->
+<section class="banner-area organic-breadcrumb">
+    <div class="container">
+        <div class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
+            <div class="col-first">
+                <h1>Créer une annonce</h1>
+                <nav class="d-flex align-items-center">
+                    <a href="index.html">Accueil<span class="lnr lnr-arrow-right"></span></a>
+                    <a href="category.html">Créer une annonce</a>
+                </nav>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End Banner Area -->
+
+
+
+
+
+<section class="login_box_area section_gap">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="login_form_inner">
+                    <h3 id="titleOne">Décrivez votre produit  </h3>
+                    <form class="row login_form" #adForm='ngForm' (ngSubmit)="add()">
+
+                        <div class="col-md-12 form-group">
+                            <div class="form-floating mb-3">
+                                <input type="email" class="form-control" id="floatingInput" placeholder="Nom du produit"  [(ngModel)]="ad.productName" [ngModelOptions]="{standalone:true}">
+                                <label for="floatingInput">Nom du produit</label>
+                              </div>
+                        </div>
+                      
+
+                        <div class="col-md-12 form-group">
+                        <select class="form-select" aria-label="Default select example" [(ngModel)]="ad.category" [ngModelOptions]="{standalone:true}" >
+                            <option selected *ngFor="let x of category" >{{x?.categoryName}}</option>
+
+                            <!-- <option value="arbre">arbre</option>
+                            <option value="bouture">bouture</option>
+                            <option value="graines">graines</option>
+                            <option value="Pot">Pot</option> -->
+                          </select>
+                        </div>
+
+
+                        <div class="col-md-12 form-group">
+                            <div class="form-floating mb-3">
+                                <input type="text" class="form-control" id="floatingInput" placeholder="Description"   [(ngModel)]="ad.description" [ngModelOptions]="{standalone:true}" style="height: 100px;">
+                                <label for="floatingInput">Description</label>
+                              </div>
+                        </div>
+                  <hr class="hr">
+                        <br><br>
+                        
+                        <h3>Capturez votre produit </h3>
+                        <div class="col">
+                        <div class="col-md-12 form-group">
+                            <label for="firstImg">
+                                <i class="fa fa-camera fa-7x" style="cursor: pointer;" (click)='filePicker.click()' c></i></label>
+                            <input type="file" class="form-control" name="name"  [(ngModel)]="ad.firstPicture"
+                                [ngModelOptions]="{standalone:true}" style="display:none;visibility:none;"  #filePicker (change)='onImageSelected($event)'>
+                                <img [src]="imagePreview">
+                                <br>
+                                <span style="color:brown">Obligatoire</span>
+                        </div>
+                        <br>
+                        
+                        <div class="col-md-12 form-group">
+                            <label for="secondImg"><i class="fa fa-camera fa-7x" style="cursor: pointer;"></i></label>
+                            <input type="file" class="form-control" name="name" id="secondImg" [(ngModel)]="ad.secondPicture"
+                                [ngModelOptions]="{standalone:true}" style="display:none;visibility:none;">
+                               
+                        </div>
+                    </div>
+                    <hr class="hr">
+                    <br><br>
+                        <h3>Fixer le prix </h3>
+
+                      
+                        <div class="col-md-12 form-group">
+                            <div class="form-floating mb-3">
+                                <input type="number" class="form-control" id="floatingInput" placeholder="Prix"   [(ngModel)]="ad.price" [ngModelOptions]="{standalone:true}" min="0">
+                                <label for="floatingInput">Prix de vente</label>
+                              </div>
+                        </div>
+
+                        <br>
+                        <div class="col-md-12 form-group">
+                            <span>Vous bénéficierez s'il est vendu de : </span>
+                            <span>{{ad.price*0.8}} DT </span>
+                            
+                        </div>
+                        <div class="col-md-12 form-group">
+                            <button type="submit" value="submit" class="primary-btn" >Publier</button>
+                           
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

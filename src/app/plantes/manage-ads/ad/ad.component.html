@@ -1,0 +1,34 @@
+<div class="single-product">
+    <button class="productDetailImg"><img class="img-fluid " src="assets/plantes/img/product/p1.jpg" alt=""
+            (click)="goToProductDetails(adsInput._id)"></button>
+            <br>
+    <div class="product-details">
+        <h5 class="details">{{adsInput.productName}}</h5>
+        <div >
+            <h6 class="details">{{adsInput.category }}</h6>
+
+        </div>
+        <div class="price details">
+            <h6>{{adsInput.price}} DT</h6>
+            <!-- <h6 class="l-through">$210.00</h6> -->
+        </div>
+        <div class="prd-bottom buttons" >
+            <a href="" class="social-info">
+                <span class="ti-bag"></span>
+                <p class="hover-text">add to bag</p>
+            </a>
+            <a href="" class="social-info">
+                <span class="lnr lnr-heart"></span>
+                <p class="hover-text">Wishlist</p>
+            </a>
+            <!-- <a href="" class="social-info">
+                <span class="lnr lnr-sync"></span>
+                <p class="hover-text">compare</p>
+            </a> -->
+            <!-- <a href="" class="social-info">
+                <span class="lnr lnr-move"></span>
+                <p class="hover-text">view more</p>
+            </a> -->
+        </div>
+    </div>
+</div>
