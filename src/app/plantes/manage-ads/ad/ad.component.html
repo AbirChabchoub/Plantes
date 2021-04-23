@@ -1,6 +1,6 @@
 <div class="single-product">
-    <button class="productDetailImg"><img class="img-fluid " src="assets/plantes/img/product/p1.jpg" alt=""
-            (click)="goToProductDetails(adsInput._id)"></button>
+    <button class="productDetailImg"><img class="img-fluid " [src]="adsInput.image" alt=""
+            (click)="goToProductDetails(adsInput._id)" ></button>
             <br>
     <div class="product-details">
         <h5 class="details">{{adsInput.productName}}</h5>

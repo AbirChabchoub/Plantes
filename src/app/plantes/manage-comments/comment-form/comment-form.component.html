@@ -1,27 +1,15 @@
 <div class="review_box">
     <h4>Ajouter un commentaire</h4>
-    <form class="row contact_form" [formGroup]="commentForm">
-        <div class="col-md-12">
-            <div class="form-group">
-                <input type="text" class="form-control" name="name" placeholder="Nom & Prénom"
-                    formControlName="fullName">
-            </div>
-            <!-- full name validator and Error -->
-            <div *ngIf='commentForm.controls["fullName"].invalid && (commentForm.controls["fullName"].touched 
-                                    || commentForm.controls["fullName"].dirty)'>
-                <div *ngIf='commentForm.controls["fullName"].errors?.required' style="color:red">Ce champ
-                    est obligatoire</div>
-            </div>
-        </div>
-     
+    <form class="row contact_form" #commentForm="ngForm" (ngSubmit)="addComment()">
+
         <div class="col-md-12">
             <div class="form-group">
                 <textarea class="form-control" name="message" rows="1" placeholder="Commentaire"
-                    formControlName="message"></textarea>
+                    [(ngModel)]="comment.message"></textarea>
             </div>
         </div>
         <div class="col-md-12 text-right">
-            <button type="submit" value="submit" class="btn primary-btn" (click)="addComment(commentForm.value)">Ajouter
+            <button type="submit" value="submit" class="btn primary-btn">Ajouter
                 commentaire</button>
         </div>
     </form>

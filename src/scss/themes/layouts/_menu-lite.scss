@@ -1123,7 +1123,8 @@
 	}
 
 	.pcoded-menu-caption {
-		color: #8090a5;
+		// color: #8090a5;
+		
 	}
 
 	.pcoded-inner-navbar {
@@ -1132,7 +1133,7 @@
 			&:focus,
 			&:hover {
 				> a {
-					color: #e5efff;
+					color: #fff1e5;
 					font-weight: 600;
 				}
 			}
@@ -1143,7 +1144,7 @@
 				&:hover {
 					> a {
 						&:before {
-							background: #e5efff;
+							background: #e8ffe5;
 						}
 					}
 				}
@@ -1324,7 +1325,7 @@
 				&:hover {
 					a {
 						box-shadow: none;
-						color: #fff;
+						color: rgb(255, 255, 255);
 						background: transparent;
 					}
 				}

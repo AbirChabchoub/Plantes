@@ -66,7 +66,7 @@ const storage = multer.diskStorage({
     filename: (req, file, cb) => {
         const name = file.originalname.toLowerCase().split(' ').join('-');
         const extension = MIME_TYPE[file.mimetype];
-        const imgName = name + '-' + Date.now() + '-crococoder-' + '.' +
+        const imgName = name + '-' + Date.now() + '-plantes-' + '.' +
             extension;
         cb(null, imgName);
     }
@@ -99,41 +99,41 @@ mongoose.connect('mongodb://localhost:27017/plantesDB', { useNewUrlParser: true,
 
 
 //traitement logique de ajouter annonce 
-// app.post("/ads", multer({ storage: storage }).single('img'), (req, res) => {
-//     console.log('here in add annonce', req.body);
-//     const ad = new Ad({
-//         productName: req.body.productName,
-//         category: req.body.category,
-//         description: req.body.description,
-//         price: req.body.price
-
-//     });
-//     ad.save().then(
-//         res.status(200).json({
-//             message: "Match Added successfully"
-//         })
-//     )
-// })
-
-app.post("/ads", (req, res) => {
+app.post("/ads", multer({ storage: storage }).single('image'), (req, res) => {
     console.log('here in add annonce', req.body);
-    // const idConnectedUser =JSON.parse(localStorage.getItem('connectedUser'));
+    url = req.protocol + '://' + req.get('host');
     const ad = new Ad({
-        // connectedUserId:req.body.connectedUserId,
         productName: req.body.productName,
         category: req.body.category,
         description: req.body.description,
         price: req.body.price,
-        userId: req.body.userId
-
+        image: url + '/images/' + req.file.filename
     });
-    // console.log(' connectedUserId ', connectedUserId);
     ad.save().then(
         res.status(200).json({
             message: "Match Added successfully"
         })
     )
 })
+
+// app.post("/ads", (req, res) => {
+//     console.log('here in add annonce', req.body);
+
+//     const ad = new Ad({
+//         productName: req.body.productName,
+//         category: req.body.category,
+//         description: req.body.description,
+//         price: req.body.price,
+//         userId: req.body.userId
+
+//     });
+
+//     ad.save().then(
+//         res.status(200).json({
+//             message: "ad Added successfully"
+//         })
+//     )
+// })
 
 
 //traitement logique de afficher tous les annonces
@@ -189,7 +189,7 @@ app.post("/users/login", (req, res) => {
     console.log("here in login", req.body);
     const loginEmail = req.body.loginEmail;
     const loginPwd = req.body.loginPwd;
-    User.findOne({ email: loginEmail}).then(
+    User.findOne({ email: loginEmail }).then(
         (findedUser) => {
             if (!findedUser) {
                 res.status(200).json({
@@ -205,14 +205,14 @@ app.post("/users/login", (req, res) => {
                 res.status(200).json({
                     message: '1'
                 })
-            } 
+            }
             User.findOne({ email: req.body.loginEmail }).then(
                 (finalUser) => {
                     let user = {
-                        id:finalUser._id,
+                        id: finalUser._id,
                         firstName: finalUser.firstName,
                         lastName: finalUser.lastName,
-                        role:finalUser.role
+                        role: finalUser.role
                     };
                     res.status(200).json({
                         user: user,
@@ -409,9 +409,8 @@ app.post("/comments", (req, res) => {
     console.log('here in add comment', req.body);
     const comment = new Comment({
         fullName: req.body.fullName,
-        phoneNumber: req.body.phoneNumber,
-        message: req.body.message,
-        emailAddress: req.body.emailAddress
+        commentUserId: req.body.commentUserId,
+        message: req.body.message
 
     });
     comment.save().then(
@@ -424,12 +423,12 @@ app.post("/comments", (req, res) => {
 app.post('/comments', (req, res) => {
     req.body.created_at = new Date();
     db.collection('comments').save(req.body, (err, result) => {
-      if (err) return console.log(err)
-  
-      console.log('saved to database')
-      
+        if (err) return console.log(err)
+
+        console.log('saved to database')
+
     })
-  })
+})
 
 
 //traitement logique de edit profil
@@ -469,6 +468,15 @@ app.get("/users/:id", (req, res) => {
     });
 
 });
+
+
+
+
+
+
+
+
+
 
 
 

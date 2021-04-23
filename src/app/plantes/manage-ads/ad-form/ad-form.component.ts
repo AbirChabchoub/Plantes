@@ -43,19 +43,12 @@ export class AdFormComponent implements OnInit {
   }
 
 
-  // add(){
-  //   this.addService.addAd(this.ad,this.adForm.value.image).subscribe(
-
-  //     () => {
-  //       console.log("added succesfully");
-  //       this.route.navigate(["ads"]);
-  //     });
-  // }
+ 
 
   add() {
     
      this.ad.userId = JSON.parse(localStorage.getItem('connectedUser'));
-    this.addService.addAd(this.ad).subscribe(
+    this.addService.addAd(this.ad,this.adForm.value.image).subscribe(
 
       () => {
         console.log("added succesfully");
@@ -73,7 +66,7 @@ export class AdFormComponent implements OnInit {
 
   onImageSelected(event: Event) {
     const file = (event.target as HTMLInputElement).files[0];
-    this.adForm.patchValue({ img: file });
+    this.adForm.patchValue({ image: file });
     this.adForm.updateValueAndValidity();
     const reader = new FileReader();
     reader.onload = () => {

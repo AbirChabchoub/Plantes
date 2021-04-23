@@ -33,7 +33,7 @@ $Menu-width: 270px;
 $Menu-collapsed-width: 70px;
 
 // color list for build layouts
-$primary-color: #4680ff;
+$primary-color: #3D9830;
 $warning-color: #ffa21d;
 $danger-color: #ff5252;
 $success-color: #11c15b;
@@ -53,12 +53,12 @@ $header-light-background: #fff;
 $header-light-text-color: #101b33;
 
 // Menu
-$menu-dark-background: #101b33;
+$menu-dark-background: #F4F7F7;
 // $menu-dark-text-color: #b5bdca;
-$menu-dark-text-color: #97a7c1;
+$menu-dark-text-color: #87918a;
 
 $menu-light-background: #fff;
-$menu-light-text-color: #535763;
+$menu-light-text-color: #596353;
 $menu-active-color: $primary-color;
 
 $dark-layout: darken(#101b33,8%);
@@ -69,7 +69,7 @@ $dark-layout-font: #adb7be;
 $menu-icon-color: #4680ff, #ff5252, #01a9ac ,#7759de , #00ACC1, $warning-color;
 // Header background
 $color-header-name: blue, red, purple, info, dark;
-$color-header-color: #B3CABB, #ff5252, #7759de ,#00ACC1,#101b33;
+$color-header-color: #3D9830, #ff5252, #7759de ,#00ACC1,#cfd2da;
 // Menu background
 $color-menu-name: blue, red, purple, info, dark;
 $color-menu-color: #4680ff, #ff5252, #7759de ,#00ACC1,#101b33;
@@ -92,7 +92,7 @@ $color-title-color: #4680ff, #ff5252, #7759de ,#00ACC1,$dark-color;
 $theme-font-family: 'Mada', sans-serif;
 $theme-font-size: 14px;
 $theme-background: #f4f5fa;
-$theme-font-color: #535763;
+$theme-font-color: #536358;
 // $theme-heading-color: #111;
 $theme-heading-color: #060606;
 

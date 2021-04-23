@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { AdsService } from 'src/app/services/ads.service';
 
 @Component({
   selector: 'app-all-ads',
@@ -6,10 +7,16 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./all-ads.component.scss']
 })
 export class AllAdsComponent implements OnInit {
-
-  constructor() { }
+  ads: any={};
+  constructor(private adService:AdsService) { }
 
   ngOnInit() {
+    this.adService.getAllAds().subscribe(
+      (data) => {
+        this.ads = data.ads;
+      }
+    )
+
   }
 
 }

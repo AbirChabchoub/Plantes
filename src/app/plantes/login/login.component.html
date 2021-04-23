@@ -39,6 +39,16 @@
                         <div class="col-md-12 form-group">
                             <input type="text" class="form-control"   placeholder="Adresse email"  formControlName="loginEmail">
                         </div>
+
+                        <!-- first name validator and Error -->
+                        <div *ngIf='loginForm.controls["loginEmail"].invalid && (loginForm.controls["loginEmail"].touched 
+|| loginForm.controls["loginEmail"].dirty)'>
+                            <div *ngIf='loginForm.controls["loginEmail"].errors?.email' style="color:red"> Veuillez entrez
+                                une adresse email valide</div>
+                            <div *ngIf='loginForm.controls["loginEmail"].errors?.required' style="color:red">Ce champ est
+                                obligatoire</div>
+                        </div>
+
                         <div class="col-md-12 form-group">
                             <input type="password" class="form-control"   placeholder="Mot de passe" formControlName="loginPwd" >
                         </div>

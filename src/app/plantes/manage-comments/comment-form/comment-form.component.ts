@@ -9,13 +9,11 @@ import { CommentsService } from 'src/app/services/comments.service';
 })
 export class CommentFormComponent implements OnInit {
   commentForm:FormGroup;
-  comment:any
+  comment:any={}
   constructor(private formBuilder:FormBuilder,private commentService:CommentsService) { }
 
   ngOnInit() {
 this.commentForm=this.formBuilder.group({
-  fullName:['', [Validators.required]],
- 
   message:['']
 
 })
@@ -24,12 +22,12 @@ this.commentForm=this.formBuilder.group({
   }
 
 
-  addComment(comment:any){
-    this.commentService.addComment(comment).subscribe(
+  addComment(){
+    this.comment.commentUserId = JSON.parse(localStorage.getItem('connectedUser'));
+    console.log('here connected User in add comment' , this.comment.commentUserId);
+    this.commentService.addComment(this.comment).subscribe(
 
-      (data) => {
-        console.log(data.message);
-        
+      () => {
         console.log("added succesfully");
         
       });

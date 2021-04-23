@@ -59,21 +59,16 @@
                         <div class="col">
                         <div class="col-md-12 form-group">
                             <label for="firstImg">
-                                <i class="fa fa-camera fa-7x" style="cursor: pointer;" (click)='filePicker.click()' c></i></label>
+                                <i class="fa fa-camera fa-7x" style="cursor: pointer;" (click)='filePicker.click()' ></i></label>
                             <input type="file" class="form-control" name="name"  [(ngModel)]="ad.firstPicture"
                                 [ngModelOptions]="{standalone:true}" style="display:none;visibility:none;"  #filePicker (change)='onImageSelected($event)'>
-                                <img [src]="imagePreview">
+                                <img [src]="imagePreview" *ngIf="imagePreview" height="150px" width="150px">
                                 <br>
                                 <span style="color:brown">Obligatoire</span>
                         </div>
                         <br>
                         
-                        <div class="col-md-12 form-group">
-                            <label for="secondImg"><i class="fa fa-camera fa-7x" style="cursor: pointer;"></i></label>
-                            <input type="file" class="form-control" name="name" id="secondImg" [(ngModel)]="ad.secondPicture"
-                                [ngModelOptions]="{standalone:true}" style="display:none;visibility:none;">
-                               
-                        </div>
+                    
                     </div>
                     <hr class="hr">
                     <br><br>

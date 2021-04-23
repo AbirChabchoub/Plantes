@@ -7,6 +7,7 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class CommentComponent implements OnInit {
   @Input() commentsInput: any;
+  @Input() isResponseDisabled:any;
   actualDate: any;
   constructor() { }
 

@@ -12,19 +12,21 @@ export class AdsService {
 
 
 
-  // addAd(ad: any, image: File) {
-  //   const formData = new FormData();
-  //   formData.append('productName', ad.productName);
-  //   formData.append(' category', ad.category);
-  //   formData.append('description', ad.description);
-  //   formData.append('price', ad.price);
-  //   formData.append('image', image);
-  //   return this.httpClient.post<{ message: string }>(this.adUrl, formData);
-  // }
-  addAd(ad: any) {
-  
-    return this.httpClient.post<{ message: string }>(this.adUrl,ad);
+  addAd(ad: any, image: File) {
+    const formData = new FormData();
+    formData.append('productName', ad.productName);
+    formData.append('category', ad.category);
+    formData.append('description', ad.description);
+    formData.append('price', ad.price);
+    formData.append('image', image);
+    return this.httpClient.post<{ message: string }>(this.adUrl, formData);
   }
+
+
+  // addAd(ad: any) {
+  
+  //   return this.httpClient.post<{ message: string }>(this.adUrl,ad);
+  // }
 
   getAllAds() {
     return this.httpClient.get<{ ads: any }>(this.adUrl);
@@ -38,5 +40,11 @@ export class AdsService {
   getAdById(id: any) {
     return this.httpClient.get<{ad:any}>(`${this.adUrl}/${id}`);
   }
+
+// getAdByUserId(){
+//   return this.httpClient.get<{ad:any}>(`${this.adUrl}/${id}`)
+// }
+
+
 
 }

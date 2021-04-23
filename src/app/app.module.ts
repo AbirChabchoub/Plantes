@@ -24,6 +24,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
 import { JwPaginationComponent } from 'jw-angular-pagination';
+import { AdComponent } from './plantes/manage-ads/ad/ad.component';
+import { ManageAdsComponent } from './plantes/manage-ads/manage-ads.component';
+import { ManageAdsModule } from './plantes/manage-ads/manage-ads.module';
 
 
 @NgModule({
@@ -41,7 +44,8 @@ import { JwPaginationComponent } from 'jw-angular-pagination';
 		NavGroupComponent,
 		NavItemComponent,
 		HeaderComponent,
-		FooterComponent
+		FooterComponent,
+		
 		
 		
 	],
