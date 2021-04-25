@@ -6,9 +6,13 @@
         <div class="media-body">
             <h4>{{commentsInput.fullName}}</h4>
             <h5>{{ actualDate | date:'medium' }}</h5>
-            <a class="reply_btn" href="#">Répondre</a>
+            <button *ngIf="userIsAuthenticated" class="reply_btn" (click)="toggleChild()">Répondre</button>
         </div>
+
     </div>
+
     <p>{{commentsInput.message}}</p>
+    <app-reply [showMePartially]="showVar"></app-reply>
     <hr>
+
 </div>
