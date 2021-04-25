@@ -29,6 +29,7 @@ import { CommentsComponent } from './manage-comments/comments/comments.component
 import { ProfileComponent } from './manage-profile/profile/profile.component';
 import { EditProfileComponent } from './manage-profile/edit-profile/edit-profile.component';
 import { JwPaginationComponent } from 'jw-angular-pagination';
+import { ReplyComponent } from './manage-comments/reply/reply.component';
 
 
 
@@ -47,7 +48,8 @@ import { JwPaginationComponent } from 'jw-angular-pagination';
     CommentsComponent,   
     ProfileComponent,
     EditProfileComponent,
-    JwPaginationComponent  
+    JwPaginationComponent,
+    ReplyComponent  
   
   ],
   imports: [

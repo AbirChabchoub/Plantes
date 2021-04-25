@@ -1,4 +1,4 @@
-<div class="review_box">
+<div class="review_box" *ngIf="userIsAuthenticated">
     <h4>Ajouter un commentaire</h4>
     <form class="row contact_form" #commentForm="ngForm" (ngSubmit)="addComment()">
 
