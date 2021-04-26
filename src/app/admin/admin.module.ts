@@ -8,12 +8,13 @@ import { FormsModule } from '@angular/forms';
 import { UsersComponent } from './users/users.component';
 import { AddUserComponent } from './add-user/add-user.component';
 import { AllAdsComponent } from './ads/all-ads/all-ads.component';
+import { SignupAdminComponent } from './signup-admin/signup-admin.component';
 
 
 
 
 @NgModule({
-	declarations: [ DashboardComponent, AddCategoryComponent, UsersComponent, AddUserComponent, AllAdsComponent ],
+	declarations: [ DashboardComponent, AddCategoryComponent, UsersComponent, AddUserComponent, AllAdsComponent, SignupAdminComponent ],
 	imports: [ CommonModule, AdminRoutingModule , FormsModule]
 	
 	

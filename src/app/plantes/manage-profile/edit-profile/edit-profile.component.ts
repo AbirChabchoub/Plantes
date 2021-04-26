@@ -13,7 +13,10 @@ export class EditProfileComponent implements OnInit {
   user: any = {};
   updateProfileForm: FormGroup;
   id: any;
-  constructor(private formBuilder: FormBuilder, private usersService: UsersService, private route: Router, private activatedRoute: ActivatedRoute) { }
+  constructor(private formBuilder: FormBuilder, 
+    private usersService: UsersService, 
+    private route: Router, 
+    private activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
 
@@ -48,9 +51,9 @@ export class EditProfileComponent implements OnInit {
     this.usersService.updateProfil(this.user).subscribe(
       (data) => {
         console.log('your profile is successfully updated', data.message);
-
+        this.route.navigate(['profile']);
       })
-    this.route.navigate(['profile']);
+    
   }
 
 

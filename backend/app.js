@@ -92,6 +92,7 @@ app.use((req, res, next) => {
 });
 
 var nodemailer = require('nodemailer');
+const wishlist = require('./models/wishlist');
 // 27017 PORT du serveur local de la DB
 // plantesDB : Nom de la base de données
 mongoose.connect('mongodb://localhost:27017/plantesDB', { useNewUrlParser: true, useUnifiedTopology: true });
@@ -116,21 +117,19 @@ app.post("/ads", multer({ storage: storage }).single('image'), (req, res) => {
     )
 })
 
-// app.post("/ads", (req, res) => {
+// app.post("/ads", multer({ storage: storage }).single('image'), (req, res) => {
 //     console.log('here in add annonce', req.body);
-
+//     url = req.protocol + '://' + req.get('host');
 //     const ad = new Ad({
 //         productName: req.body.productName,
 //         category: req.body.category,
 //         description: req.body.description,
 //         price: req.body.price,
-//         userId: req.body.userId
-
+//         image: url + '/images/' + req.file.filename
 //     });
-
 //     ad.save().then(
 //         res.status(200).json({
-//             message: "ad Added successfully"
+//             ad:ad
 //         })
 //     )
 // })
@@ -470,11 +469,55 @@ app.get("/users/:id", (req, res) => {
 });
 
 
+//traitement logique de commander produit
+app.post("/orders", (req, res) => {
+        console.log('here in signup', req.body); //req.body te5ouli les valeurs mta3 formulaire li 3abitou 
+        const order = new Order({
+            orderUserId: req.body.orderUserId,
+            productId: req.body.productId,
+          
+        });
+
+        order.save().then(
+            res.status(200).json({
+                message: "La commande est bien ajouté !"
+            }
+
+            )
+        );
+});
+
+
+//traitement logique de get ad by user id
+//traitement logique de ajouter article au wishlist
+app.post("/wishlist",(req,res)=>{
+console.log('here in add to wishlist');
+const wishlist=new Wishlist({
+    // adId:req.body.adId,
+    wishlistUserId:req.body.wishlistUserId
+
+});
+console.log('here wishlist user id',wishlistUserId);
+
+wishlist.save().then(
+    res.status(200).json({
+        message:'added to wishlist'
+    })
+)
 
 
 
+})
 
-
+//traitement logique de supprimer article du wishlist
+app.delete("/wishlist/:id", (req, res) => {
+    console.log("here in delete from wishlist");
+    wishlist.deleteOne({ _id: req.params.id }).then(
+        res.status(200).json({
+            message: " deleted from wishlist"
+        })
+    )
+})
 
 
 
