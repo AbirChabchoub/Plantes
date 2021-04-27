@@ -21,19 +21,16 @@ export class CommentsComponent implements OnInit {
 	ngOnInit() {
 		this.id = this.activateRouter.snapshot.paramMap.get('id');
 		this.getAllAds();
-		console.log(this.id);
 
-		this.getAllComment();
+		this.getCommentById();
 	}
 	getAllAds() {
 		this.adsService.getAdById(this.id).subscribe((data) => {
 			this.ad = data.ad;
 		});
 	}
-	getAllComment() {
-		this.commentService.getAllComments().subscribe((data) => {
-			console.log('here comments', data.comments);
-
+	getCommentById() {
+		this.commentService.getCommentsById(this.id).subscribe((data) => {
 			this.comments = data.comments;
 		});
 	}
