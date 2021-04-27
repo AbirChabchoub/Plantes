@@ -19,13 +19,24 @@ export class AdsService {
     formData.append('description', ad.description);
     formData.append('price', ad.price);
     formData.append('image', image);
+
     return this.httpClient.post<{ message: string }>(this.adUrl, formData);
   }
 
 
-  // addAd(ad: any) {
-  
-  //   return this.httpClient.post<{ message: string }>(this.adUrl,ad);
+  // addAd(ad: any, image: File) {
+  //   const formData = new FormData();
+  //   formData.append('productName', ad.productName);
+  //   formData.append('category', ad.category);
+  //   formData.append('description', ad.description);
+  //   formData.append('price', ad.price);
+  //   formData.append('image', image);
+
+  //   return this.httpClient.post<{ ad: any }>(this.adUrl, formData).subscribe((res)=>{
+  //     localStorage.setItem('adId',JSON.stringify(res.ad.id));
+
+      
+  //   });
   // }
 
   getAllAds() {

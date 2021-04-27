@@ -28,7 +28,10 @@ goToEditProfile(){
 }
 
 
+goToAdForm(){
+  this.router.navigate(['adForm']);
 
+}
 
 
 
