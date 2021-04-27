@@ -31,7 +31,7 @@ export class CommentsComponent implements OnInit {
 		});
 	}
 	getAllComment() {
-		this.commentService.getAllComments().subscribe((data) => {
+		this.commentService.getComments(this.id).subscribe((data) => {
 			console.log('here comments', data.comments);
 
 			this.comments = data.comments;

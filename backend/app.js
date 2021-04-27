@@ -103,19 +103,21 @@ app.post('/ads', multer({ storage: storage }).single('image'), (req, res) => {
 	);
 });
 
-// app.post("/ads", multer({ storage: storage }).single('image'), (req, res) => {
+// app.post("/ads", (req, res) => {
 //     console.log('here in add annonce', req.body);
-//     url = req.protocol + '://' + req.get('host');
+
 //     const ad = new Ad({
 //         productName: req.body.productName,
 //         category: req.body.category,
 //         description: req.body.description,
 //         price: req.body.price,
-//         image: url + '/images/' + req.file.filename
+//         userId: req.body.userId
+
 //     });
+
 //     ad.save().then(
 //         res.status(200).json({
-//             ad:ad
+//             message: "ad Added successfully"
 //         })
 //     )
 // })
@@ -317,17 +319,16 @@ app.put('/adminUsers/:id', (req, res) => {
 	});
 });
 
-//traitement logique de afficher tous les commentaires
-app.get('/comments', (req, res) => {
-	console.log('here in add comment', req.body);
-	Comment.find((err, docs) => {
-		if (err) {
-			console.log('error with db ');
-		} else {
+//traitement logique de afficher  les commentaires by id de produit
+app.get('/comments/:id', (req, res) => {
+	console.log('here id', req.params.id);
+	Comment.find({ prId: req.params.id }).then((findedObj) => {
+		if (findedObj) {
 			res.status(200).json({
-				comments: docs
+				comments: findedObj
 			});
 		}
+		console.log('here comment', comments);
 	});
 });
 
@@ -337,7 +338,8 @@ app.post('/comments', (req, res) => {
 	const comment = new Comment({
 		fullName: req.body.fullName,
 		commentUserId: req.body.commentUserId,
-		message: req.body.message
+		message: req.body.message,
+		prId: req.body.prId
 	});
 	comment.save().then(
 		res.status(200).json({
@@ -389,7 +391,6 @@ app.get('/users/:id', (req, res) => {
 		}
 	});
 });
-
 //traitement logique de commander produit
 app.post('/orders', (req, res) => {
 	console.log('here in signup', req.body); //req.body te5ouli les valeurs mta3 formulaire li 3abitou
