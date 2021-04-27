@@ -14,6 +14,8 @@ const Ad = require('./models/ad');
 const Category = require('./models/category');
 //importer le modéle category
 const Comment = require('./models/comment');
+//importer le modéle wishlist
+const Wishlist = require('./models/wishlist');
 //importer le module de cryptage du pwd
 const bcrypt = require('bcrypt');
 //importer le pdfKit
@@ -493,33 +495,44 @@ app.post("/orders", (req, res) => {
 app.post("/wishlist",(req,res)=>{
 console.log('here in add to wishlist');
 const wishlist=new Wishlist({
-    // adId:req.body.adId,
-    wishlistUserId:req.body.wishlistUserId
+    adId:req.body.adId,
+    wishlistUserId:req.body.wishlistUserId,
+    
 
 });
-console.log('here wishlist user id',wishlistUserId);
 
 wishlist.save().then(
     res.status(200).json({
         message:'added to wishlist'
     })
-)
+);
 
 
 
-})
+});
 
 //traitement logique de supprimer article du wishlist
 app.delete("/wishlist/:id", (req, res) => {
-    console.log("here in delete from wishlist");
-    wishlist.deleteOne({ _id: req.params.id }).then(
+    console.log("here in delete from wishlist",req.params.id);
+    Wishlist.deleteOne({ _id:req.params.id}).then(
         res.status(200).json({
             message: " deleted from wishlist"
         })
     )
 })
 
-
+// Traitement logique de get ads by userId
+app.post("/profile", (req, res) => {
+    console.log("Here search ", req.body);
+  
+    Match.findOne({ teamOne: req.body.teamOne }).then((findedObj) => {
+      if (findedObj) {
+        res.status(200).json({
+          match: findedObj,
+        });
+      }
+    });
+  });
 
 
 

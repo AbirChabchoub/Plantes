@@ -52,7 +52,7 @@ deleteFromWishlist(id:any){
   this.addedToWishlist=false;
   this.wishlistService.removeFromWishlist(id).subscribe(
     (data)=>{
-      console.log('user deleted successfully',data.message)
+      console.log(' deleted from wishlist successfully',data.message)
      
       
     });
@@ -60,8 +60,10 @@ deleteFromWishlist(id:any){
 }
 
 addToWishlist(id:any){
-   localStorage.setItem('idProductToReserve',JSON.stringify(id))
+   localStorage.setItem('idProductToReserve',JSON.stringify(id));
   this.addedToWishlist=true;
+  this.wishlist.wishlistUserId=JSON.parse(localStorage.getItem('connectedUser'));
+  this.wishlist.adId=JSON.parse(localStorage.getItem('idProductToReserve'));
 this.wishlistService.addToWishlist(this.wishlist).subscribe(
   (data)=>{
     console.log("added to wishlist",data.message);

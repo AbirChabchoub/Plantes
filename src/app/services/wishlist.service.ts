@@ -5,7 +5,7 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class WishlistService {
-  wishlistUrl="https://localhost:3001/wishlist"
+  wishlistUrl="http://localhost:3001/wishlist"
   constructor(private httpClient:HttpClient) { }
 
 

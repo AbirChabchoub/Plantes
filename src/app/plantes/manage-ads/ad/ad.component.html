@@ -1,6 +1,9 @@
 <div class="single-product">
-    <img class="img-fluid products" [src]="adsInput.image" alt=""
+  <div> <img class="img-fluid products" [src]="adsInput.image" alt=""
             (click)="goToProductDetails(adsInput._id)" style="cursor: pointer;">
+            <a *ngIf="addedToWishlist">  <i   class="fas fa-heart wishlist fa-2x"  (click)="deleteFromWishlist(adsInput._id)" style="cursor: pointer;"></i> </a> 
+            <a *ngIf="!addedToWishlist">  <i   class="far fa-heart wishlist fa-2x"   (click)="addToWishlist(adsInput._id)" style="cursor: pointer;"></i></a> 
+        </div> 
             <br>
     <div class="product-details">
         <h5 class="details">{{adsInput.productName}}</h5>
@@ -16,31 +19,7 @@
             <a href="" class="social-info icon">
                 <span class="ti-bag "></span>
                 <p class="hover-text ">add to bag</p>
-            </a>
-            <!-- <a href="" class="social-info icon">
-                <span class="lnr lnr-heart" *ngFor="addedToWishlist" (click)="handleDeleteFromWishlist()"></span>
-                <i class="fa fa-heart" aria-hidden="true" *ngIf="addedToWishlist" (click)="deleteFromWishlist(adsInput._id)"></i>
-
-                <p class="hover-text ">Wishlist</p>
-            </a> -->
-
-         <button *ngIf="addedToWishlist">  <i   class="fas fa-heart"  (click)="deleteFromWishlist(adsInput._id)"></i> </button> 
-         <button *ngIf="!addedToWishlist">  <i   class="far fa-heart"   (click)="addToWishlist(adsInput._id)"></i></button> 
-
-
-
-            <!-- <div class="card_area d-flex align-items-center">
-                <a class="icon_btn"><i class="lnr lnr lnr-heart" *ngIf="!addedToWishlist" (click)="addToWishlist()"></i></a>
-            </div> -->
-
-            <!-- <a href="" class="social-info">
-                <span class="lnr lnr-sync"></span>
-                <p class="hover-text">compare</p>
-            </a> -->
-            <!-- <a href="" class="social-info">
-                <span class="lnr lnr-move"></span>
-                <p class="hover-text">view more</p>
-            </a> -->
+            </a>        
         </div>
     </div>
 </div>
