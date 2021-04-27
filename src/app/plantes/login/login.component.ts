@@ -41,7 +41,7 @@ export class LoginComponent implements OnInit {
 
   validateLogin(user) {
     this.userService.login(user);
-    //this.router.navigate(['ads']);
+    // this.router.navigate(['ads']);
   }
 
 

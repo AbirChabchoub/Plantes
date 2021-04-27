@@ -14,6 +14,8 @@ const Ad = require('./models/ad');
 const Category = require('./models/category');
 //importer le modéle category
 const Comment = require('./models/comment');
+//importer le modéle wishlist
+const Wishlist = require('./models/wishlist');
 //importer le module de cryptage du pwd
 const bcrypt = require('bcrypt');
 //importer le pdfKit
@@ -78,6 +80,7 @@ app.use((req, res, next) => {
 });
 
 var nodemailer = require('nodemailer');
+const wishlist = require('./models/wishlist');
 // 27017 PORT du serveur local de la DB
 // plantesDB : Nom de la base de données
 mongoose.connect('mongodb://localhost:27017/plantesDB', { useNewUrlParser: true, useUnifiedTopology: true });
@@ -100,21 +103,19 @@ app.post('/ads', multer({ storage: storage }).single('image'), (req, res) => {
 	);
 });
 
-// app.post("/ads", (req, res) => {
+// app.post("/ads", multer({ storage: storage }).single('image'), (req, res) => {
 //     console.log('here in add annonce', req.body);
-
+//     url = req.protocol + '://' + req.get('host');
 //     const ad = new Ad({
 //         productName: req.body.productName,
 //         category: req.body.category,
 //         description: req.body.description,
 //         price: req.body.price,
-//         userId: req.body.userId
-
+//         image: url + '/images/' + req.file.filename
 //     });
-
 //     ad.save().then(
 //         res.status(200).json({
-//             message: "ad Added successfully"
+//             ad:ad
 //         })
 //     )
 // })
