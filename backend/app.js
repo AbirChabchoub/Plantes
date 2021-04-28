@@ -94,8 +94,10 @@ app.post('/ads', multer({ storage: storage }).single('image'), (req, res) => {
 		category: req.body.category,
 		description: req.body.description,
 		price: req.body.price,
-		image: url + '/images/' + req.file.filename
+		image: url + '/images/' + req.file.filename,
+		userId: req.body.userId
 	});
+	console.log(req.body.userId);
 	ad.save().then(
 		res.status(200).json({
 			message: 'Match Added successfully'
@@ -433,16 +435,17 @@ app.delete('/wishlist/:id', (req, res) => {
 });
 
 // Traitement logique de get ads by userId
-app.post('/profile', (req, res) => {
-	console.log('Here search ', req.body);
 
-	Match.findOne({ teamOne: req.body.teamOne }).then((findedObj) => {
+app.get('/ads/user/:id', (req, res) => {
+	console.log('here in ads profile', req.params.id);
+	Ad.find({ userId: req.params.id }).then((findedObj) => {
 		if (findedObj) {
 			res.status(200).json({
-				match: findedObj
+				ad: findedObj
 			});
 		}
 	});
+	console.log('here ok ');
 });
 
 module.exports = app;
