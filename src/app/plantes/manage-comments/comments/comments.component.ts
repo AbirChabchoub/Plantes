@@ -21,7 +21,6 @@ export class CommentsComponent implements OnInit {
 	ngOnInit() {
 		this.id = this.activateRouter.snapshot.paramMap.get('id');
 		this.getAllAds();
-		console.log(this.id);
 
 		this.getAllComment();
 	}

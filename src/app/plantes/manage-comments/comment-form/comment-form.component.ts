@@ -36,6 +36,7 @@ export class CommentFormComponent implements OnInit {
 	}
 
 	addComment() {
+		this.comment.prId = JSON.parse(localStorage.getItem('prToReserve'));
 		this.comment.commentUserId = JSON.parse(localStorage.getItem('connectedUser'));
 		console.log('here connected User in add comment', this.comment.commentUserId);
 		this.commentService.addComment(this.comment).subscribe(() => {
