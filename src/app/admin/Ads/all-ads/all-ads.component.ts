@@ -7,7 +7,7 @@ import { AdsService } from 'src/app/services/ads.service';
   styleUrls: ['./all-ads.component.scss']
 })
 export class AllAdsComponent implements OnInit {
-  ads: any={};
+  ads: any
   constructor(private adService:AdsService) { }
 
   ngOnInit() {

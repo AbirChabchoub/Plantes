@@ -239,7 +239,7 @@ app.get('/adCategory', (req, res) => {
 });
 
 //traitement logique de chercher
-app.post('/adCategory', (req, res) => {
+app.post('/users/login', (req, res) => {
 	console.log('here in login', req.body);
 	const loginEmail = req.body.loginEmail;
 	const loginPwd = req.body.loginPwd;
@@ -271,7 +271,25 @@ app.post('/adCategory', (req, res) => {
 			});
 		});
 });
-
+//traitement logique de add user by admin
+app.post('/adminUsers',(req,res)=>{
+	console.log('here in login', req.body);
+	const user = new User({
+		fullName: req.body.fullName,
+		lastName: req.body.lastName,
+		email: req.body.email,
+		tel:req.body.tel,
+		address:req.body.address,
+		pwd:req.body.pwd,
+		confirmPwd:req.body.confirmPwd
+		
+	});
+	user.save().then(
+		res.status(200).json({
+			message: 'user Added successfully'
+		})
+	);
+})
 //traitement logique de get All users
 app.get('/adminUsers', (req, res) => {
 	console.log('here in get all users');
@@ -445,4 +463,13 @@ app.post('/profile', (req, res) => {
 	});
 });
 
+//traitement logique de supprimer annonce par l'utilisateur
+app.delete('/ads/:id', (req, res) => {
+	console.log('here in delete from ads', req.params.id);
+	Ad.deleteOne({ _id: req.params.id }).then(
+		res.status(200).json({
+			message: ' deleted from ads'
+		})
+	);
+});
 module.exports = app;

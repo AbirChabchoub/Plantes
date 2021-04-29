@@ -21,7 +21,7 @@ import { SignupComponent } from './signup/signup.component';
 
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { FAQComponent } from './faq/faq.component';
-import { ManageAdsModule } from './manage-ads/manage-ads.module';
+
 import { CommentFormComponent } from './manage-comments/comment-form/comment-form.component';
 import { CommentComponent } from './manage-comments/comment/comment.component';
 import { CommentsComponent } from './manage-comments/comments/comments.component';
@@ -30,6 +30,7 @@ import { ProfileComponent } from './manage-profile/profile/profile.component';
 import { EditProfileComponent } from './manage-profile/edit-profile/edit-profile.component';
 import { JwPaginationComponent } from 'jw-angular-pagination';
 import { ReplyComponent } from './manage-comments/reply/reply.component';
+import { ManageAdsModule } from './manage-ads/manage-ads.module';
 
 
 

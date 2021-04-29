@@ -1,15 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MustMatch } from 'src/app/functions/confirmPwd';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { UsersService } from 'src/app/services/users.service';
 import { Router, ActivatedRoute } from '@angular/router';
+import { MustMatch } from 'src/app/functions/confirmPwd';
 
 @Component({
-  selector: 'app-edit-profile',
-  templateUrl: './edit-profile.component.html',
-  styleUrls: ['./edit-profile.component.scss']
+  selector: 'app-edit-user',
+  templateUrl: './edit-user.component.html',
+  styleUrls: ['./edit-user.component.scss']
 })
-export class EditProfileComponent implements OnInit {
+export class EditUserComponent implements OnInit {
   user: any = {};
   updateProfileForm: FormGroup;
   id: any;
@@ -19,7 +19,6 @@ export class EditProfileComponent implements OnInit {
     private activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
-
     this.id = this.activatedRoute.snapshot.paramMap.get('id');
     this.usersService.getConnectedUser(this.id).subscribe(
       (data) => {
@@ -40,10 +39,8 @@ export class EditProfileComponent implements OnInit {
     );
 
 
-
-
-
   }
+
 
 
   editProfil() {
@@ -54,6 +51,10 @@ export class EditProfileComponent implements OnInit {
       })
     
   }
+
+
+
+
 
 
 }

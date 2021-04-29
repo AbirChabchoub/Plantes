@@ -1,0 +1,20 @@
+<div class="single-product">
+    <div> <img class="img-fluid products" [src]="adsInput.image" alt=""
+              (click)="goToProductDetails(adsInput._id)" style="cursor: pointer;">
+              <a *ngIf="addedToWishlist">  <i   class="fas fa-heart wishlist fa-2x"  (click)="deleteFromWishlist(adsInput._id)" style="cursor: pointer;"></i> </a> 
+              <a *ngIf="!addedToWishlist">  <i   class="far fa-heart wishlist fa-2x"   (click)="addToWishlist(adsInput._id)" style="cursor: pointer;"></i></a> 
+          </div> 
+              <br>
+      <div class="product-details">
+          <h5 class="details">{{adsInput.productName}}</h5>
+          <div >
+              <h6 class="details">{{adsInput.category }}</h6>
+          </div>
+          <div class="price details">
+              <h6>{{adsInput.price}} DT</h6> 
+          </div>
+        
+          <button class="btn btn-success button" (click)="deleteAd(adsInput._id)">Supprimer</button>
+          <button class="btn btn-secondary button" >Modifer</button>
+      </div>
+  </div>

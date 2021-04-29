@@ -21,10 +21,10 @@
             <div class="col-lg-6">
                 <div class="login_form_inner">
                     <h3>S'inscrire </h3>
-                    <form class="row login_form"  [formGroup]="signupForm">
+                    <form class="row login_form" [formGroup]="signupForm">
                         <!-- nom -->
                         <div class="col-md-12 form-group">
-                            <input type="text" class="form-control"  placeholder="Nom" formControlName="firstName">
+                            <input type="text" class="form-control" placeholder="Nom" formControlName="firstName">
                         </div>
                         <!-- first name validator and Error -->
                         <div *ngIf='signupForm.controls["firstName"].invalid && (signupForm.controls["firstName"].touched 
@@ -36,7 +36,8 @@
 
                         <!-- Prénom -->
                         <div class="col-md-12 form-group">
-                            <input type="text" class="form-control" name="name" placeholder="Prénom" formControlName="lastName">
+                            <input type="text" class="form-control" name="name" placeholder="Prénom"
+                                formControlName="lastName">
                         </div>
 
                         <!-- last name validator and Error -->
@@ -48,7 +49,8 @@
 
                         <!-- email -->
                         <div class="col-md-12 form-group">
-                            <input type="email" class="form-control" name="name" placeholder="Adresse email" formControlName="email">
+                            <input type="email" class="form-control" name="name" placeholder="Adresse email"
+                                formControlName="email">
                         </div>
                         <div *ngIf='signupForm.controls["email"].invalid && (signupForm.controls["email"].touched 
 || signupForm.controls["email"].dirty)'>
@@ -62,19 +64,22 @@
                         <!-- tel -->
 
                         <div class="col-md-12 form-group">
-                            <input type="text" class="form-control" name="name" placeholder="Numéro de téléphone" formControlName="tel">
+                            <input type="text" class="form-control" name="name" placeholder="Numéro de téléphone"
+                                formControlName="tel">
                         </div>
                         <div *ngIf='signupForm.controls["tel"].invalid && (signupForm.controls["tel"].touched 
 || signupForm.controls["tel"].dirty)'>
                             <div *ngIf='signupForm.controls["tel"].errors?.required' style="color:red "> Ce champ est
                                 obligatoire</div>
-                                <div *ngIf='signupForm.controls["tel"].errors?.pattern' style="color:red"> Ce champ doit contenir 8 chiffres
-                                    </div>
+                            <div *ngIf='signupForm.controls["tel"].errors?.pattern' style="color:red"> Ce champ doit
+                                contenir 8 chiffres
+                            </div>
                         </div>
 
                         <!-- adresse -->
                         <div class="col-md-12 form-group">
-                            <input type="text" class="form-control" name="name" placeholder="Adresse"   formControlName="address">
+                            <input type="text" class="form-control" name="name" placeholder="Adresse"
+                                formControlName="address">
                         </div>
 
                         <div *ngIf='signupForm.controls["address"].invalid && (signupForm.controls["address"].touched 
@@ -88,7 +93,8 @@
 
                         <!-- mot de passe -->
                         <div class="col-md-12 form-group">
-                            <input type="password" class="form-control" name="name" placeholder="Mot de passe"   formControlName="pwd">
+                            <input type="password" class="form-control" name="name" placeholder="Mot de passe"
+                                formControlName="pwd">
                         </div>
                         <div *ngIf='signupForm.controls["pwd"].invalid && (signupForm.controls["pwd"].touched 
 || signupForm.controls["pwd"].dirty)'>
@@ -98,7 +104,7 @@
                         <!-- confirmer le mot de passe -->
                         <div class="col-md-12 form-group">
                             <input type="password" class="form-control" name="name"
-                                placeholder="Confirmer votre mot de passe"  formControlName="confirmPassword">
+                                placeholder="Confirmer votre mot de passe" formControlName="confirmPassword">
                         </div>
 
                         <div *ngIf='signupForm.controls["confirmPassword"].invalid && (signupForm.controls["confirmPassword"].touched 
@@ -106,8 +112,6 @@
                             <div *ngIf='signupForm.controls["confirmPassword"].errors?.mustMatch' style="color:red">
                                 Veuillez confirmer le mot de passe</div>
                         </div>
-
-
                         <div class="col-md-12 form-group">
                             <div class="creat_account">
                                 <input type="checkbox" id="f-option2" name="selector">
@@ -115,7 +119,7 @@
                             </div>
                         </div>
                         <div class="col-md-12 form-group">
-                            <button  type="submit" (click)='signup(signupForm.value)' class="primary-btn"
+                            <button type="submit" (click)='signup(signupForm.value)' class="primary-btn"
                                 [disabled]="signupForm.invalid">S'inscrire</button>
                             <a href="#">Mot de passe oubliée?</a>
                         </div>
