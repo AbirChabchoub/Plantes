@@ -28,7 +28,6 @@ import { AdComponent } from './plantes/manage-ads/ad/ad.component';
 import { ManageAdsComponent } from './plantes/manage-ads/manage-ads.component';
 import { ManageAdsModule } from './plantes/manage-ads/manage-ads.module';
 
-
 @NgModule({
 	declarations: [
 		AppComponent,
@@ -44,15 +43,19 @@ import { ManageAdsModule } from './plantes/manage-ads/manage-ads.module';
 		NavGroupComponent,
 		NavItemComponent,
 		HeaderComponent,
-		FooterComponent,
-		
-		
-		
+		FooterComponent
 	],
-	imports: [ BrowserModule, AppRoutingModule, SharedModule, AdminModule, 
-		PlantesModule , FormsModule, 
-		ReactiveFormsModule,HttpClientModule],
-	exports:[ FormsModule, ReactiveFormsModule],
+	imports: [
+		BrowserModule,
+		AppRoutingModule,
+		SharedModule,
+		AdminModule,
+		PlantesModule,
+		FormsModule,
+		ReactiveFormsModule,
+		HttpClientModule
+	],
+	exports: [ FormsModule, ReactiveFormsModule ],
 	providers: [ NavigationItem ],
 	bootstrap: [ AppComponent ]
 })

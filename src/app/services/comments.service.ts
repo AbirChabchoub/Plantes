@@ -12,10 +12,7 @@ export class CommentsService {
 		return this.httpClient.post<{ message: string }>(this.commentsUrl, comment);
 	}
 
-	getAllComments() {
-		return this.httpClient.get<{ comments: any }>(this.commentsUrl);
-	}
-	getCommentsById(id) {
+	getComments(id: any) {
 		return this.httpClient.get<{ comments: any }>(`${this.commentsUrl}/${id}`);
 	}
 }

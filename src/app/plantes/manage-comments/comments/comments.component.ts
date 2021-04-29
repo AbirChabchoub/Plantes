@@ -22,15 +22,17 @@ export class CommentsComponent implements OnInit {
 		this.id = this.activateRouter.snapshot.paramMap.get('id');
 		this.getAllAds();
 
-		this.getCommentById();
+		this.getAllComment();
 	}
 	getAllAds() {
 		this.adsService.getAdById(this.id).subscribe((data) => {
 			this.ad = data.ad;
 		});
 	}
-	getCommentById() {
-		this.commentService.getCommentsById(this.id).subscribe((data) => {
+	getAllComment() {
+		this.commentService.getComments(this.id).subscribe((data) => {
+			console.log('here comments', data.comments);
+
 			this.comments = data.comments;
 		});
 	}

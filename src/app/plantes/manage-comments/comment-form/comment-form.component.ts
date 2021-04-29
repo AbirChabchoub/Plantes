@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { CommentsService } from 'src/app/services/comments.service';
 import { UsersService } from 'src/app/services/users.service';
+import { User } from '../../../../../backend/models/user';
 
 @Component({
 	selector: 'app-comment-form',
@@ -11,7 +12,7 @@ import { UsersService } from 'src/app/services/users.service';
 	styleUrls: [ './comment-form.component.scss' ]
 })
 export class CommentFormComponent implements OnInit {
-	userIsAuthenticated = false;
+	userIsAuthenticated: User;
 	private authListenerSubs: Subscription;
 	commentForm: FormGroup;
 	comment: any = {};
@@ -24,10 +25,7 @@ export class CommentFormComponent implements OnInit {
 	) {}
 
 	ngOnInit() {
-		this.userIsAuthenticated = this.authService.isUserAuth();
-		this.authListenerSubs = this.authService.getAuthStatusListener().subscribe((isAuthenticated) => {
-			this.userIsAuthenticated = isAuthenticated;
-		});
+		this.authService.currentUser.subscribe((x) => (this.userIsAuthenticated = x));
 		// this.id = this.ActivatedRoute.snapshot.paramMap.get('id');
 		this.commentForm = this.formBuilder.group({
 			message: [ '' ]

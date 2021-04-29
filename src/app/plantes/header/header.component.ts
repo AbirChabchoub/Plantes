@@ -3,27 +3,20 @@ import { Subscription } from 'rxjs';
 
 import { UsersService } from 'src/app/services/users.service';
 import { Router } from '@angular/router';
+import { User } from '../../../../backend/models/user';
 
 @Component({
 	selector: 'app-header',
 	templateUrl: './header.component.html',
 	styleUrls: [ './header.component.scss' ]
 })
-export class HeaderComponent implements OnInit, OnDestroy {
-	userIsAuthenticated: Boolean;
-	private authListenerSubs: Subscription;
+export class HeaderComponent implements OnInit {
+	userIsAuthenticated: User;
+
 	constructor(private authService: UsersService, private router: Router) {}
 
 	ngOnInit() {
-		this.userIsAuthenticated = this.authService.isUserAuth();
-		this.authListenerSubs = this.authService.getAuthStatusListener().subscribe((isAuthenticated) => {
-			this.userIsAuthenticated = isAuthenticated;
-			alert(isAuthenticated);
-		});
-	}
-
-	ngOnDestroy() {
-		this.authListenerSubs.unsubscribe();
+		this.authService.currentUser.subscribe((x) => (this.userIsAuthenticated = x));
 	}
 
 	logout() {

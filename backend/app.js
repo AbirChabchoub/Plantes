@@ -94,8 +94,10 @@ app.post('/ads', multer({ storage: storage }).single('image'), (req, res) => {
 		category: req.body.category,
 		description: req.body.description,
 		price: req.body.price,
-		image: url + '/images/' + req.file.filename
+		image: url + '/images/' + req.file.filename,
+		userId: req.body.userId
 	});
+	console.log(req.body.userId);
 	ad.save().then(
 		res.status(200).json({
 			message: 'Match Added successfully'
@@ -103,19 +105,21 @@ app.post('/ads', multer({ storage: storage }).single('image'), (req, res) => {
 	);
 });
 
-// app.post("/ads", multer({ storage: storage }).single('image'), (req, res) => {
+// app.post("/ads", (req, res) => {
 //     console.log('here in add annonce', req.body);
-//     url = req.protocol + '://' + req.get('host');
+
 //     const ad = new Ad({
 //         productName: req.body.productName,
 //         category: req.body.category,
 //         description: req.body.description,
 //         price: req.body.price,
-//         image: url + '/images/' + req.file.filename
+//         userId: req.body.userId
+
 //     });
+
 //     ad.save().then(
 //         res.status(200).json({
-//             ad:ad
+//             message: "ad Added successfully"
 //         })
 //     )
 // })
@@ -317,29 +321,16 @@ app.put('/adminUsers/:id', (req, res) => {
 	});
 });
 
-//traitement logique de afficher tous les commentaires
-app.get('/comments', (req, res) => {
-	console.log('here in add comment', req.body);
-	Comment.find((err, docs) => {
-		if (err) {
-			console.log('error with db ');
-		} else {
-			res.status(200).json({
-				comments: docs
-			});
-		}
-	});
-});
 //traitement logique de afficher  les commentaires by id de produit
 app.get('/comments/:id', (req, res) => {
 	console.log('here id', req.params.id);
 	Comment.find({ prId: req.params.id }).then((findedObj) => {
-		//_id !!! 5ater fel bd yetkteb hakek id sinn undefined
 		if (findedObj) {
 			res.status(200).json({
 				comments: findedObj
 			});
 		}
+		console.log('here comment', comments);
 	});
 });
 
@@ -401,6 +392,60 @@ app.get('/users/:id', (req, res) => {
 			});
 		}
 	});
+});
+//traitement logique de commander produit
+app.post('/orders', (req, res) => {
+	console.log('here in signup', req.body); //req.body te5ouli les valeurs mta3 formulaire li 3abitou
+	const order = new Order({
+		orderUserId: req.body.orderUserId,
+		productId: req.body.productId
+	});
+
+	order.save().then(
+		res.status(200).json({
+			message: 'La commande est bien ajouté !'
+		})
+	);
+});
+
+//traitement logique de get ad by user id
+//traitement logique de ajouter article au wishlist
+app.post('/wishlist', (req, res) => {
+	console.log('here in add to wishlist');
+	const wishlist = new Wishlist({
+		adId: req.body.adId,
+		wishlistUserId: req.body.wishlistUserId
+	});
+
+	wishlist.save().then(
+		res.status(200).json({
+			message: 'added to wishlist'
+		})
+	);
+});
+
+//traitement logique de supprimer article du wishlist
+app.delete('/wishlist/:id', (req, res) => {
+	console.log('here in delete from wishlist', req.params.id);
+	Wishlist.deleteOne({ _id: req.params.id }).then(
+		res.status(200).json({
+			message: ' deleted from wishlist'
+		})
+	);
+});
+
+// Traitement logique de get ads by userId
+
+app.get('/ads/user/:id', (req, res) => {
+	console.log('here in ads profile', req.params.id);
+	Ad.find({ userId: req.params.id }).then((findedObj) => {
+		if (findedObj) {
+			res.status(200).json({
+				ad: findedObj
+			});
+		}
+	});
+	console.log('here ok ');
 });
 
 module.exports = app;

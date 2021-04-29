@@ -1,17 +1,23 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject, Subject } from 'rxjs';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { Router } from '@angular/router';
-import { JsonPipe } from '@angular/common';
+import { User } from '../../../backend/models/user';
 
 @Injectable({
 	providedIn: 'root'
 })
 export class UsersService {
 	userUrl = 'http://localhost:3001/users';
-	private authStatusListener = new BehaviorSubject<boolean>(false);
-	private isUserAuthenticated = false;
-	constructor(private httpClient: HttpClient, private router: Router) {}
+	private currentUserSubject: BehaviorSubject<User>;
+	public currentUser: Observable<User>;
+	constructor(private httpClient: HttpClient, private router: Router) {
+		this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('connectedUser')));
+		this.currentUser = this.currentUserSubject.asObservable();
+	}
+	public get currentUserValue(): User {
+		return this.currentUserSubject.value;
+	}
 
 	addUserToDB(user: any) {
 		return this.httpClient.post<{ message: String }>(`${this.userUrl}/signup`, user);
@@ -26,35 +32,16 @@ export class UsersService {
 			if (res.user.role == 'user') {
 				this.router.navigate([ '/' ]);
 			} else {
-				this.router.navigate([ 'admin' ]);
+				this.router.navigate([ '/' ]);
 			}
-			this.isUserAuthenticated = true;
-			this.authStatusListener.next(!this.authStatusListener.value);
+			this.currentUserSubject.next(user);
+			return user;
 		});
 	}
 
-	getAuthStatusListener() {
-		return this.authStatusListener.asObservable();
-	}
-
-	isUserAuth() {
-		return this.isUserAuthenticated;
-	}
-
 	logout() {
-		this.isUserAuthenticated = false;
-		this.authStatusListener.next(false);
-		this.router.navigate([ '/' ]);
 		localStorage.removeItem('connectedUser');
-	}
-
-	private saveAuthData(token: string, expirationDate: Date) {
-		localStorage.setItem('token', token);
-		localStorage.setItem('expiration', expirationDate.toISOString());
-	}
-	private clearAuthData() {
-		localStorage.removeItem('token');
-		localStorage.removeItem('expiration');
+		this.currentUserSubject.next(null);
 	}
 
 	updateProfil(user: any) {
