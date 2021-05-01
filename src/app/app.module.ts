@@ -25,7 +25,6 @@ import { HttpClientModule } from '@angular/common/http';
 
 
 
-
 @NgModule({
 	declarations: [
 		AppComponent,
@@ -41,15 +40,19 @@ import { HttpClientModule } from '@angular/common/http';
 		NavGroupComponent,
 		NavItemComponent,
 		HeaderComponent,
-		FooterComponent,
-		
-		
-		
+		FooterComponent
 	],
-	imports: [ BrowserModule, AppRoutingModule, SharedModule, AdminModule, 
-		PlantesModule , FormsModule, 
-		ReactiveFormsModule,HttpClientModule],
-	exports:[ FormsModule, ReactiveFormsModule],
+	imports: [
+		BrowserModule,
+		AppRoutingModule,
+		SharedModule,
+		AdminModule,
+		PlantesModule,
+		FormsModule,
+		ReactiveFormsModule,
+		HttpClientModule
+	],
+	exports: [ FormsModule, ReactiveFormsModule ],
 	providers: [ NavigationItem ],
 	bootstrap: [ AppComponent ]
 })

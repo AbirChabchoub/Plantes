@@ -1,13 +1,12 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AdsService } from 'src/app/services/ads.service';
-import { FormBuilder } from '@angular/forms';
 import { OrdersService } from 'src/app/services/orders.service';
 
 @Component({
-  selector: 'app-product-details',
-  templateUrl: './product-details.component.html',
-  styleUrls: ['./product-details.component.scss']
+	selector: 'app-product-details',
+	templateUrl: './product-details.component.html',
+	styleUrls: [ './product-details.component.scss' ]
 })
 export class ProductDetailsComponent implements OnInit {
   ad: any;

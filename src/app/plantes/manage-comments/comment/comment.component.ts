@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { UsersService } from 'src/app/services/users.service';
+import { User } from '../../../../../backend/models/user';
 
 @Component({
 	selector: 'app-comment',
@@ -9,7 +10,7 @@ import { UsersService } from 'src/app/services/users.service';
 	styleUrls: [ './comment.component.scss' ]
 })
 export class CommentComponent implements OnInit {
-	userIsAuthenticated = false;
+	userIsAuthenticated: User;
 	private authListenerSubs: Subscription;
 	@Input() commentsInput: any;
 	@Input() isResponseDisabled: any;
@@ -18,10 +19,7 @@ export class CommentComponent implements OnInit {
 	constructor(private authService: UsersService, private router: Router) {}
 
 	ngOnInit() {
-		this.userIsAuthenticated = this.authService.isUserAuth();
-		this.authListenerSubs = this.authService.getAuthStatusListener().subscribe((isAuthenticated) => {
-			this.userIsAuthenticated = isAuthenticated;
-		});
+		this.authService.currentUser.subscribe((x) => (this.userIsAuthenticated = x));
 	}
 	ngOnDestroy() {
 		this.authListenerSubs.unsubscribe();

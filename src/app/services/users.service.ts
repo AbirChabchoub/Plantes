@@ -1,75 +1,54 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Subject } from 'rxjs';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { Router } from '@angular/router';
-import { JsonPipe } from '@angular/common';
+import { User } from '../../../backend/models/user';
 
 @Injectable({
-  providedIn: 'root'
+	providedIn: 'root'
 })
 export class UsersService {
-  userUrl = "http://localhost:3001/users";
-  private authStatusListener = new Subject<boolean>();
-  private isUserAuthenticated = false;
-  constructor(private httpClient: HttpClient, private router: Router) { }
+	userUrl = 'http://localhost:3001/users';
+	private currentUserSubject: BehaviorSubject<User>;
+	public currentUser: Observable<User>;
+	constructor(private httpClient: HttpClient, private router: Router) {
+		this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('connectedUser')));
+		this.currentUser = this.currentUserSubject.asObservable();
+	}
+	public get currentUserValue(): User {
+		return this.currentUserSubject.value;
+	}
 
-  addUserToDB(user: any) {
-    return this.httpClient.post<{ message: String }>(`${this.userUrl}/signup`, user);
-  }
+	addUserToDB(user: any) {
+		return this.httpClient.post<{ message: String }>(`${this.userUrl}/signup`, user);
+	}
 
+	login(user: any) {
+		console.log('here user service', user);
 
-  login(user: any) {
-    console.log('here user service', user);
-    
-    return this.httpClient.post<{ user: any }>(`${this.userUrl}/login`, user).subscribe((res) => {
-      console.log(res);
-      localStorage.setItem('connectedUser',JSON.stringify(res.user.id));
-            if (res.user.role == 'user') {
-        this.router.navigate(['/']);
-      } else {
-        this.router.navigate(['/']);
-      }
-      this.isUserAuthenticated = true;
-      this.authStatusListener.next(true);
-     
-    })
-  
-  }
+		return this.httpClient.post<{ user: any }>(`${this.userUrl}/login`, user).subscribe((res) => {
+			console.log(res);
+			localStorage.setItem('connectedUser', JSON.stringify(res.user.id));
+			if (res.user.role == 'user') {
+				this.router.navigate([ '/' ]);
+			} else {
+				this.router.navigate([ '/' ]);
+			}
+			this.currentUserSubject.next(user);
+			return user;
+		});
+	}
 
-  getAuthStatusListener() {
-    return this.authStatusListener.asObservable();
-  }
+	logout() {
+		localStorage.removeItem('connectedUser');
+		this.currentUserSubject.next(null);
+	}
 
-  isUserAuth() {
-    return this.isUserAuthenticated;
-  }
+	updateProfil(user: any) {
+		return this.httpClient.put<{ message: string }>(`${this.userUrl}/${user._id}`, user);
+	}
 
-
-  logout() {
-    
-    this.isUserAuthenticated = false;
-    this.authStatusListener.next(false);
-    this.router.navigate(['/']);
-  }
-
-  private saveAuthData(token: string, expirationDate: Date) {
-    localStorage.setItem('token', token);
-    localStorage.setItem('expiration', expirationDate.toISOString());
-  }
-  private clearAuthData() {
-    localStorage.removeItem('token');
-    localStorage.removeItem('expiration');
-  }
-
-  updateProfil(user:any){
-    return  this.httpClient.put<{message:string}>(`${this.userUrl}/${user._id}`,user);
-    }
-
-
-getConnectedUser(id:any){
- 
-  return this.httpClient.get<{users:any}>(`${this.userUrl}/${id}`)
-}
-
-
+	getConnectedUser(id: any) {
+		return this.httpClient.get<{ users: any }>(`${this.userUrl}/${id}`);
+	}
 }

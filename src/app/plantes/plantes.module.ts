@@ -32,35 +32,32 @@ import { JwPaginationComponent } from 'jw-angular-pagination';
 import { ReplyComponent } from './manage-comments/reply/reply.component';
 import { ManageAdsModule } from './manage-ads/manage-ads.module';
 
-
-
-
-
-
 @NgModule({
-  declarations: [BannerComponent, DealsWeekComponent,
-    BlogComponent, BrandsComponent, FeaturesComponent,
-    HomeComponent, ImgCategoriesComponent,
-    ImgDealsComponent, InfoComponent, LoginComponent, ManageAdsComponent,
-    ProductDetailsComponent, ProductsComponent, ShopComponent, SignupComponent,
-    FAQComponent,
-    CommentFormComponent,
-    CommentComponent,
-    CommentsComponent,   
-    ProfileComponent,
-    EditProfileComponent,
-    JwPaginationComponent,
-    ReplyComponent  
-  
-  ],
-  imports: [
-    CommonModule,
-    PlantesRoutingModule,
-    ReactiveFormsModule,
-    FormsModule,
-    ManageAdsModule
-   
-
-  ]
+	declarations: [
+		BannerComponent,
+		DealsWeekComponent,
+		BlogComponent,
+		BrandsComponent,
+		FeaturesComponent,
+		HomeComponent,
+		ImgCategoriesComponent,
+		ImgDealsComponent,
+		InfoComponent,
+		LoginComponent,
+		ManageAdsComponent,
+		ProductDetailsComponent,
+		ProductsComponent,
+		ShopComponent,
+		SignupComponent,
+		FAQComponent,
+		CommentFormComponent,
+		CommentComponent,
+		CommentsComponent,
+		ProfileComponent,
+		EditProfileComponent,
+		JwPaginationComponent,
+		ReplyComponent
+	],
+	imports: [ CommonModule, PlantesRoutingModule, ReactiveFormsModule, FormsModule, ManageAdsModule ]
 })
-export class PlantesModule { }
+export class PlantesModule {}
