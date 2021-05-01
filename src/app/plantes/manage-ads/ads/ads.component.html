@@ -107,23 +107,15 @@
         
         
             <!-- Start Best Seller -->
-            <!-- <app-ads [selectedLI]="valueFromSelectedLi"></app-ads> -->
+         
             <section class="lattest-product-area pb-40 category-list" >
                 <div class="row">
                     <div class="col-lg-4 col-md-6" *ngFor="let x of ads | test:ll">
                         <app-ad  [adsInput]="x" ></app-ad>
                     </div>
                 </div>
-                <!-- <div class="card-body">
-                    <div *ngFor="let item of pageOfItems">{{item.name}}</div>
-                </div>
-                <div class="card-footer pb-0 pt-3">
-                   <jw-pagination [items]="ads" (changePage)="onChangePage($event)"></jw-pagination> 
-                </div> -->
             </section>
-            <!-- End Best Seller -->
-        
-        
+            <!-- End Best Seller -->       
         </div>
     </div>
 </div>

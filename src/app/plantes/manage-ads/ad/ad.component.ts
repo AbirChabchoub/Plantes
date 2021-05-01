@@ -16,26 +16,12 @@ export class AdComponent implements OnInit {
 	constructor(private router: Router, private wishlistService: WishlistService) {}
 
 	ngOnInit() {
-		this.wishlist = {
-			wishlistUserId: JSON.parse(localStorage.getItem('connectedUser'))
-		};
+	
 	}
 
 	goToProductDetails(id: any) {
 		localStorage.setItem('prToReserve', JSON.stringify(id));
 		this.router.navigate([ `product-details/${id}` ]);
-	}
-
-	handleAddToWishlist() {
-		this.wishlistService.addToWishlist(this.adsInput.id).subscribe(() => {
-			this.addedToWishlist = true;
-		});
-	}
-
-	handleDeleteFromWishlist() {
-		this.wishlistService.removeFromWishlist(this.adsInput.id).subscribe(() => {
-			this.addedToWishlist = false;
-		});
 	}
 
 	deleteFromWishlist(id: any) {

@@ -36,7 +36,7 @@ const NavigationItems = [
 				id: 'dashboard',
 				title: 'Dashboard',
 				type: 'item',
-				url: '/dashboard/analytics',
+				url: '/dashboard',
 				icon: 'feather icon-home'
 			}
 		]
@@ -82,6 +82,13 @@ const NavigationItems = [
 				type: 'item',
 				url: '/addAds',
 				icon: 'feather icon-pie-chart'
+			},
+			{
+				id: 'addCategory',
+				title: 'Ajouter une catégorie',
+				type: 'item',
+				url: '/addCategory',
+				icon: 'feather icon-server'
 			}
 		]
 	},

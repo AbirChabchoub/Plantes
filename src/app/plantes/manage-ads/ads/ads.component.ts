@@ -21,9 +21,8 @@ export class AdsComponent implements OnInit {
     this.adService.getAllAds().subscribe(
       (data) => {
         this.ads = data.ads;
-      }
-    )
-    this.items = Array(150).fill(0).map((x, i) => ({ id: (i + 1), name: `Item ${i + 1}`}));
+      });
+
   }
 
   
@@ -45,10 +44,6 @@ export class AdsComponent implements OnInit {
 	}
 
 
-  onChangePage(pageOfItems: Array<any>) {
-    // update current page of items
-    this.pageOfItems = pageOfItems;
-  }
 
 
 

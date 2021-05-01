@@ -1,39 +1,108 @@
-<form action="javascript:">
-    <div class="form-row">
-      <div class="form-group col-md-6">
-        <label >Nom</label>
-        <input type="text" class="form-control" id="inputEmail4" placeholder="Nom">
-      </div>
-      <div class="form-group col-md-6">
-        <label >Prénom</label>
-        <input type="text" class="form-control" id="inputPassword4" placeholder="Prénom">
-      </div>
-    </div>
-    <div class="form-row">
-        <div class="form-group col-md-6">
-          <label >Adresse Email</label>
-          <input type="email" class="form-control" id="inputEmail4" placeholder="Adresse Email">
-        </div>
-        <div class="form-group col-md-6">
-          <label >Numéro de téléphone</label>
-          <input type="tel" class="form-control" id="inputPassword4" placeholder="Numéro de téléphone">
-        </div>
-      </div>
+<form action="javascript:" [formGroup]="addUserForm">
 
-    <div class="form-group">
-      <label for="inputAddress">Adresse</label>
-      <input type="text" class="form-control" id="inputAddress" placeholder="Adresse">
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <label>Nom</label>
+      <input type="text" class="form-control"  placeholder="Nom" formControlName="firstName">
     </div>
-  
+
+    <div class="form-group col-md-6">
+      <label>Prénom</label>
+      <input type="text" class="form-control"  placeholder="Prénom" formControlName="lastName">
+    </div>
+  </div>
+
+<!-- 1st row errors -->
+  <div class="form-row">
+    <!-- first name validator and Error  -->
+    <div *ngIf='addUserForm.controls["firstName"].invalid && (addUserForm.controls["firstName"].touched 
+                            || addUserForm.controls["firstName"].dirty)'>
+      <div *ngIf='addUserForm.controls["firstName"].errors?.required' style="color:red">Ce champ
+        est obligatoire</div>
+    </div>
+    <!-- last name validator and Error  -->
+    <div *ngIf='addUserForm.controls["lastName"].invalid && (addUserForm.controls["lastName"].touched 
+  || addUserForm.controls["lastName"].dirty)'>
+      <div *ngIf='addUserForm.controls["lastName"].errors?.required' style="color:red;margin-left:530px">Ce champ est
+        obligatoire</div>
+    </div>
+  </div>
+
+ 
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <label>Adresse Email</label>
+      <input type="email" class="form-control"  placeholder="Adresse Email" formControlName="email">
+    </div>
+    <div class="form-group col-md-6">
+      <label>Numéro de téléphone</label>
+      <input type="tel" class="form-control"  placeholder="Numéro de téléphone"
+        formControlName="tel">
+    </div>
    
-    <div class="form-group">
-      <div class="form-check">
-        <input class="form-check-input" type="checkbox" id="gridCheck">
-        <label class="form-check-label" for="gridCheck">Check me out</label>
-      </div>
+  </div>
+
+<!-- 2nd row errors -->
+  <div class="form-row">
+    <div *ngIf='addUserForm.controls["email"].invalid && (addUserForm.controls["email"].touched 
+    || addUserForm.controls["email"].dirty)'>
+  <div *ngIf='addUserForm.controls["email"].errors?.email' style="color:red"> Veuillez entrez
+    une adresse email valide</div>
+  <div *ngIf='addUserForm.controls["email"].errors?.required' style="color:red">Ce champ est
+    obligatoire</div>
+</div>
+<div *ngIf='addUserForm.controls["tel"].invalid && (addUserForm.controls["tel"].touched 
+|| addUserForm.controls["tel"].dirty)'>
+<div *ngIf='addUserForm.controls["tel"].errors?.required' style="color:red;margin-left:530px"> Ce champ est
+obligatoire</div>
+<div *ngIf='addUserForm.controls["tel"].errors?.pattern' style="color:red;margin-left:530px"> Ce champ doit contenir 8 chiffres
+</div>
+</div>
+  </div>
+
+
+
+  <div class="form-group">
+    <label for="inputAddress">Adresse</label>
+    <input type="text" class="form-control" id="inputAddress" placeholder="Adresse" formControlName="address">
+  </div>
+  <div *ngIf='addUserForm.controls["address"].invalid && (addUserForm.controls["address"].touched 
+    || addUserForm.controls["address"].dirty)'>
+    <div *ngIf='addUserForm.controls["address"].errors?.required' style="color:red"> Ce champ est
+      obligatoire</div>
+  </div>
+
+
+
+
+<div class="form-row">
+    <div class="form-group col-md-6">
+      <label>Mot de passe</label>
+      <input type="password" class="form-control"  placeholder="Mot de passe" formControlName="pwd">
     </div>
-    <button type="submit" class="btn btn-primary" style="margin-left: 450px;">Ajouter</button>
-  </form>
+
+    <div class="form-group col-md-6">
+      <label>Confirmer le mot de passe</label>
+      <input type="password" class="form-control"  placeholder="Confirmer le mot de passe" formControlName="confirmPassword">
+    </div>
 
 
-  
+    <div *ngIf='addUserForm.controls["confirmPassword"].invalid && (addUserForm.controls["confirmPassword"].touched 
+    || addUserForm.controls["confirmPassword"].dirty)'>
+                             <div *ngIf='addUserForm.controls["confirmPassword"].errors?.mustMatch' style="color:red;margin-left:530px">
+                                 Veuillez confirmer le mot de passe</div>
+                         </div>
+
+  </div>
+
+
+  <div class="form-group">
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox" id="gridCheck">
+      <label class="form-check-label" for="gridCheck">Check me out</label>
+    </div>
+  </div>
+  <button type="submit" class="btn btn-primary"
+    style="margin-left: 450px; background-color: #335022!important;border-color: #B3CABB!important;"
+    (click)="addUser(addUserForm.value)"> Ajouter</button>
+</form>
