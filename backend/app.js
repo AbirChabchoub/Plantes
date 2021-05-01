@@ -453,7 +453,6 @@ app.delete('/wishlist/:id', (req, res) => {
 // Traitement logique de get ads by userId
 app.post('/profile', (req, res) => {
 	console.log('Here search ', req.body);
-
 	Match.findOne({ teamOne: req.body.teamOne }).then((findedObj) => {
 		if (findedObj) {
 			res.status(200).json({
@@ -463,7 +462,7 @@ app.post('/profile', (req, res) => {
 	});
 });
 
-//traitement logique de supprimer annonce par l'utilisateur
+//traitement logique de supprimer annonce par l'admin
 app.delete('/ads/:id', (req, res) => {
 	console.log('here in delete from ads', req.params.id);
 	Ad.deleteOne({ _id: req.params.id }).then(
@@ -472,4 +471,32 @@ app.delete('/ads/:id', (req, res) => {
 		})
 	);
 });
+
+//traitement logique passer commande
+app.post('/orders/:id',(req,res)=>{
+	console.log('here in orders', req.params.id);
+	const order=new Order({
+		orderUserId:req.params.orderUserId,
+		productId:req.params.productId
+
+	});
+	order.save().then(
+		res.status(200).json({
+			message: 'added to basket'
+		})
+	);
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
 module.exports = app;

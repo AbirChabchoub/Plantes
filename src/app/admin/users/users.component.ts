@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 })
 export class UsersComponent implements OnInit {
 users:any;
+term:any
   constructor(private userService:AdminUsersService,
   private router:Router  ) { }
 

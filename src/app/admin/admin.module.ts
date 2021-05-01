@@ -11,12 +11,16 @@ import { AllAdsComponent } from './ads/all-ads/all-ads.component';
 import { SignupAdminComponent } from './signup-admin/signup-admin.component';
 import { EditUserComponent } from './edit-user/edit-user.component';
 import { AllAdComponent } from './ads/all-ad/all-ad.component';
+import { AdFormComponent } from '../plantes/manage-ads/ad-form/ad-form.component';
+import { AdminAdFormComponent } from './ads/admin-ad-form/admin-ad-form.component';
+import { FilterPipe } from './pipes/filter.pipe';
+
 
 
 
 
 @NgModule({
-	declarations: [ DashboardComponent, AddCategoryComponent, UsersComponent, AddUserComponent, AllAdsComponent, SignupAdminComponent, EditUserComponent, AllAdComponent ],
+	declarations: [ DashboardComponent, AddCategoryComponent, UsersComponent, AddUserComponent, AllAdsComponent, SignupAdminComponent, EditUserComponent, AllAdComponent, AdminAdFormComponent, FilterPipe ],
 	imports: [ CommonModule, AdminRoutingModule , FormsModule,ReactiveFormsModule]
 	
 	

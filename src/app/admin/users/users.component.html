@@ -1,3 +1,12 @@
+
+
+ <form>
+  <div class="col-md-12 form-group">
+      <input type="text" class="form-control searchInput" placeholder="Rechercher" [(ngModel)]='term'
+          [ngModelOptions]="{standalone:true}">
+  </div>
+</form>
+
 <div class="row">
   <!-- [ Hover-table ] start -->
   <div class="col-md-12">
@@ -15,7 +24,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let x of users">
+          <tr *ngFor="let x of users | filter">
            
             <td>{{x.firstName}}</td>
             <td>{{x.lastName}}</td>

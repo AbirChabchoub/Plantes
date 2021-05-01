@@ -7,14 +7,15 @@ import { AddUserComponent } from './add-user/add-user.component';
 import { AllAdsComponent } from './ads/all-ads/all-ads.component';
 import { EditUserComponent } from './edit-user/edit-user.component';
 import { AddCatogoryService } from './Admin-services/add-catogory.service';
+import { AdFormComponent } from '../plantes/manage-ads/ad-form/ad-form.component';
+import { AdminAdFormComponent } from './ads/admin-ad-form/admin-ad-form.component';
 
 const routes: Routes = [
 	 { path: 'admin', component: DashboardComponent } ,
 	 { path:'addCategory',component:AddCategoryComponent},
 	 { path:'users',component:UsersComponent},
-	//  { path:'addUser',component:UsersComponent},
 	 { path:'adminAds',component:AllAdsComponent},
-	//  { path:'addAds',component:UsersComponent},
+	  { path:'addAds',component:AdminAdFormComponent},
 	 { path:'addUser',component:AddUserComponent},
 	 { path:'editUser',component:EditUserComponent},
 	 { path:'dashboard',component:DashboardComponent},
