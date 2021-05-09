@@ -14,7 +14,7 @@
               <h6>{{adsInput.price}} DT</h6> 
           </div>
         
-          <button class="btn btn-success button" (click)="deleteAd(adsInput._id)">Supprimer</button>
-          <button class="btn btn-secondary button" >Modifer</button>
+          <button class="btn btn-success button" (click)="deleteAdFromAdmin(adsInput._id)">Supprimer</button>
+          <button class="btn btn-secondary button" (click)="goToEditAd(adsInput._id)">Modifer</button>
       </div>
   </div>
