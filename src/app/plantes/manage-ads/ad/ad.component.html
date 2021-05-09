@@ -1,25 +1,31 @@
 <div class="single-product">
   <div> <img class="img-fluid products" [src]="adsInput.image" alt=""
             (click)="goToProductDetails(adsInput._id)" style="cursor: pointer">
-            <a *ngIf="addedToWishlist">  <i   class="fas fa-heart wishlist fa-2x heart"  (click)="deleteFromWishlist(adsInput._id)" style="cursor: pointer;position:absolute"></i> </a> 
-            <a *ngIf="!addedToWishlist">  <i   class="far fa-heart wishlist fa-2x heart"   (click)="addToWishlist(adsInput._id)" style="cursor: pointer;position:absolute"></i></a> 
+
         </div> 
             <br>
     <div class="product-details">
-        <h5 class="details">{{adsInput.productName}}</h5>
+        <h5 class="details productName">{{adsInput.productName}}</h5>
         <div >
-            <h6 class="details">{{adsInput.category }}</h6>
+            <!-- <h6 class="details ">{{adsInput.category }}</h6> -->
 
         </div>
-        <div class="price details">
+        <div class="price details price">
             <h6>{{adsInput.price}} DT</h6>
-            <!-- <h6 class="l-through">$210.00</h6> -->
         </div>
-        <div class="prd-bottom buttons" >
-            <a href="" class="social-info icon">
-                <span class="ti-bag "></span>
-                <p class="hover-text ">add to bag</p>
-            </a>        
+            
+        <div class="prd-bottom">
+            <a  class="social-info" style="position: absolute;margin-top: -10px;margin-left: 90px;">
+                <span class="ti-bag"></span>   
+            </a>
+            
+            <a  class="social-info" *ngIf="!addedToWishlist" style="position: absolute;margin-top: -30px;margin-left: 130px;">
+                <span class="lnr lnr-heart" (click)="addToWishlist(adsInput._id)" style="background-color:grey!important;cursor: pointer;margin-top: 20px;"></span>
+                <p class="hover-text" style="position: absolute;margin-top: -10px;margin-left: 90px;">Favoris</p>
+            </a>          
+            <a  class="social-info" *ngIf="addedToWishlist" style="position: absolute;margin-top: -10px;margin-left: 130px;">
+                <span class="lnr lnr-heart" (click)="deleteFromWishlist(adsInput._id)" style="background-color:green!important;cursor: pointer"></span>
+            </a>
         </div>
     </div>
 </div>

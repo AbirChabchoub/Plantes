@@ -26,19 +26,6 @@ export class LoginComponent implements OnInit {
     this.router.navigate(['signup']);
   }
 
-
-
-
-  //     login(user:any){
-  //  this.userService.login(user).subscribe(
-  //   (data)=>{
-  //     console.log('se connecter',data.user)
-  //     this.router.navigate(['ads']);
-  //   }
-  // )
-  //     }
-
-
   validateLogin(user) {
     this.userService.login(user);
     // this.router.navigate(['ads']);

@@ -16,16 +16,13 @@ const Category = require('./models/category');
 const Comment = require('./models/comment');
 //importer le modéle wishlist
 const Wishlist = require('./models/wishlist');
+//importer le modéle admin
+const Admin = require('./models/admin');
 //importer le module de cryptage du pwd
 const bcrypt = require('bcrypt');
 //importer le pdfKit
 const PDFDocument = require('pdfkit');
 // const fs = require('fs');
-
-// let pdfDoc = new PDFDocument;
-// pdfDoc.pipe(fs.createWriteStream('SampleDocument.pdf'));
-// pdfDoc.text("My Sample PDF Document");
-// pdfDoc.end();
 
 //importer le path
 const path = require('path'); //module prédéfinit
@@ -81,6 +78,8 @@ app.use((req, res, next) => {
 
 var nodemailer = require('nodemailer');
 const wishlist = require('./models/wishlist');
+
+
 // 27017 PORT du serveur local de la DB
 // plantesDB : Nom de la base de données
 mongoose.connect('mongodb://localhost:27017/plantesDB', { useNewUrlParser: true, useUnifiedTopology: true });
@@ -100,29 +99,10 @@ app.post('/ads', multer({ storage: storage }).single('image'), (req, res) => {
 	console.log(req.body.userId);
 	ad.save().then(
 		res.status(200).json({
-			message: 'Match Added successfully'
+			message: 'Ad Added successfully'
 		})
 	);
 });
-
-// app.post("/ads", (req, res) => {
-//     console.log('here in add annonce', req.body);
-
-//     const ad = new Ad({
-//         productName: req.body.productName,
-//         category: req.body.category,
-//         description: req.body.description,
-//         price: req.body.price,
-//         userId: req.body.userId
-
-//     });
-
-//     ad.save().then(
-//         res.status(200).json({
-//             message: "ad Added successfully"
-//         })
-//     )
-// })
 
 //traitement logique de afficher tous les annonces
 app.get('/ads', (req, res) => {
@@ -149,7 +129,7 @@ app.post('/users/signup', (req, res) => {
 			tel: req.body.tel,
 			address: req.body.address,
 			pwd: cryptedPwd,
-			confirmPassword: req.body.confirmPassword,
+			confirmPassword: cryptedPwd,
 			role: req.body.role
 		});
 
@@ -173,7 +153,7 @@ app.post('/users/login', (req, res) => {
 					message: '0'
 				});
 			}
-			return bcrypt.compare(req.body.loginPwd, findedUser.pwd); //compare ta3mel décryptage w tcompari en mm temps
+			return bcrypt.compare(loginPwd, findedUser.pwd); //compare ta3mel décryptage w tcompari en mm temps
 		})
 		.then((correctUserPwd) => {
 			console.log('correctUserPwd', correctUserPwd);
@@ -274,17 +254,17 @@ app.post('/users/login', (req, res) => {
 		});
 });
 //traitement logique de add user by admin
-app.post('/adminUsers',(req,res)=>{
+app.post('/admin', (req, res) => {
 	console.log('here in login', req.body);
 	const user = new User({
 		fullName: req.body.fullName,
 		lastName: req.body.lastName,
 		email: req.body.email,
-		tel:req.body.tel,
-		address:req.body.address,
-		pwd:req.body.pwd,
-		confirmPwd:req.body.confirmPwd
-		
+		tel: req.body.tel,
+		address: req.body.address,
+		pwd: req.body.pwd,
+		confirmPwd: req.body.confirmPwd
+
 	});
 	user.save().then(
 		res.status(200).json({
@@ -293,7 +273,7 @@ app.post('/adminUsers',(req,res)=>{
 	);
 })
 //traitement logique de get All users
-app.get('/adminUsers', (req, res) => {
+app.get('/admin', (req, res) => {
 	console.log('here in get all users');
 	User.find((err, docs) => {
 		console.log(docs);
@@ -308,8 +288,7 @@ app.get('/adminUsers', (req, res) => {
 });
 
 //traitement logique de supprimer utilsateur
-
-app.delete('/adminUsers/:id', (req, res) => {
+app.delete('/admin/:id', (req, res) => {
 	console.log('here in delete');
 	User.deleteOne({ _id: req.params.id }).then(
 		res.status(200).json({
@@ -319,7 +298,7 @@ app.delete('/adminUsers/:id', (req, res) => {
 });
 
 //traitement logique de update utilsateur
-app.put('/adminUsers/:id', (req, res) => {
+app.put('/admin/:id', (req, res) => {
 	console.log('here in update', req.params.id);
 	const user = new User({
 		_id: req.body.id,
@@ -390,13 +369,14 @@ app.put('/users/:id', (req, res) => {
 		pwd: req.body.pwd,
 		confirmPassword: req.body.confirmPassword
 	});
-	User.updateOne({ _id: req.params.id }, user).then((result) => {
-		if (result) {
-			res.status(200).json({
-				message: 'profil updated with success'
-			});
-		}
-	});
+	User.updateOne({ _id: req.params.id }, user).then(
+		(result) => {
+			if (result) {
+				res.status(200).json({
+					message: 'profil updated with success'
+				});
+			}
+		});
 });
 
 //traitement logique de get connectedUser
@@ -410,20 +390,6 @@ app.get('/users/:id', (req, res) => {
 			});
 		}
 	});
-});
-//traitement logique de commander produit
-app.post('/orders', (req, res) => {
-	console.log('here in signup', req.body); //req.body te5ouli les valeurs mta3 formulaire li 3abitou
-	const order = new Order({
-		orderUserId: req.body.orderUserId,
-		productId: req.body.productId
-	});
-
-	order.save().then(
-		res.status(200).json({
-			message: 'La commande est bien ajouté !'
-		})
-	);
 });
 
 //traitement logique de get ad by user id
@@ -451,7 +417,19 @@ app.delete('/wishlist/:id', (req, res) => {
 		})
 	);
 });
+//traitement logique de get wihlist by userId
+app.get('/wishlist/:id', (req, res) => {
+	console.log('here in my wishlist');
+	Wishlist.findOne({ _id: req.params.id }).then((findedObj) => {
+		//_id !!! 5ater fel bd yetkteb hakek id sinn undefined
+		if (findedObj) {
+			res.status(200).json({
+				wishlist: findedObj
+			});
+		}
+	});
 
+});
 // Traitement logique de get ads by userId
 app.get('/ads/user/:id', (req, res) => {
 	console.log('here in ads profile', req.params.id);
@@ -464,9 +442,8 @@ app.get('/ads/user/:id', (req, res) => {
 	});
 	console.log('here ok ');
 });
-
 //traitement logique de supprimer annonce par l'admin
-app.delete('/ads/:id', (req, res) => {
+app.delete('/adCategory/:id', (req, res) => {
 	console.log('here in delete from ads', req.params.id);
 	Ad.deleteOne({ _id: req.params.id }).then(
 		res.status(200).json({
@@ -474,13 +451,44 @@ app.delete('/ads/:id', (req, res) => {
 		})
 	);
 });
-
+//traitement logique de update ad by id in admin
+app.put('/adCategory/:id', (req, res) => {
+	console.log('here in update ad by admin', req.params.id);
+	const ad = new Ad({
+		id: req.body._id,
+		productName: req.params.productName,
+		category: req.body.category,
+		description: req.body.description,
+		price: req.body.price,
+		// image:req.params.image,
+		userId: req.params.userId
+	});
+	Ad.updateOne({ id: req.params.id }, ad).then((result) => {
+		if (result) {
+			res.status(200).json({
+				message: 'Ad updated'
+			});
+		}
+		console.log('here teeeest');
+	});
+});
+//traitement logique de get ad by id
+app.get('/adCategory/:id', (req, res) => {
+	console.log('here in get ad by id in admin', req.params.id);
+	Ad.findOne({ _id: req.params.id }).then((findedObj) => {
+		if (findedObj) {
+			res.status(200).json({
+				ad: findedObj
+			})
+		}
+	})
+});
 //traitement logique passer commande
-app.post('/orders/:id',(req,res)=>{
+app.post('/orders/:id', (req, res) => {
 	console.log('here in orders', req.params.id);
-	const order=new Order({
-		orderUserId:req.params.orderUserId,
-		productId:req.params.productId
+	const order = new Order({
+		orderUserId: req.params.orderUserId,
+		productId: req.params.productId
 
 	});
 	order.save().then(
@@ -489,17 +497,146 @@ app.post('/orders/:id',(req,res)=>{
 		})
 	);
 });
+//traitement logique de get admin by id
+app.get('/dashboard/:id', (req, res) => {
+	console.log('here in get admin by id', req.params.id);
+	Admin.findOne({ _id: req.params.id }).then((findedObj) => {
+		if (findedObj) {
+			res.status(200).json({
+				admin: findedObj
+			});
+		}
+	});
+
+});
+//traitement logique de signup Admin
+app.post('/admin/signup', (req, res) => {
+	bcrypt.hash(req.body.adminPassword, 10).then((cryptedPwd) => {
+		console.log('here in signup Admin', req.body); //req.body te5ouli les valeurs mta3 formulaire li 3abitou
+		const admin = new Admin({
+			fullName: req.body.fullName,
+			adminEmail: req.body.adminEmail,
+			adminPassword: cryptedPwd,
+			adminConfirmPassword: cryptedPwd
+		});
+
+		admin.save().then(
+			res.status(200).json({
+				message: "L'administrateur est bien ajouté !"
+			})
+		);
+	});
+});
+
+//traitement logique de login Admin
+app.post('/admin/login', (req, res) => {
+	console.log('here in login admin', req.body);
+	const loginAdminEmail = req.body.loginAdminEmail;
+	const loginAdminPassword = req.body.loginAdminPassword;
+	Admin.findOne({ adminEmail: loginAdminEmail })
+		.then((findedUser) => {
+			if (!findedUser) {
+				res.status(200).json({
+					message: '0'
+				});
+			}
+			return bcrypt.compare(loginAdminPassword, findedUser.adminPassword); //compare ta3mel décryptage w tcompari en mm temps
+		})
+		.then((correctAdminPwd) => {
+			console.log('correctAdminPwd', correctAdminPwd);
+			if (!correctAdminPwd) {
+				res.status(200).json({
+					message: '1'
+				});
+			}
+			Admin.findOne({ adminEmail: req.body.loginAdminEmail }).then((finalUser) => {
+				let admin = {
+					id: finalUser._id,
+					fullName: finalUser.fullName,
+
+				};
+				res.status(200).json({
+					admin: admin,
+					message: '2'
+				});
+			});
+		});
+});
+
+//traitement logique de get wishlist by id
+app.get('/wishlist/:id', (req, res) => {
+	console.log('here in get my wishlist');
+	Wishlist.find({ wishlistUserId: req.params.id })
+		.then((findedObj) => {
+			if (findedObj) {
+				res.status(200).json({
+				message:'0'
+				});
+			}
+console.log('heere',findedObj.adId);
+
+		})
+
+	Ad.find({_id: findedObj.adId}).then((finalUser) => {
+	
+		res.status(200).json({
+			wishlist:finalUser 
+			
+		});
+	});
+});
 
 
+//traitement logique de users chart
+app.get('/admin', (req, res) => {
+	console.log('here in users chart ');
+	User.find((err, docs) => {
+		if (err) {
+			console.log('error with DB');
 
+		} else {
+			res.status(200).json({
+				user: docs
+			})
+		}
+	})
 
+})
+//traitement logique de edit user profile by admin
+app.put('/admin/:id', (req, res) => {
+	console.log('here in update', req.params.id);
+	const user = new User({
+		_id: req.body._id,
+		firstName: req.body.firstName,
+		lastName: req.body.lastName,
+		email: req.body.email,
+		tel: req.body.tel,
+		address: req.body.tel,
+		pwd: req.body.pwd,
+		confirmPassword: req.body.confirmPassword
+	});
+	User.updateOne({ _id: req.params.id }, user).then(
+		(result) => {
+			if (result) {
+				res.status(200).json({
+					message: 'profil updated with success in admin'
+				});
+			}
+		});
+});
 
-
-
-
-
-
-
+//traitement logique de get UserByIdFromAdmin
+// app.get('/admin/:id', (req, res) => {
+// 	console.log('here UserIdFromAdmin', req.params.id);
+// 	User.findOne({ _id: req.params.id }).then((findedObj) => {
+// 		//_id !!! 5ater fel bd yetkteb hakek id sinn undefined
+// 		if (findedObj) {
+// 			res.status(200).json({
+// 				user: findedObj
+// 			});
+// 		}
+// 	});
+// });
 
 
 module.exports = app;

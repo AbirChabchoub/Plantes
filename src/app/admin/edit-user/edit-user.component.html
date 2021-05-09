@@ -1,14 +1,14 @@
-<!-- <form  [formGroup]="updateProfileForm">
+<form  [formGroup]="updateProfileForm">
     <div class="form-row">
         <div class="form-group col-md-6">
             <label>Nom</label>
             <input type="text" class="form-control" id="inputEmail4" placeholder="Nom" formControlName="firstName"
                 [(ngModel)]="user.firstName">
         </div>
-        first name validator and Error
+        <!-- first name validator and Error -->
         <div *ngIf='updateProfileForm.controls["firstName"].invalid && (updateProfileForm.controls["firstName"].touched 
 || updateProfileForm.controls["firstName"].dirty)'>
-            <div *ngIf='updateProfileForm.controls["firstName"].errors?.required' style="color:red">Ce champ
+            <div *ngIf='updateProfileForm.controls["firstName"].errors?.required' style="color:red;margin-top: 70px;margin-left: -400px;">Ce champ
                 est obligatoire</div>
         </div>
         <div class="form-group col-md-6">
@@ -17,10 +17,10 @@
                 [(ngModel)]="user.lastName">
         </div>
     </div>
-   last name validator and Error
+   <!-- last name validator and Error -->
     <div *ngIf='updateProfileForm.controls["lastName"].invalid && (updateProfileForm.controls["lastName"].touched 
 || updateProfileForm.controls["lastName"].dirty)'>
-        <div *ngIf='updateProfileForm.controls["lastName"].errors?.required' style="color:red">Ce champ est
+        <div *ngIf='updateProfileForm.controls["lastName"].errors?.required' style="color:red;margin-left: 470px;margin-top: -10px">Ce champ est
             obligatoire</div>
     </div>
 
@@ -32,9 +32,9 @@
         </div>
         <div *ngIf='updateProfileForm.controls["email"].invalid && (updateProfileForm.controls["email"].touched 
         || updateProfileForm.controls["email"].dirty)'>
-            <div *ngIf='updateProfileForm.controls["email"].errors?.email' style="color:red"> Veuillez entrez
+            <div *ngIf='updateProfileForm.controls["email"].errors?.email' style="color:red;margin-top: 80px;margin-left: -400px"> Veuillez entrez
                 une adresse email valide</div>
-            <div *ngIf='updateProfileForm.controls["email"].errors?.required' style="color:red">Ce champ est
+            <div *ngIf='updateProfileForm.controls["email"].errors?.required' style="color:red;margin-top: 80px;margin-left: -400px">Ce champ est
                 obligatoire</div>
         </div>
         <div class="form-group col-md-6">
@@ -44,9 +44,9 @@
         </div>
         <div *ngIf='updateProfileForm.controls["tel"].invalid && (updateProfileForm.controls["tel"].touched 
         || updateProfileForm.controls["tel"].dirty)'>
-            <div *ngIf='updateProfileForm.controls["tel"].errors?.required' style="color:red "> Ce champ est
+            <div *ngIf='updateProfileForm.controls["tel"].errors?.required' style="color:red ;margin-left: 470px;margin-top: -10px"> Ce champ est
                 obligatoire</div>
-            <div *ngIf='updateProfileForm.controls["tel"].errors?.pattern' style="color:red"> Ce champ doit contenir 8 chiffres
+            <div *ngIf='updateProfileForm.controls["tel"].errors?.pattern' style="color:red ;margin-left: 470px;margin-top: -10px"> Ce champ doit contenir 8 chiffres
             </div>
         </div>
     </div>
@@ -81,7 +81,7 @@
         </div>
         <div *ngIf='updateProfileForm.controls["confirmPassword"].invalid && (updateProfileForm.controls["confirmPassword"].touched 
         || updateProfileForm.controls["confirmPassword"].dirty)'>
-            <div *ngIf='updateProfileForm.controls["confirmPassword"].errors?.mustMatch' style="color:red">
+            <div *ngIf='updateProfileForm.controls["confirmPassword"].errors?.mustMatch' style="color:red;margin-left: 470px;margin-top: -10px">
                 Veuillez confirmer le mot de passe</div>
         </div>
     </div>
@@ -95,5 +95,5 @@
             <label class="form-check-label" for="gridCheck">Check me out</label>
         </div>
     </div>
-    <button type="submit" class="btn btn-primary" style="margin-left: 450px;" (click)='editProfil()'>Modifier</button>
-</form> -->
+    <button type="submit" class="btn btn-primary" style="margin-left: 450px;background-color: green;border-color: green;" (click)='editProfil()'>Modifier</button>
+</form>

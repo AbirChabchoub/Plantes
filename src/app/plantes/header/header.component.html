@@ -18,7 +18,7 @@
                     <ul class="nav navbar-nav menu_nav ml-auto">
                         <li class="nav-item navBarItems"><a class="nav-link" routerLink="">Accueil</a></li>
                         <li class="nav-item submenu dropdown navBarItems">
-                            <a routerLink="/ads" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button"
+                            <a routerLink="/ads" class="nav-link dropdown-toggle"  role="button"
                                 aria-expanded="false">Annonces</a>
 
                         </li>
@@ -50,9 +50,9 @@
                             <ul class="dropdown-menu">
                                 <li class="nav-item"><a class="nav-link" (click)="goToProfile()">Mon jardin</a>
                                 </li>
-                                <li class="nav-item"><a class="nav-link" routerLink="signup">Mes commandes</a>
+                                <li class="nav-item"><a class="nav-link" (click)='goToOrders()'>Mes commandes</a>
                                 </li>
-                                <li class="nav-item"><a class="nav-link" href="tracking.html">Mes favoris</a>
+                                <li class="nav-item"><a class="nav-link" (click)='goToMyWishlist()'>Mes favoris</a>
                                 </li>
                                 <li class="nav-item"><a class="nav-link" href="elements.html">Elements</a></li>
                             </ul>

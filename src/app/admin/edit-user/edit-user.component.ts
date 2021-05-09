@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { UsersService } from 'src/app/services/users.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { MustMatch } from 'src/app/functions/confirmPwd';
+import { AdminUsersService } from '../Admin-services/admin-users.service';
 
 @Component({
   selector: 'app-edit-user',
@@ -14,15 +15,16 @@ export class EditUserComponent implements OnInit {
   updateProfileForm: FormGroup;
   id: any;
   constructor(private formBuilder: FormBuilder, 
-    private usersService: UsersService, 
+    private adminService: AdminUsersService, 
+    private usersService:UsersService,
     private route: Router, 
     private activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
     this.id = this.activatedRoute.snapshot.paramMap.get('id');
-    this.usersService.getConnectedUser(this.id).subscribe(
+    this.adminService.getUserByIdFromAdmin(this.id).subscribe(
       (data) => {
-        this.user = data.users
+        this.user = data.user
       });
 
 
@@ -30,7 +32,7 @@ export class EditUserComponent implements OnInit {
       firstName: ['', [Validators.required]],
       lastName: ['', [Validators.required]],
       address: ['', [Validators.required]],
-      tel: ['', [Validators.pattern("[0-9 ]{8}"), Validators.required]],
+      tel: ['', [Validators.pattern("[0-9]{8}"), Validators.required]],
       pwd: ['', Validators.required],
       email: ['', [Validators.email, Validators.required]],
       confirmPassword: ['']
@@ -44,11 +46,11 @@ export class EditUserComponent implements OnInit {
 
 
   editProfil() {
-    this.usersService.updateProfil(this.user).subscribe(
+    this.adminService.updateUser(this.user).subscribe(
       (data) => {
         console.log('your profile is successfully updated', data.message);
         this.route.navigate(['profile']);
-      })
+      });
     
   }
 

@@ -31,6 +31,8 @@ import { EditProfileComponent } from './manage-profile/edit-profile/edit-profile
 import { JwPaginationComponent } from 'jw-angular-pagination';
 import { ReplyComponent } from './manage-comments/reply/reply.component';
 import { ManageAdsModule } from './manage-ads/manage-ads.module';
+import { OrdersComponent } from './manage-profile/orders/orders.component';
+import { WishlistComponent } from './manage-profile/wishlist/wishlist.component';
 
 @NgModule({
 	declarations: [
@@ -56,7 +58,9 @@ import { ManageAdsModule } from './manage-ads/manage-ads.module';
 		ProfileComponent,
 		EditProfileComponent,
 		JwPaginationComponent,
-		ReplyComponent
+		ReplyComponent,
+		OrdersComponent,
+		WishlistComponent
 	],
 	imports: [ CommonModule, PlantesRoutingModule, ReactiveFormsModule, FormsModule, ManageAdsModule ]
 })

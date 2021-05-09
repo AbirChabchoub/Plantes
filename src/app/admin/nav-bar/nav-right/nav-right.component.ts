@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbDropdownConfig } from '@ng-bootstrap/ng-bootstrap';
-
+import { UsersService } from 'src/app/services/users.service';
+import{Admin} from '../../../../../backend/models/Admin';
 @Component({
 	selector: 'app-nav-right',
 	templateUrl: './nav-right.component.html',
@@ -8,7 +9,19 @@ import { NgbDropdownConfig } from '@ng-bootstrap/ng-bootstrap';
 	providers: [ NgbDropdownConfig ]
 })
 export class NavRightComponent implements OnInit {
-	constructor() {}
+	userIsAuthenticated: Admin;
 
-	ngOnInit() {}
+	constructor(private authService: UsersService) {}
+
+	ngOnInit() {
+		this.authService.currentUser.subscribe((x) => (this.userIsAuthenticated = x));
+
+	}
+
+	logout() {
+		this.authService.logout();
+	}
+
+
+
 }

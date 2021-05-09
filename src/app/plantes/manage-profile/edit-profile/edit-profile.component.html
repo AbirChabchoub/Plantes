@@ -1,4 +1,4 @@
-<section class="banner-area organic-breadcrumb">
+<!-- <section class="banner-area organic-breadcrumb">
     <div class="container">
         <div class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
             <div class="col-first">
@@ -11,7 +11,7 @@
         </div>
     </div>
 </section>
-<!-- End Banner Area -->
+ End Banner Area 
 
 
 <section class="login_box_area section_gap">
@@ -21,12 +21,12 @@
                 <div class="login_form_inner">
                     <h3>S'inscrire </h3>
                     <form class="row login_form" [formGroup]="updateProfileForm">
-                        <!-- nom -->
+                        nom
                         <div class="col-md-12 form-group">
                             <input type="text" class="form-control" placeholder="Nom" formControlName="firstName"
                                 [(ngModel)]="user.firstName">
                         </div>
-                        <!-- first name validator and Error -->
+                        first name validator and Error
                         <div *ngIf='updateProfileForm.controls["firstName"].invalid && (updateProfileForm.controls["firstName"].touched 
 || updateProfileForm.controls["firstName"].dirty)'>
                             <div *ngIf='updateProfileForm.controls["firstName"].errors?.required' style="color:red">Ce champ
@@ -34,20 +34,20 @@
                         </div>
 
 
-                        <!-- Prénom -->
+                        Prénom
                         <div class="col-md-12 form-group">
                             <input type="text" class="form-control" name="name" placeholder="Prénom"
                                 formControlName="lastName" [(ngModel)]="user.lastName">
                         </div>
 
-                        <!-- last name validator and Error -->
+                        last name validator and Error
                         <div *ngIf='updateProfileForm.controls["lastName"].invalid && (updateProfileForm.controls["lastName"].touched 
 || updateProfileForm.controls["lastName"].dirty)'>
                             <div *ngIf='updateProfileForm.controls["lastName"].errors?.required' style="color:red">Ce champ est
                                 obligatoire</div>
                         </div>
 
-                        <!-- email -->
+                        email
                         <div class="col-md-12 form-group">
                             <input type="email" class="form-control" name="name" placeholder="Adresse email"
                                 formControlName="email" [(ngModel)]="user.email">
@@ -61,7 +61,7 @@
                         </div>
 
 
-                        <!-- tel -->
+                        tel
 
                         <div class="col-md-12 form-group">
                             <input type="text" class="form-control" name="name" placeholder="Numéro de téléphone"
@@ -76,7 +76,7 @@
                             </div>
                         </div>
 
-                        <!-- adresse -->
+                        adresse
                         <div class="col-md-12 form-group">
                             <input type="text" class="form-control" name="name" placeholder="Adresse"
                                 formControlName="address" [(ngModel)]="user.address">
@@ -91,7 +91,7 @@
 
 
 
-                        <!-- mot de passe -->
+                        mot de passe
                         <div class="col-md-12 form-group">
                             <input type="password" class="form-control" name="name" placeholder="Mot de passe"
                                 formControlName="pwd" [(ngModel)]="user.pwd">
@@ -101,7 +101,7 @@
                             <div *ngIf='updateProfileForm.controls["pwd"].errors?.required' style="color:red"> Ce champ est
                                 obligatoire</div>
                         </div>
-                        <!-- confirmer le mot de passe -->
+                        confirmer le mot de passe
                         <div class="col-md-12 form-group">
                             <input type="password" class="form-control" name="name"
                                 placeholder="Confirmer votre mot de passe" formControlName="confirmPassword">
@@ -114,12 +114,12 @@
                         </div>
 
 
-                        <!-- <div class="col-md-12 form-group">
+                        <div class="col-md-12 form-group">
                             <div class="creat_account">
                                 <input type="checkbox" id="f-option2" name="selector">
                                 <label for="f-option2">Rester connecter</label>
                             </div>
-                        </div> -->
+                        </div>
                         <div class="col-md-12 form-group">
                             <button type="submit" (click)='editProfil()' class="primary-btn"
                                 >Modifier</button>
@@ -130,4 +130,106 @@
             </div>
         </div>
     </div>
-</section>
+</section>  -->
+<br><br><br><br><br>
+<form [formGroup]="updateProfileForm">
+<div class="container rounded bg-white mt-5">
+    <div class="row">
+        <div class="col-md-4 border-right">
+            <div class="d-flex flex-column align-items-center text-center p-3 py-5">
+                <img class="rounded-circle mt-5" src="https://i.imgur.com/0eg0aG0.jpg" width="90">
+                <button type="button" (click)='filePicker.click()' class="btn btn-success imageBtn">Sélectionner image</button>
+                <div class="form-group">
+                    <input style="visibility: hidden;" type="file" class="form-control"
+                    #filePicker (change)='onImageSelected($event)' /> 
+                </div>
+                    <img style="width: 50px;height: 50px;" *ngIf="imagePreview" [src]="imagePreview">
+                </div>
+        </div>
+        <div class="col-md-8">
+            <div class="p-3 py-5">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h6 class="text-right">Modifier mon profile</h6>
+                </div>
+                <div class="row mt-2">
+                    <div class="col-md-6">
+                        <input type="text" class="form-control" value="Nom" placeholder="Nom" formControlName="firstName"
+                        [(ngModel)]="user.firstName">
+                    </div> 
+                    <!-- first name validator and Error -->
+                    <div *ngIf='updateProfileForm.controls["firstName"].invalid && (updateProfileForm.controls["firstName"].touched 
+|| updateProfileForm.controls["firstName"].dirty)'>
+                        <div *ngIf='updateProfileForm.controls["firstName"].errors?.required' style="color:red">Ce champ
+                            est obligatoire</div>
+                    </div>
+                    <div class="col-md-6">
+                        <input type="text" class="form-control" value="Prénom" placeholder="Prénom" formControlName="lastName" [(ngModel)]="user.lastName">
+                    </div>
+                    <!-- last name validator and Error -->
+                    <div *ngIf='updateProfileForm.controls["lastName"].invalid && (updateProfileForm.controls["lastName"].touched 
+|| updateProfileForm.controls["lastName"].dirty)'>
+                        <div *ngIf='updateProfileForm.controls["lastName"].errors?.required' style="color:red">Ce champ est
+                            obligatoire</div>
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-md-6">
+                        <input type="text" class="form-control" value="Adresse email" placeholder="Email" formControlName="email" [(ngModel)]="user.email">
+                        </div>
+                        <div *ngIf='updateProfileForm.controls["email"].invalid && (updateProfileForm.controls["email"].touched 
+                        || updateProfileForm.controls["email"].dirty)'>
+                                                    <div *ngIf='updateProfileForm.controls["email"].errors?.email' style="color:red"> Veuillez entrez
+                                                        une adresse email valide</div>
+                                                    <div *ngIf='updateProfileForm.controls["email"].errors?.required' style="color:red">Ce champ est
+                                                        obligatoire</div>
+                                                </div>
+                    <div class="col-md-6"><input type="text" class="form-control" value="+19685969668"
+                            placeholder="Phone number" formControlName="tel" [(ngModel)]="user.tel">
+                        </div>
+                        <div *ngIf='updateProfileForm.controls["tel"].invalid && (updateProfileForm.controls["tel"].touched 
+                        || updateProfileForm.controls["tel"].dirty)'>
+                                                    <div *ngIf='updateProfileForm.controls["tel"].errors?.required' style="color:red "> Ce champ est
+                                                        obligatoire</div>
+                                                    <div *ngIf='updateProfileForm.controls["tel"].errors?.pattern' style="color:red"> Ce champ doit
+                                                        contenir 8 chiffres
+                                                    </div>
+                                                </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-md-12">
+                        <input type="text" class="form-control" placeholder="address"
+                            value="Adresse"   formControlName="address" [(ngModel)]="user.address">
+                        </div>
+                        <div *ngIf='updateProfileForm.controls["address"].invalid && (updateProfileForm.controls["address"].touched 
+                        || updateProfileForm.controls["address"].dirty)'>
+                                                    <div *ngIf='updateProfileForm.controls["address"].errors?.required' style="color:red"> Ce champ est
+                                                        obligatoire</div>
+                                                </div>
+                   
+                </div>
+                <div class="row mt-3">
+                    <div class="col-md-6">
+                        <input type="text" class="form-control" value="Mot de passe" formControlName="pwd" [(ngModel)]="user.pwd">
+                        </div>
+                        <div *ngIf='updateProfileForm.controls["pwd"].invalid && (updateProfileForm.controls["pwd"].touched 
+                        || updateProfileForm.controls["pwd"].dirty)'>
+                                                    <div *ngIf='updateProfileForm.controls["pwd"].errors?.required' style="color:red"> Ce champ est
+                                                        obligatoire</div>
+                                                </div>
+                    <div class="col-md-6">
+                        <input type="text" class="form-control" value="Confirmer le mot de passe"
+                            placeholder="Confirmer le mot de passe" formControlName="confirmPassword">
+                        </div>
+                        <div *ngIf='updateProfileForm.controls["confirmPassword"].invalid && (updateProfileForm.controls["confirmPassword"].touched 
+                        || updateProfileForm.controls["confirmPassword"].dirty)'>
+                                                 <div *ngIf='updateProfileForm.controls["confirmPassword"].errors?.mustMatch' style="color:red">
+                                                     Veuillez confirmer le mot de passe</div>
+                                             </div>
+                </div>
+                <div class="mt-5 text-right"><button class="btn btn-primary profile-button" type="button"
+                        (click)='editProfil()'>Modifier</button></div>
+            </div>
+        </div>
+    </div>
+</div>
+</form>

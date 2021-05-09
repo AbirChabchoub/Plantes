@@ -9,7 +9,9 @@ export class WishlistService {
   constructor(private httpClient:HttpClient) { }
 
 
-
+getMyWishlist(userId:any){
+  return this.httpClient.get<{wishlist:any}>(`${this.wishlistUrl}/${userId}`);
+}
 
 
 

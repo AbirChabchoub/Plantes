@@ -39,4 +39,19 @@ export class ProfileComponent implements OnInit {
 	goToAdForm() {
 		this.router.navigate([ 'adForm' ]);
 	}
+
+	// onImageSelected(event: Event) {
+	// 	const file = (event.target as HTMLInputElement).files[0]; 
+	// 	console.log('Here my file', file);
+		
+	// 	this.addMatchForm.patchValue({ image: file }); 
+	// 	this.addMatchForm.updateValueAndValidity();
+	// 	const reader = new FileReader();
+	// 	reader.onload = () => {
+	// 	  this.imagePreview = reader.result as string
+	// 	}; reader.readAsDataURL(file);
+	//   }
+
+
+
 }

@@ -19,40 +19,34 @@
     <div class="container">
         <div class="row s_product_inner">
             <div class="col-lg-6">
-                <div class="s_Product_carousel">
+                <div >
                     <!-- <div class="single-prd-item">
                         <img class="img-fluid" src="assets/plantes/img/category/s-p1.jpg" alt="">
                     </div> -->
-                      <div class="single-prd-item">
-                        <img class="img-fluid" [src]="ad?.image" alt="">
-                    </div>   
-                    <div class="single-prd-item">
-                        <img class="img-fluid" [src]="ad?.image" alt="">
-                    </div>
+                    <img class="img-fluid" [src]="ad?.image" alt="" width="450px" height="350px">
                 </div>
             </div>
             <div class="col-lg-5 offset-lg-1">
                 <div class="s_product_text">
 					<h3>{{ad?.productName}}</h3> 
 						<!-- kolha hkeeyet wa9t mtaa req  w res ken mana3melch ? y'affichili ama yjini erreur donc ki nzid ? n9olou kif tjini lres wenti affichili -->
-                    <h2>{{ad?.price}}</h2>
+                    <h2>{{ad?.price}} DT </h2>
                     <ul class="list">
                         <li><a class="active" href="#"><span>Catégorie</span> {{ad?.category}}</a></li>
-                        <li><a href="#"><span>Availibility</span> : In Stock</a></li>
+                        <!-- <li><a href="#"><span>Availibility</span> : In Stock</a></li> -->
                     </ul>
-                    <p>{{ad?.description}}</p>
+                  
                     <div class="product_count">
-                        <label for="qty">Quantity:</label>
-                        <input type="text" name="qty" id="sst" maxlength="12" value="1" title="Quantity:" class="input-text qty">
+                        <!-- <input type="text" name="qty" id="sst" maxlength="12" value="1" title="Quantity:" class="input-text qty"> -->
                         <!-- <button onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst )) result.value++;return false;"
                          class="increase items-count" type="button"><i class="lnr lnr-chevron-up"></i></button>
                         <button onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst ) &amp;&amp; sst > 0 ) result.value--;return false;"
                          class="reduced items-count" type="button"><i class="lnr lnr-chevron-down"></i></button> -->
                     </div>
                     <div class="card_area d-flex align-items-center">
-                        <a class="primary-btn" href="#" (click)="verifConnectedUser()">Ajouter au panier</a>
+                        <a class="primary-btn buyBtn"  data-toggle="modal" data-target="#myModal">Acheter maintenant</a>
                         <!-- <a class="icon_btn" href="#"><i class="lnr lnr lnr-diamond"></i></a> -->
-                        <a class="icon_btn" href="#"><i class="lnr lnr lnr-heart"></i></a>
+                        <a class="icon_btn buyBtn " href="#"><i class="lnr lnr lnr-heart "></i></a>
                     </div>
                 </div>
             </div>
@@ -61,6 +55,33 @@
 </div>
 <!--================End Single Product Area =================-->
 
+<!-- Modal -->
+<div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Modal Header</h4>
+      </div>
+      <div class="modal-body">
+        <img class="img-fluid" [src]="ad?.image" alt="" width="150px" height="150px" style="margin-top:-30px;">
+        
+        <p style="margin-top: -200px;margin-left: 200px;">{{ad?.productName}}</p> 
+        <p style="margin-top: -10px;margin-left: 200px;">{{ad?.price}}DT</p>
+        <li><a class="active"  style="margin-top:-20px;margin-left: 200px;"><span>Catégorie</span> {{ad?.category}}</a></li>
+        <p style="margin-top:10px;margin-left: 200px;">prix livraison : 7 DT</p>
+        <p style="margin-top:20px;margin-left: 200px;">prix total : {{ad?.price+7}} DT</p>
+       
+        
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
 
    <app-comments></app-comments>
  

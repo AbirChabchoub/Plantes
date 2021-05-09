@@ -39,9 +39,7 @@ export class AdsService {
 		return this.httpClient.get<{ ads: any }>(this.adUrl);
 	}
 
-	deleteAd(id: any) {
-		return this.httpClient.delete<{ message: string }>(`${this.adUrl}/${id}`);
-	}
+	
 
 	getAdById(id: any) {
 		return this.httpClient.get<{ ad: any }>(`${this.adUrl}/${id}`);

@@ -1,1 +1,81 @@
-<p>signup-admin works!</p>
+
+<form [formGroup]="signupAdmin">
+<div class="auth-wrapper">
+    <div class="auth-content">
+      <div class="card">
+        <div class="row align-items-center text-center">
+          <div class="col-md-12">
+            <div class="card-body">
+              <img src="assets/images/logo-dark.png" alt="" class="img-fluid mb-4">
+              <h4 class="mb-3 f-w-400">S'inscrire</h4>
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><i class="feather icon-user"></i></span>
+                </div>
+                <input type="text" class="form-control" placeholder="Nom & Prénom" formControlName="fullName">
+              </div>
+
+                        <!-- first name validator and Error -->
+                        <div *ngIf='signupAdmin.controls["fullName"].invalid && (signupAdmin.controls["fullName"].touched 
+|| signupAdmin.controls["fullName"].dirty)'>
+                            <div *ngIf='signupAdmin.controls["fullName"].errors?.required' style="color:red">Ce champ
+                                est obligatoire</div>
+                        </div>
+
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><i class="feather icon-mail"></i></span>
+                </div>
+                <input type="email" class="form-control" placeholder="Adresse email" formControlName="adminEmail">
+              </div>
+              <div *ngIf='signupAdmin.controls["adminEmail"].invalid && (signupAdmin.controls["adminEmail"].touched 
+              || signupAdmin.controls["adminEmail"].dirty)'>
+                                          <div *ngIf='signupAdmin.controls["adminEmail"].errors?.email' style="color:red"> Veuillez entrez
+                                              une adresse email valide</div>
+                                          <div *ngIf='signupAdmin.controls["adminEmail"].errors?.required' style="color:red">Ce champ est
+                                              obligatoire</div>
+                                      </div>
+
+
+
+              <div class="input-group mb-4">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><i class="feather icon-lock"></i></span>
+                </div>
+                <input type="password" class="form-control" placeholder="Mot de passe" formControlName="adminPassword">
+              </div>
+              <div *ngIf='signupAdmin.controls["adminPassword"].invalid && (signupAdmin.controls["adminPassword"].touched 
+              || signupAdmin.controls["adminPassword"].dirty)'>
+                                          <div *ngIf='signupAdmin.controls["adminPassword"].errors?.required' style="color:red"> Ce champ est
+                                              obligatoire</div>
+                                      </div>
+
+              <div class="input-group mb-4">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><i class="feather icon-lock"></i></span>
+                </div>
+                <input type="password" class="form-control" placeholder="Confirmer le mot de passe" formControlName="adminConfirmPassword">
+              </div>
+
+              <div *ngIf='signupAdmin.controls["adminConfirmPassword"].invalid && (signupAdmin.controls["adminConfirmPassword"].touched 
+              || signupAdmin.controls["adminConfirmPassword"].dirty)'>
+                                       <div *ngIf='signupAdmin.controls["adminConfirmPassword"].errors?.mustMatch' style="color:red">
+                                           Veuillez confirmer le mot de passe</div>
+                                   </div>
+
+
+              <div class="form-group text-left mt-2">
+                <div class="checkbox checkbox-primary d-inline">
+                  <input type="checkbox" name="checkbox-fill-2" id="checkbox-fill-2">
+                  <label for="checkbox-fill-2" class="cr">Send me the <a href="javascript:"> Newsletter</a> weekly.</label>
+                </div>
+              </div>
+              <button class="btn btn-primary btn-block mb-4 signupButton" (click)="signup(signupAdmin.value)">S'inscrire</button>
+              <p class="mb-2">Vous avez deja un compte? <a [routerLink]="['loginAdmin']" class="f-w-400">Se connecter</a></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
