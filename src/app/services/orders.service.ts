@@ -11,7 +11,10 @@ export class OrdersService {
 
 
 addOrder(order:any){
-  this.httpClient.post<{message:any}>(`${this.orderUrl}`, order); 
+  this.httpClient.post<{message:string}>(this.orderUrl, order); 
+}
+getOrderByUserId(id:any){
+  this.httpClient.get<{order:any}>(`${this.orderUrl}/${id}`);
 }
 
 }
