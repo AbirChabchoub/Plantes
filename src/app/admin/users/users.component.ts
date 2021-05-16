@@ -10,9 +10,11 @@ import { Router } from '@angular/router';
 })
 export class UsersComponent implements OnInit {
 users:any;
-term:any
+term:any;
+id:any
   constructor(private userService:AdminUsersService,
-  private router:Router  ) { }
+  private router:Router,
+  private adminService:AdminUsersService  ) { }
 
   ngOnInit() {
 this.getAllusers();
@@ -47,9 +49,16 @@ this.userService.updateUser(id).subscribe(
 }
 
 
-goToEditProfile(){
-  this.router.navigate(['editUser']);
+goToEditProfile(id:any){
+  localStorage.setItem('userToEdit', JSON.stringify(id));
+		this.router.navigate([ `editUser/${id}` ]);
 }
 
+getUserById(){
+  this.adminService.getUserByIdFromAdmin(this.id).subscribe(
+    (data)=>{
+this.users=data.user
+  });
+}
 
 }

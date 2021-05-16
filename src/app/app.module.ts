@@ -22,7 +22,9 @@ import { HeaderComponent } from './plantes/header/header.component';
 import { FooterComponent } from './plantes/footer/footer.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-
+import { LoginAdminComponent } from './admin/login-admin/login-admin.component';
+import { SignupAdminComponent } from './admin/signup-admin/signup-admin.component';
+import { ChartsModule } from 'ng2-charts' ; 
 
 
 @NgModule({
@@ -40,7 +42,9 @@ import { HttpClientModule } from '@angular/common/http';
 		NavGroupComponent,
 		NavItemComponent,
 		HeaderComponent,
-		FooterComponent
+		FooterComponent,
+		LoginAdminComponent,
+		SignupAdminComponent
 	],
 	imports: [
 		BrowserModule,
@@ -50,7 +54,8 @@ import { HttpClientModule } from '@angular/common/http';
 		PlantesModule,
 		FormsModule,
 		ReactiveFormsModule,
-		HttpClientModule
+		HttpClientModule,
+	ChartsModule
 	],
 	exports: [ FormsModule, ReactiveFormsModule ],
 	providers: [ NavigationItem ],

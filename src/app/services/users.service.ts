@@ -20,6 +20,7 @@ export class UsersService {
 	}
 
 	addUserToDB(user: any) {
+		localStorage.setItem('connectedUser', JSON.stringify(user.id));
 		return this.httpClient.post<{ message: String }>(`${this.userUrl}/signup`, user);
 	}
 

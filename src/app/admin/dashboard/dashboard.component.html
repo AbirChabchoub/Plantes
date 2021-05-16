@@ -1,0 +1,23 @@
+
+   <div class="card mb-3 justify-content-center adminDetails" >
+    <div class="row g-0">
+      <div class="col-md-4">
+        <img src="assets/plantes/img/profil.png" class="profilImg">
+      </div>
+      <div class="col-md-8">
+        <table >
+            <thead>
+              <tr>
+                <th ></th>
+                <th colspan="2"  id="profileNameText"><p class="card-title" id="profileName">Bienvenue {{admin.fullName}} !</p></th>
+                <th ></th>
+              </tr>
+              <tr> 
+               <button class="btn btn-primary btn-sm profilButtons" (click)="goToEditAdminProfile()"> Modifier mon profile</button>
+              </tr>
+            </thead>           
+          </table>        
+        </div>
+      </div>
+    </div>
+  

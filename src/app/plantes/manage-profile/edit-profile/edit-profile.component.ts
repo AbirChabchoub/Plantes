@@ -13,6 +13,7 @@ export class EditProfileComponent implements OnInit {
   user: any = {};
   updateProfileForm: FormGroup;
   id: any;
+  imagePreview: String;
   constructor(private formBuilder: FormBuilder, 
     private usersService: UsersService, 
     private route: Router, 
@@ -47,13 +48,22 @@ export class EditProfileComponent implements OnInit {
 
 
   editProfil() {
+    let connectedUserId = JSON.parse(localStorage.getItem('connectedUser'));		
     this.usersService.updateProfil(this.user).subscribe(
       (data) => {
         console.log('your profile is successfully updated', data.message);
-        this.route.navigate(['profile']);
-      })
-    
+        this.route.navigate([ `profile/${connectedUserId}` ]);
+      });   
   }
 
-
+  onImageSelected(event: Event) {
+    const file = (event.target as HTMLInputElement).files[0];
+    this.updateProfileForm.patchValue({ image: file });
+    this.updateProfileForm.updateValueAndValidity();
+    const reader = new FileReader();
+    reader.onload = () => {
+      this.imagePreview = reader.result as string
+    };
+    reader.readAsDataURL(file);
+  }
 }

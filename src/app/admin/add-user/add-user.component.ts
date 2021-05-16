@@ -35,6 +35,7 @@ addUser(user:any){
   this.adminUsersService.addUser(user).subscribe(
     (data)=>{
       console.log('user added succesfylly in admin',data.message);
+      this.router.navigate(['users']);
       
     })
 }

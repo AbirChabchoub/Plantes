@@ -36,7 +36,7 @@ const NavigationItems = [
 				id: 'dashboard',
 				title: 'Dashboard',
 				type: 'item',
-				url: '/dashboard',
+				url: '/dashboard/:id',
 				icon: 'feather icon-home'
 			}
 		]

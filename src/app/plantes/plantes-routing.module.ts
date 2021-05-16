@@ -11,6 +11,9 @@ import { FAQComponent } from './faq/faq.component';
 
 import { ProfileComponent } from './manage-profile/profile/profile.component';
 import { EditProfileComponent } from './manage-profile/edit-profile/edit-profile.component';
+import { OrdersComponent } from './manage-profile/orders/orders.component';
+import { AdminComponent } from '../admin/admin.component';
+import { WishlistComponent } from './manage-profile/wishlist/wishlist.component';
 
 const routes: Routes = [
 	{ path: '', component: HomeComponent },
@@ -23,7 +26,11 @@ const routes: Routes = [
 	{ path: 'product-details/:id', component: ProductDetailsComponent },
 	{ path: 'forum', component: FAQComponent },
 	{ path: 'profile/:id', component: ProfileComponent },
-	{ path: 'editProfile/:id', component: EditProfileComponent }
+	{ path: 'editProfile/:id', component: EditProfileComponent },
+	{ path: 'orders/:id', component: OrdersComponent },
+	{ path: 'wishlist/:id', component:WishlistComponent }
+
+	// {path:'admin',component:AdminComponent}
 ];
 
 @NgModule({

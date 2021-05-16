@@ -9,7 +9,9 @@ export class WishlistService {
   constructor(private httpClient:HttpClient) { }
 
 
-
+getMyWishlist(userId:any){
+  return this.httpClient.get<{wishlist:any}>(`${this.wishlistUrl}/${userId}`);
+}
 
 
 
@@ -17,8 +19,8 @@ addToWishlist(wishlist:any){
   return this.httpClient.post<{ message: string }>(this.wishlistUrl, wishlist);
 }
 
-removeFromWishlist(adId:any){
-  return this.httpClient.delete<{message:any}>(`${this.wishlistUrl}/${adId}`)
+removeFromWishlist(id:any){
+  return this.httpClient.delete<{message:any}>(`${this.wishlistUrl}/${id}`)
 
 }
 

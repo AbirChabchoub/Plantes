@@ -27,4 +27,13 @@ export class HeaderComponent implements OnInit {
 		let connectedUserId = JSON.parse(localStorage.getItem('connectedUser'));
 		this.router.navigate([ `profile/${connectedUserId}` ]);
 	}
+
+	goToOrders(){
+		let connectedUserId = JSON.parse(localStorage.getItem('connectedUser'));
+		this.router.navigate([ `orders/${connectedUserId}` ]);
+	}
+	goToMyWishlist(){
+		let connectedUserId = JSON.parse(localStorage.getItem('connectedUser'));
+		this.router.navigate([ `wishlist/${connectedUserId}` ]);
+	}
 }

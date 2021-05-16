@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AdminComponent } from './admin/admin.component';
 import { PlantesComponent } from './plantes/plantes.component';
+import { LoginAdminComponent } from './admin/login-admin/login-admin.component';
+import { SignupAdminComponent } from './admin/signup-admin/signup-admin.component';
 
 const routes: Routes = [
 	{
@@ -33,7 +35,9 @@ const routes: Routes = [
 				loadChildren: () => import('./admin/admin.module').then((module) => module.AdminModule)
 			}
 		]
-	}
+	},
+	{path:'loginAdmin',component:LoginAdminComponent},
+	{path:'signupWithAdmin',component:SignupAdminComponent}
 ];
 
 @NgModule({

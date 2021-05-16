@@ -22,5 +22,15 @@ getAllCategories(){
 categoryName(category:any){
 return this.httpClient.post<{message:String}>(this.adminAdsUrl,category);
 }
+deleteAd(id: any) {
+  return this.httpClient.delete<{ message:String }>(`${this.adminAdsUrl}/${id}`);
+}
+updateAdByAdmin(ad:any){
+  return this.httpClient.put<{message:String}>(`${this.adminAdsUrl}/${ad._id}`,ad);
+}
+
+getAdByIdFromAdmin(id:any){
+  return this.httpClient.get<{ad:any}>(`${this.adminAdsUrl}/${id}`);
+}
 
 }

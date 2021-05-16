@@ -46,7 +46,6 @@ export class AdFormComponent implements OnInit {
  
 
   add() {
-    
      this.ad.userId = JSON.parse(localStorage.getItem('connectedUser'));
     this.addService.addAd(this.ad,this.adForm.value.image).subscribe(
 
