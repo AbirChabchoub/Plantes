@@ -10,7 +10,7 @@ import { Router, ActivatedRoute } from '@angular/router';
   styleUrls: ['./edit-profile.component.scss']
 })
 export class EditProfileComponent implements OnInit {
-  user: any = {};
+  user: any ={};
   updateProfileForm: FormGroup;
   id: any;
   imagePreview: String;

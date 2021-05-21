@@ -1,10 +1,3 @@
-
-
-
-
-
-
-
 <main class="content ">
     <div class="container-fluid ">
 
@@ -16,43 +9,36 @@
                     <div class="card-header">
                         <!-- <h5 class="card-title mb-0">Profile</h5> -->
                     </div>
-                    <div class="card-body text-center">
+                    <div class="card-body text-center sideBar">
                         <img src="./../../../assets/images/profile/bg-1.jpg" alt="Christina Mason"
                             class="img-fluid rounded-circle mb-2" width="128" height="128" />
-                        <div class="form-group">
-                            <button type="btn btn-primary btn-sm profilButtons file" (click)='filePicker.click()'
-                                class="btn btn-success">Sélectionner image</button>
-                            <input style="visibility: hidden;" type="file" class="form-control" #filePicker
-                                (change)='onImageSelected($event)' /> </div>
-                        <img style="width: 50px;height: 50px;" *ngIf="imagePreview" [src]="imagePreview">
+                       
                         <h5 class="card-title mb-0">Bienvenue {{user.lastName }} {{user.firstName}} ! </h5>
-                        <!-- <div class="text-muted mb-2">{{user.email}}</div> -->
-
                         <div>
-                            <button class="btn btn-primary btn-sm profilButtons" (click)="goToAdForm()">Je
+                            <button class="btn btn-primary btn-sm profilButtons" id="ad" (click)="goToAdForm()">Je
                                 vends</button>
                             <br>
-                            <button class="btn btn-primary btn-sm profilButtons" (click)="goToEditProfile()"> Modifier
+                            <button class="btn btn-primary btn-sm profilButtons" id="updateBtn"(click)="goToEditProfile()"> Modifier
                                 mon profile</button>
                         </div>
                     </div>
-                    <hr class="my-0" />
+                    <!-- <hr class="my-0" /> -->
 
-                    <hr class="my-0" />
-                    <div class="card-body">
+                    <!-- <hr class="my-0" /> -->
+                    <!-- <div class="card-body">
                         <h5 class="h6 card-title">A propos</h5>
                         <ul class="list-unstyled mb-0">
-                            <!-- <li class="mb-1"><span data-feather="home" class="feather-sm mr-1"></span> Lives in <a
-                                    href="#">{{user.address}}</a></li> -->
+                            <li class="mb-1"><span data-feather="home" class="feather-sm mr-1"></span> Lives in <a
+                                    href="#">{{user.address}}</a></li>
 
                             <li class="mb-1"><span data-feather="briefcase" class="feather-sm mr-1"></span> Works at <a
                                     href="#">GitHub</a></li>
                             <li class="mb-1"><span data-feather="map-pin" class="feather-sm mr-1"></span> From <a
                                     href="#">Boston</a></li>
                         </ul>
-                    </div>
-                    <hr class="my-0" />
-                    <div class="card-body">
+                    </div> -->
+                    <!-- <hr class="my-0" /> -->
+                    <!-- <div class="card-body">
                         <h5 class="h6 card-title">Elsewhere</h5>
                         <ul class="list-unstyled mb-0">
                             <li class="mb-1"><span class="fas fa-globe fa-fw mr-1"></span> <a href="#">staciehall.co</a>
@@ -66,25 +52,111 @@
                             <li class="mb-1"><span class="fab fa-linkedin fa-fw mr-1"></span> <a href="#">LinkedIn</a>
                             </li>
                         </ul>
-                    </div>
+                    </div> -->
                 </div>
             </div>
 
-        </div>
 
+            <div class="col-md-8 col-xl-9 profileSideBar">
+                <div class="card profileBody">
+                    <div class="card-header">
+                        <h5 class="card-title mb-0 ">Mes favoris </h5>
+                    </div>
+                    <!-- <section class="lattest-product-area pb-40 category-list">
+                        <div class="row">
+                            <div class="col-lg-4 col-md-6" *ngFor="let x of wishlist ">
+                                <div class="single-product">
+                                    <div> <img class="img-fluid products" [src]="x.image" alt=""
+                                            (click)="goToProductDetails(x._id)" style="cursor: pointer">
+                    
+                                    </div>
+                                    <br>
+                                    <div class="product-details">
+                                        <h5 class="details productName">{{x.productName}}</h5>
+                                        <div>
+                                            <h6 class="details ">{{x.category }}</h6>
+                    
+                                        </div>
+                                        <div class="price details price">
+                                            <h6>{{x.price}} DT</h6>
+                                        </div>
+                    
+                                        <div class="prd-bottom">
+                                            <a class="social-info" style="position: absolute;margin-top: -10px;margin-left: 90px;">
+                                                <span class="ti-bag"></span>
+                                            </a>
+                    
+                    
+                                            <a class="social-info" style="position: absolute;margin-top: -10px;margin-left: 130px;">
+                                                <span class="far fa-trash-alt" (click)="deleteFromWishlist(x._id)"
+                                                    style="background-color:green!important;cursor: pointer"></span>
+                                            </a>
+                                        </div>
+                                    </div>
+                               
+                            </div>
+                        </div>
+                        </div>
+                    </section> -->
+
+
+
+
+
+
+                    <div class="row">
+                        <!-- [ Hover-table ] start -->
+                        <div class="col-md-12">
+                          <div class="table-responsive">
+                            <table class="table table-hover">
+                              <thead>
+                                <tr>
+                                
+                                  <th>Nom</th>
+                                  <th>Prénom</th>
+                                  <th>Adresse email</th>
+                                  <th>Numéro de téléphone</th>
+                                  <th>Adresse</th>
+                                  <th>Action</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <tr *ngFor="let x of wishlist">
+                                 
+                                  <td> <img class="img-fluid products" [src]="x.image" alt="" style="width:70px;height: 90px;">
+                                
+                                
+                                </td>
+                                  <td>{{x.productName}}</td>
+                                  <td>{{x.price}}</td>
+                                  <td>{{x.category}}</td>
+                                   <td>   <i class="fas fa-trash-alt fa-lg" style="color: green;margin-top: 20px;" (click)="deleteFromWishlist(x._id)"></i> 
+                                   </td> 
+                                  <td>
+                                    
+          
+                                  </td>
+                                </tr>
+                              </tbody>
+                            </table>
+                          </div>
+                      
+                        </div>
+                        <!-- [ Hover-table ] end -->
+                      
+                      </div>
+
+
+
+                </div>
+            </div>
+        </div>
     </div>
 </main>
 
 
+<br><br><br><br><br><br><br><br><br>
 
 
 
 
-
-<section class="lattest-product-area pb-40 category-list" >
-    <div class="row">
-        <div class="col-lg-4 col-md-6" *ngFor="let x of ads ">
-            <app-ad  [adsInput]="x" ></app-ad>
-        </div>
-    </div>
-</section>

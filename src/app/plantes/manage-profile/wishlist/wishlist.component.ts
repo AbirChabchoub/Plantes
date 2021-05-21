@@ -9,10 +9,10 @@ import { UsersService } from 'src/app/services/users.service';
   styleUrls: ['./wishlist.component.scss']
 })
 export class WishlistComponent implements OnInit {
-  wishlist: any = {}
+  wishlist: any;
   ads: any;
   id: any;
-  user: any = ''
+  user: any = {}
   constructor(private wishlistService: WishlistService,
     private activatedRoute: ActivatedRoute,
     private usersService: UsersService) { }
@@ -27,10 +27,21 @@ export class WishlistComponent implements OnInit {
     this.wishlistService.getMyWishlist(this.id).subscribe(
       (data) => {
         this.wishlist = data.wishlist;
-        console.log('heere ', data.wishlist);
+       
       });
 
 
   }
+  deleteFromWishlist(id: any) {
+    this.wishlistService.removeFromWishlist(id).subscribe(
+      (data) => {
+        console.log(' deleted from wishlist successfully', id);
+        this.wishlistService.getMyWishlist(this.id).subscribe(
+          (data) => {
+            this.wishlist = data.wishlist;
+            console.log('heere ', data.wishlist);
+          });
+      });
 
+  }
 }

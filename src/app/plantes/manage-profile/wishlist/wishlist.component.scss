@@ -1,0 +1,67 @@
+.profileSideBar{
+    margin-top: 140px;
+
+}
+
+.profileBody{
+	height: 600px!important;
+}
+.sideBar{
+	height: 350px!important;
+}
+.profilButtons{
+    background-color: green!important;
+    border-color: green;
+    margin: -5px;
+	color:white;
+	
+}
+
+.card-header h5{
+font-size: 30px;
+margin-left: 400px;
+}
+
+.file{
+    width: 60px;
+    height: 30px;
+}
+.col{
+	display: flex;
+	justify-content: space-around; 
+	margin: 30px;
+}
+
+.products{
+	width: 250px;
+	height: 300px;
+}
+
+.icon{
+	margin-left: 20px;
+}
+
+#updateBtn{
+	margin-top: 280px;
+	position: absolute;
+	margin-left: -75px;
+}
+#ad{
+	margin-top: 250px;
+	position: absolute;
+	margin-left: -40px;
+}
+
+.card-body img{
+	width: 160px;
+	height: 220px;
+	position: absolute;
+	margin-left: -80px;
+	margin-top: -30px;
+}
+.card-body h5{
+	margin-left: 5px;
+	position:absolute;
+	margin-top: 210px;
+}
+

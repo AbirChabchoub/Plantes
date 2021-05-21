@@ -13,7 +13,8 @@ export class ProfileComponent implements OnInit {
 		private router: Router,
 		private activatedRoute: ActivatedRoute,
 		private usersService: UsersService,
-		private adsService: AdsService
+		private adsService: AdsService,
+		
 	) {}
 	id: any;
 	user: any = {};
@@ -26,7 +27,8 @@ export class ProfileComponent implements OnInit {
 			this.user = data.users;
 		});
 
-		this.adsService.getAdByUserId(this.connectedUser).subscribe((data) => {
+		this.adsService.getAdByUserId(this.connectedUser).subscribe(
+			(data) => {
 			this.ad = data.ad;
 		});
 	}
@@ -52,6 +54,19 @@ export class ProfileComponent implements OnInit {
 	// 	}; reader.readAsDataURL(file);
 	//   }
 
+deleteAd(id:any){
+	this.adsService.deleteAdByUser(id).subscribe(
+		()=>{
+			console.log('ad deleted successfully');
+			this.adsService.getAdByUserId(this.connectedUser).subscribe(
+				(data) => {
+				this.ad = data.ad;
+			});
+			}
+			
+	)};
 
-
+goToUpdteForm(id:any){
+this.router.navigate([`editAd/${id}`]);
+}
 }
