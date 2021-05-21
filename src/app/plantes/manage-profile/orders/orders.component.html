@@ -9,66 +9,30 @@
                     <div class="card-header">
                         <!-- <h5 class="card-title mb-0">Profile</h5> -->
                     </div>
-                    <div class="card-body text-center">
+                    <div class="card-body text-center sideBar">
                         <img src="./../../../assets/images/profile/bg-1.jpg" alt="Christina Mason"
                             class="img-fluid rounded-circle mb-2" width="128" height="128" />
-                        <div class="form-group">
-                            <button type="btn btn-primary btn-sm profilButtons file" (click)='filePicker.click()'
-                                class="btn btn-success">Sélectionner image</button>
-                            <input style="visibility: hidden;" type="file" class="form-control" #filePicker
-                                (change)='onImageSelected($event)' /> </div>
-                        <img style="width: 50px;height: 50px;" *ngIf="imagePreview" [src]="imagePreview">
+                        
                         <h5 class="card-title mb-0">Bienvenue {{user.lastName }} {{user.firstName}} ! </h5>
                         <!-- <div class="text-muted mb-2">{{user.email}}</div> -->
 
                         <div>
-                            <button class="btn btn-primary btn-sm profilButtons" (click)="goToAdForm()">Je
+                            <button class="btn btn-primary btn-sm profilButtons" id="ad" (click)="goToAdForm()">Je
                                 vends</button>
                             <br>
-                            <button class="btn btn-primary btn-sm profilButtons" (click)="goToEditProfile()"> Modifier
-                                mon profile</button>
+                            <button class="btn btn-primary btn-sm profilButtons"  id="updateBtn"  (click)="goToEditProfile()"> Modifier mon profile</button>
                         </div>
-                    </div>
-                    <hr class="my-0" />
-
-                    <hr class="my-0" />
-                    <div class="card-body">
-                        <h5 class="h6 card-title">A propos</h5>
-                        <ul class="list-unstyled mb-0">
-                            <!-- <li class="mb-1"><span data-feather="home" class="feather-sm mr-1"></span> Lives in <a
-                                    href="#">{{user.address}}</a></li> -->
-
-                            <li class="mb-1"><span data-feather="briefcase" class="feather-sm mr-1"></span> Works at <a
-                                    href="#">GitHub</a></li>
-                            <li class="mb-1"><span data-feather="map-pin" class="feather-sm mr-1"></span> From <a
-                                    href="#">Boston</a></li>
-                        </ul>
-                    </div>
-                    <hr class="my-0" />
-                    <div class="card-body">
-                        <h5 class="h6 card-title">Elsewhere</h5>
-                        <ul class="list-unstyled mb-0">
-                            <li class="mb-1"><span class="fas fa-globe fa-fw mr-1"></span> <a href="#">staciehall.co</a>
-                            </li>
-                            <li class="mb-1"><span class="fab fa-twitter fa-fw mr-1"></span> <a href="#">Twitter</a>
-                            </li>
-                            <li class="mb-1"><span class="fab fa-facebook fa-fw mr-1"></span> <a href="#">Facebook</a>
-                            </li>
-                            <li class="mb-1"><span class="fab fa-instagram fa-fw mr-1"></span> <a href="#">Instagram</a>
-                            </li>
-                            <li class="mb-1"><span class="fab fa-linkedin fa-fw mr-1"></span> <a href="#">LinkedIn</a>
-                            </li>
-                        </ul>
-                    </div>
+                    </div>                                                                       
+                    
                 </div>
             </div>
 
-            <div class="col-md-8 col-xl-9 profileSideBar">
+             <div class="col-md-8 col-xl-9 profileSideBar"> 
                 <div class="card">
                     <div class="card-header">
                         <h5 class="card-title mb-0 ">Mes commandes</h5>
                     </div>
-                 
+<!--                  
                     <ul class="nav nav-tabs" id="myTab" role="tablist">
                         <li class="nav-item" role="presentation">
                           <button class="nav-link active navButton" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">Mes commandes</button>
@@ -80,17 +44,194 @@
                         </li>
                       </ul>
                       <div class="tab-content" id="myTabContent">
-                        <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">...</div>
+                        <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                            <div *ngFor="let x of order" ></div>
+                        </div>
                         <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">...</div>
-                      </div>
+                      </div> -->
 
 
 
+<!-- cart  -->
+<!-- <section class="cart_area ">
+    <div class="container">
+        <div class="cart_inner">
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr >
+                            <th scope="col">Produit</th>
+                            <th scope="col">Prix</th>
+                            <th scope="col">Catégorie</th>
+                            <th scope="col">Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    
+                        <tr *ngFor="let x of orders">
+                            <td>
+                                <div class="media">
+                                    <div class="d-flex">
+                                        <img [src]="x.image" alt="">
+                                    </div>
+                                    <div class="media-body">
+                                        <p>{{x.productName}}</p>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <h5>{{x.price}} DT</h5>
+                            </td>
+                            <td>
+                                <h5>{{x.category}} DT</h5>
+                            </td>
+                            <td>
+                                <h5>$720.00</h5>
+                            </td>
+                        </tr>
+                  
+                        
+                        <tr class="bottom_button">
+                            <td>
+                                <a class="gray_btn" href="#">Update Cart</a>
+                            </td>
+                            <td>
+
+                            </td>
+                            <td>
+
+                            </td>
+                            <td>
+                                <div class="cupon_text d-flex align-items-center">
+                                    <input type="text" placeholder="Coupon Code">
+                                    <a class="primary-btn" href="#">Apply</a>
+                                    <a class="gray_btn" href="#">Close Coupon</a>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+
+                            </td>
+                            <td>
+
+                            </td>
+                            <td>
+                                <h5>Subtotal</h5>
+                            </td>
+                            <td>
+                                <h5>$2160.00</h5>
+                            </td>
+                        </tr>
+                        <tr class="shipping_area">
+                            <td>
+
+                            </td>
+                            <td>
+
+                            </td>
+                            <td>
+                                <h5>Shipping</h5>
+                            </td>
+                            <td>
+                                <div class="shipping_box">
+                                    <ul class="list">
+                                        <li><a href="#">Flat Rate: $5.00</a></li>
+                                        <li><a href="#">Free Shipping</a></li>
+                                        <li><a href="#">Flat Rate: $10.00</a></li>
+                                        <li class="active"><a href="#">Local Delivery: $2.00</a></li>
+                                    </ul>
+                                    <h6>Calculate Shipping <i class="fa fa-caret-down" aria-hidden="true"></i></h6>
+                                    <select class="shipping_select">
+                                        <option value="1">Bangladesh</option>
+                                        <option value="2">India</option>
+                                        <option value="4">Pakistan</option>
+                                    </select>
+                                    <select class="shipping_select">
+                                        <option value="1">Select a State</option>
+                                        <option value="2">Select a State</option>
+                                        <option value="4">Select a State</option>
+                                    </select>
+                                    <input type="text" placeholder="Postcode/Zipcode">
+                                    <a class="gray_btn" href="#">Update Details</a>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr class="out_button_area">
+                            <td>
+
+                            </td>
+                            <td>
+
+                            </td>
+                            <td>
+
+                            </td>
+                            <td>
+                                <div class="checkout_btn_inner d-flex align-items-center">
+                                    <a class="gray_btn" href="#">Continue Shopping</a>
+                                    <a class="primary-btn" href="#">Proceed to checkout</a>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</section> -->
+
+
+<div class="row">
+    <!-- [ Hover-table ] start -->
+    <div class="col-md-12">
+      <div class="table-responsive">
+        <table class="table table-hover">
+          <thead>
+            <tr>
+            
+              <th>Nom</th>
+              <th>Prénom</th>
+              <th>Adresse email</th>
+              <th>Numéro de téléphone</th>
+              <th>Adresse</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let x of orders">
+             
+              <td> <img class="img-fluid products" [src]="x.image" alt="" style="width:70px;height: 90px;">
+            
+            
+            </td>
+              <td>{{x.productName}}</td>
+              <td>{{x.price}}</td>
+              <td>{{x.category}}</td>
+               <td>   <i class="fas fa-trash-alt fa-lg" style="color: green;margin-top: 20px;" (click)="deleteFromWishlist(x._id)"></i> 
+               </td> 
+              <td>
+                
+
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+  
+    </div>
+    <!-- [ Hover-table ] end -->
+  
+  </div>
 
 
 
                 </div>
-            </div>
+            </div> 
+
+
+
+
         </div>
 
     </div>
