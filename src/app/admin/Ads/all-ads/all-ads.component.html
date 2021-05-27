@@ -1,5 +1,5 @@
 
-<div class="col-xl-9 col-lg-8 col-md-7">
+<!-- <div class="col-xl-9 col-lg-8 col-md-7">
             <section class="lattest-product-area pb-40 category-list" >
                 <div class="row">
                     <div class="col-lg-4 col-md-6" *ngFor="let x of ads">
@@ -7,4 +7,94 @@
                     </div>
                 </div>
             </section>
-</div>
+</div> -->
+
+<div class="tab-content" id="myTabContent">
+    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+        <div class="row">
+            <!-- [ Hover-table ] start -->
+            <div class="col-md-12">
+              <div class="table-responsive">
+                <table class="table table-hover">
+                  <thead>
+                    <tr>
+                    
+                      <th>Image</th>
+                      <th>Nom du produit</th>
+                      <th>Prix</th>
+                      <th>Catégorie</th>
+                     
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let x of ads">
+                     
+                      <td> <img class="img-fluid products" [src]="x.image" alt="" style="width:70px;height: 90px;">
+                    
+                    
+                    </td>
+                      <td>{{x.productName}}</td>
+                      <td>{{x.price}} DT</td>
+                      <td>{{x.category}}</td>
+                   
+                       <td>   <i class="fas fa-trash-alt fa-lg" style="color: green;margin-top: 20px;cursor: pointer;" (click)="deleteAdByAdmin(x._id)"></i> 
+                       </td> 
+                      <td>
+                        
+        
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+          
+            </div>
+            <!-- [ Hover-table ] end -->
+          
+          </div>
+    </div>
+    <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+        <div class="row">
+            <!-- [ Hover-table ] start -->
+            <div class="col-md-12">
+              <div class="table-responsive">
+                <table class="table table-hover">
+                  <thead>
+                    <tr>
+                    
+                      <th>Nom</th>
+                      <th>Prénom</th>
+                      <th>Adresse email</th>
+                      <th>Numéro de téléphone</th>
+                      <th>Adresse</th>
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let x of solds">
+                     
+                      <td> <img class="img-fluid products" [src]="x.image" alt="" style="width:70px;height: 90px;">
+                    
+                    
+                    </td>
+                      <td>{{x?.productName}}</td>
+                      <td>{{x?.price}}</td>
+                      <td>{{x?.category}}</td>
+                       <td>   <i class="fas fa-trash-alt fa-lg" style="color: green;margin-top: 20px;" (click)="deleteFromWishlist(x._id)"></i> 
+                       </td> 
+                      <td>
+                        
+        
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+          
+            </div>
+            <!-- [ Hover-table ] end -->
+          
+          </div>
+    </div>
+  </div>
