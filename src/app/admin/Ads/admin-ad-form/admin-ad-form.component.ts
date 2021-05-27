@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder } from '@angular/forms';
 import { AdsService } from 'src/app/services/ads.service';
 import { Router } from '@angular/router';
 import { AddCatogoryService } from '../../Admin-services/add-catogory.service';
+import { ToastType, Toaster } from 'ngx-toast-notifications';
 
 @Component({
   selector: 'app-admin-ad-form',
@@ -15,13 +16,16 @@ export class AdminAdFormComponent implements OnInit {
   category: any;
   imagePreview: String;
   connectedUserId:any;
+  private types: Array<ToastType> = ['success'];
+  private text = ' √ Annonce est bien ajouté';
   constructor(private formBuilder: FormBuilder,
     private addService: AdsService,
     private route: Router,
-    private AddCategoryService: AddCatogoryService) { }
+    private AddCategoryService: AddCatogoryService,
+    private toaster: Toaster) { }
 
   ngOnInit() {
-  
+    this.getAllCategories();
     this.adForm = this.formBuilder.group({
       connectedUserId: this.connectedUserId,
       productName: [''],
@@ -43,6 +47,7 @@ export class AdminAdFormComponent implements OnInit {
        console.log("added succesfully");
        this.route.navigate(["ads"]);
      });
+     this.showToast();
  }
 
  onImageSelected(event: Event) {
@@ -54,6 +59,24 @@ export class AdminAdFormComponent implements OnInit {
     this.imagePreview = reader.result as string
   };
   reader.readAsDataURL(file);
+}
+getAllCategories() {
+  this.AddCategoryService.getAllCategories().subscribe(
+    (data) => {
+      this.category = data.category;
+    });
+}
+
+get randomType() {
+  return this.types[Math.ceil((Math.random() * 8)) % this.types.length];
+}
+showToast() {
+  const type = this.randomType;
+  this.toaster.open({
+   
+    caption: this.text,
+    type: type,
+  });
 }
 
 

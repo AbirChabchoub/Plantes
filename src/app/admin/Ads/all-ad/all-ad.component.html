@@ -1,8 +1,6 @@
 <div class="single-product">
     <div> <img class="img-fluid products" [src]="adsInput.image" alt=""
-              (click)="goToProductDetails(adsInput._id)" style="cursor: pointer;">
-              <a *ngIf="addedToWishlist">  <i   class="fas fa-heart wishlist fa-2x"  (click)="deleteFromWishlist(adsInput._id)" style="cursor: pointer;"></i> </a> 
-              <a *ngIf="!addedToWishlist">  <i   class="far fa-heart wishlist fa-2x"   (click)="addToWishlist(adsInput._id)" style="cursor: pointer;"></i></a> 
+              (click)="goToProductDetails(adsInput._id)" style="cursor: pointer;">             
           </div> 
               <br>
       <div class="product-details">
@@ -14,7 +12,7 @@
               <h6>{{adsInput.price}} DT</h6> 
           </div>
         
-          <button class="btn btn-success button" (click)="deleteAdFromAdmin(adsInput._id)">Supprimer</button>
-          <button class="btn btn-secondary button" (click)="goToEditAd(adsInput._id)">Modifer</button>
+          <button class="btn btn-success buttons" (click)="deleteAdFromAdmin(adsInput._id)">Supprimer</button>
+          <button class="btn btn-secondary buttons" (click)="goToEditAd(adsInput._id)">Modifer</button>
       </div>
   </div>

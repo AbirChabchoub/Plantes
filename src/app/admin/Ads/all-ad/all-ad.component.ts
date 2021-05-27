@@ -47,6 +47,11 @@ this.adminAdsService.deleteAd(id).subscribe(
 console.log('ad deleted succssefully from admin');
 this.getAllAds();
 });
+this.wishlistService.removeByAdId(id).subscribe(
+  ()=>{
+    console.log('ad deleted succssefully from wishlist');
+    
+  });
   }
 
 
