@@ -24,7 +24,7 @@ export class AdminUsersService {
 
   constructor(private httpClient: HttpClient,
     private router: Router) { 
-    this.currentUserSubject = new BehaviorSubject<Admin>(JSON.parse(localStorage.getItem('connectedUser')));
+    this.currentUserSubject = new BehaviorSubject<Admin>(JSON.parse(localStorage.getItem('connectedAdmin')));
 		this.currentUser = this.currentUserSubject.asObservable();
   }
   
@@ -33,7 +33,9 @@ export class AdminUsersService {
 	}
 
   signupAdmin(admin:any){
+    // localStorage.setItem('connectedAdmin', JSON.stringify(admin.id));
     return this.httpClient.post<{message:String}>(`${this.adminUrl}/signup`,admin);
+  
   }
 
 
@@ -41,16 +43,21 @@ login(admin: any) {
   return this.httpClient.post<{ admin: any }>(`${this.adminUrl}/login`, admin).subscribe((res) => {
     console.log(res);
     localStorage.setItem('connectedAdmin', JSON.stringify(res.admin.id));
-    let connectedUserId = JSON.parse(localStorage.getItem('connectedUser'));
-    this.router.navigate([ `dashboard/${connectedUserId}` ]); 
+    localStorage.setItem('adminFullName', JSON.stringify(res.admin.fullName));
+    // localStorage.setItem('adminImage', JSON.stringify(res.admin.image));
+
+    let connectedUserId = JSON.parse(localStorage.getItem('connectedAdmin'));
+    this.router.navigate([ `dashboard` ]); 
     this.currentUserSubject.next(admin);
     return admin;
   });
 }
 
 logout() {
-  localStorage.removeItem('connectedUser');
+  localStorage.removeItem('connectedAdmin');
+  localStorage.removeItem('adminFullName');
   this.currentUserSubject.next(null);
+  this.router.navigate([ 'loginAdmin' ]);
 }
   getAllUsers() {
     //Action:get , address:api/users
@@ -70,9 +77,9 @@ logout() {
   getAdminById(id: any) {
     return this.httpClient.get<{ admin: any }>(`${this.adminUrl}/${id}`);
   }
-  //récupérer tous le user
+  //update user
   updateUser(user: any) {
-    return this.httpClient.put<{ message: string }>(`${this.adminUrl}/${user._id}`, user);
+    return this.httpClient.put<{ message: string }>(`${this.adminUrl}/user/${user._id}`, user);
   }
 
 
@@ -85,8 +92,20 @@ logout() {
     }
    
    getUserByIdFromAdmin(id:any){
-    return this.httpClient.get<{ user: any }>(`${this.adminUrl}/${id}`);
+    return this.httpClient.get<{ user: any }>(`${this.adminUrl}/user/${id}`);
    }
+
+
+   updateProfil(admin: any , image:File) {
+		const formdata = new FormData();
+		formdata.append('fullName', admin.fullName);
+		formdata.append('adminEmail', admin.adminEmail);
+		formdata.append('adminPassword', admin.adminPassword);
+		formdata.append('adminConfirmPassword', admin.adminConfirmPassword);		
+		formdata.append('image', image);
+
+		return this.httpClient.put<{ message: string }>(`${this.adminUrl}/${admin._id}`,formdata);
+	}
 
 
 }
