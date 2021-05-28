@@ -22,15 +22,32 @@ getAllCategories(){
 categoryName(category:any){
 return this.httpClient.post<{message:String}>(this.adminAdsUrl,category);
 }
-deleteAd(id: any) {
+deleteCategory(id: any) {
   return this.httpClient.delete<{ message:String }>(`${this.adminAdsUrl}/${id}`);
 }
-updateAdByAdmin(ad:any){
-  return this.httpClient.put<{message:String}>(`${this.adminAdsUrl}/${ad._id}`,ad);
+deleteAdByAdmin(id: any) {
+  return this.httpClient.delete<{ message:String }>(`${this.adminAdsUrl}/ad/${id}`);
 }
+// updateAdByAdmin(ad:any){
+//   return this.httpClient.put<{message:String}>(`${this.adminAdsUrl}/ad/${ad._id}`,ad);
+// }
 
 getAdByIdFromAdmin(id:any){
   return this.httpClient.get<{ad:any}>(`${this.adminAdsUrl}/${id}`);
+}
+
+updateAdByAdmin(ad: any , image:File) {
+  const formdata = new FormData();
+  formdata.append('productName', ad.productName);
+  formdata.append('category', ad.category);
+  formdata.append('description', ad.description);
+  formdata.append('price', ad.price);
+  formdata.append('userId', ad.userId);
+  formdata.append('vendu', ad.vendu);
+  
+  formdata.append('image', image);
+
+  return this.httpClient.put<{ message: string }>(`${this.adminAdsUrl}/${ad._id}`,formdata);
 }
 
 }
