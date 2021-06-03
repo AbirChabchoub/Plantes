@@ -1,18 +1,27 @@
 <div class="review_item">
     <div class="media">
         <div class="d-flex">
-            <img src="assets/plantes/img/product/review-1.png" alt="">
+            <img [src]="commentsInput?.image" alt="" style=" width: 60px; height: 60px; border-radius: 100px;">
         </div>
         <div class="media-body">
-            <h4>{{commentsInput.commentUserId.firstName}}</h4>
-            <h5>{{ actualDate | date:'medium' }}</h5>
-            <button *ngIf="userIsAuthenticated" class="reply_btn" (click)="toggleChild()">Répondre</button>
+            <h4>{{commentsInput?.lastName}} {{commentsInput?.firstName}}</h4>
+            <h5>{{ commentsInput?.date }}</h5>
+            <!-- <button *ngIf="userIsAuthenticated" class="reply_btn" (click)="toggleChild()">Répondre</button> -->
         </div>
 
     </div>
 
-    <p>{{commentsInput.message}}</p>
-    <app-reply [showMePartially]="showVar"></app-reply>
+    <p>{{commentsInput?.message}}</p>
+    <!-- Reply -->
+    <!-- <form #responseForm="ngForm" (ngSubmit)="addResponseBycommentId(commentsInput._id)">
+    <div >
+        <div *ngIf="showMePartially">
+    
+            <input type="text" class="form-control replyInput" [(ngModel)]='response.response' [ngModelOptions]="{standalone:true}">
+            <button class="btn primary-btn replyBtn" >Répondre</button>
+        </div>
+    </div>
+</form> -->
     <hr>
 
 </div>

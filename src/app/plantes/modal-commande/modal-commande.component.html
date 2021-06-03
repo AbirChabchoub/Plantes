@@ -1,0 +1,35 @@
+<div class="modal-header ">
+    <h4 class="modal-title" id="modal-basic-title">Ajouter commande</h4>
+    <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="modal-body">
+
+    <!--  -->
+    <div class="form-group row">
+        <label class="col-sm-4 col-form-label">Image du produit : </label>
+        <div class="col-sm-8">
+            <img class="img-fluid" [src]="ad?.image" alt="" width="150px" height="100px">
+        </div>
+    </div>
+    <div class="form-group row">
+        <label class="col-sm-4 col-form-label">Nom du produit : </label>
+        <div class="col-sm-8">
+            <p>{{ad?.productName}}</p>
+        </div>
+
+    </div>
+    <p>Nom du produit : {{ad?.productName}}</p>
+    <p> Catégorie : {{ad?.category}}</p>
+    <p> Prix : {{ad?.price}}DT</p>
+
+    <p>Prix livraison : 7 DT</p>
+    <p>Prix total : {{ad?.price+7}} DT</p>
+
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="passBack()">Close</button>
+        <button type="submit" class="btn btn-primary" (click)="addToCart(ad._id)">confirmer la commande
+        </button>
+    </div>
+</div>

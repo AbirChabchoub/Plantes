@@ -23,7 +23,7 @@
                     <!-- <div class="single-prd-item">
                         <img class="img-fluid" src="assets/plantes/img/category/s-p1.jpg" alt="">
                     </div> -->
-                    <img class="img-fluid" [src]="ad?.image" alt="" width="450px" height="350px">
+                    <img class="img-fluid" [src]="ad?.image" alt="" width="450px!important" height="350px!important">
                 </div>
             </div>
             <div class="col-lg-5 offset-lg-1">
@@ -44,9 +44,11 @@
                          class="reduced items-count" type="button"><i class="lnr lnr-chevron-down"></i></button> -->
                     </div>
                     <div class="card_area d-flex align-items-center">
-                        <a class="primary-btn buyBtn"  data-toggle="modal" data-target="#myModal">Acheter maintenant</a>
-                        <!-- <a class="icon_btn" href="#"><i class="lnr lnr lnr-diamond"></i></a> -->
-                        <a class="icon_btn buyBtn " href="#"><i class="lnr lnr lnr-heart "></i></a>
+                        <a class="primary-btn buyBtn" (click)="openModal()" >Acheter maintenant</a>
+                       <a class="icon_btn buyBtn" ><i class="fas fa-shopping-cart" (click)="addToBasket(ad?._id)" ></i></a> 
+                        <a class="icon_btn buyBtn "><i class="lnr lnr lnr-heart " (click)="getAdsById(ad?._id)" style="cursor: pointer;" ></i></a>
+                        
+                       
                     </div>
                 </div>
             </div>
@@ -55,33 +57,9 @@
 </div>
 <!--================End Single Product Area =================-->
 
-<!-- Modal -->
-<div id="myModal" class="modal fade" role="dialog">
-  <div class="modal-dialog">
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Modal Header</h4>
-      </div>
-      <div class="modal-body">
-        <img class="img-fluid" [src]="ad?.image" alt="" width="150px" height="150px" style="margin-top:-30px;">
-        
-        <p style="margin-top: -200px;margin-left: 200px;">{{ad?.productName}}</p> 
-        <p style="margin-top: -10px;margin-left: 200px;">{{ad?.price}}DT</p>
-        <li><a class="active"  style="margin-top:-20px;margin-left: 200px;"><span>Catégorie</span> {{ad?.category}}</a></li>
-        <p style="margin-top:10px;margin-left: 200px;">prix livraison : 7 DT</p>
-        <p style="margin-top:20px;margin-left: 200px;">prix total : {{ad?.price+7}} DT</p>
-       
-        
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-      </div>
-    </div>
 
-  </div>
-</div>
+
+
 
    <app-comments></app-comments>
  

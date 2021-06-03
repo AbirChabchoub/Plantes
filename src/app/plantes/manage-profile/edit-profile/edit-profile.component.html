@@ -1,235 +1,139 @@
-<!-- <section class="banner-area organic-breadcrumb">
-    <div class="container">
-        <div class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
-            <div class="col-first">
-                <h1>S'inscrire</h1>
-                <nav class="d-flex align-items-center">
-                    <a routerLink="">Accueil<span class="lnr lnr-arrow-right"></span></a>
-                    <a routerLink="signup">S'inscrire</a>
-                </nav>
-            </div>
-        </div>
-    </div>
-</section>
- End Banner Area 
-
-
-<section class="login_box_area section_gap">
-    <div class="container">
+<br><br><br><br><br>
+<form [formGroup]="updateProfileForm">
+    <div class="container rounded bg-white mt-5">
         <div class="row">
-            <div class="col-lg-6">
-                <div class="login_form_inner">
-                    <h3>S'inscrire </h3>
-                    <form class="row login_form" [formGroup]="updateProfileForm">
-                        nom
-                        <div class="col-md-12 form-group">
-                            <input type="text" class="form-control" placeholder="Nom" formControlName="firstName"
-                                [(ngModel)]="user.firstName">
+            <div class="col-md-4 border-right">
+                <div class="d-flex flex-column align-items-center text-center p-3 py-5">
+                    <img class="rounded-circle mt-5" [src]="user?.image" width="90">
+                    <button type="button" (click)='filePicker.click()' class="btn btn-success imageBtn">Sélectionner
+                        image</button>
+                    <div class="form-group">
+                        <input style="visibility: hidden;" type="file" class="form-control" #filePicker
+                            (change)='onImageSelected($event)' />
+                    </div>
+                    <img style="width: 50px;height: 50px;" *ngIf="imagePreview" [src]="imagePreview">
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div class="p-3 py-5">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <h6 class="text-right">Modifier mon profile</h6>
+                    </div>
+                    <div class="row mt-2">
+                        <div class="col-md-6">
+                            <input type="text" class="form-control" value="Nom" placeholder="Nom"
+                                formControlName="firstName" [(ngModel)]="user.firstName">
                         </div>
-                        first name validator and Error
+                        <!-- first name validator and Error -->
                         <div *ngIf='updateProfileForm.controls["firstName"].invalid && (updateProfileForm.controls["firstName"].touched 
 || updateProfileForm.controls["firstName"].dirty)'>
-                            <div *ngIf='updateProfileForm.controls["firstName"].errors?.required' style="color:red">Ce champ
+                            <div *ngIf='updateProfileForm.controls["firstName"].errors?.required' style="color:red">Ce
+                                champ
                                 est obligatoire</div>
                         </div>
-
-
-                        Prénom
-                        <div class="col-md-12 form-group">
-                            <input type="text" class="form-control" name="name" placeholder="Prénom"
+                        <div class="col-md-6">
+                            <input type="text" class="form-control" value="Prénom" placeholder="Prénom"
                                 formControlName="lastName" [(ngModel)]="user.lastName">
                         </div>
-
-                        last name validator and Error
+                        <!-- last name validator and Error -->
                         <div *ngIf='updateProfileForm.controls["lastName"].invalid && (updateProfileForm.controls["lastName"].touched 
 || updateProfileForm.controls["lastName"].dirty)'>
-                            <div *ngIf='updateProfileForm.controls["lastName"].errors?.required' style="color:red">Ce champ est
+                            <div *ngIf='updateProfileForm.controls["lastName"].errors?.required' style="color:red">Ce
+                                champ est
                                 obligatoire</div>
                         </div>
-
-                        email
-                        <div class="col-md-12 form-group">
-                            <input type="email" class="form-control" name="name" placeholder="Adresse email"
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-md-6">
+                            <input type="text" class="form-control" value="Adresse email" placeholder="Email"
                                 formControlName="email" [(ngModel)]="user.email">
                         </div>
                         <div *ngIf='updateProfileForm.controls["email"].invalid && (updateProfileForm.controls["email"].touched 
-|| updateProfileForm.controls["email"].dirty)'>
-                            <div *ngIf='updateProfileForm.controls["email"].errors?.email' style="color:red"> Veuillez entrez
-                                une adresse email valide</div>
-                            <div *ngIf='updateProfileForm.controls["email"].errors?.required' style="color:red">Ce champ est
-                                obligatoire</div>
-                        </div>
-
-
-                        tel
-
-                        <div class="col-md-12 form-group">
-                            <input type="text" class="form-control" name="name" placeholder="Numéro de téléphone"
-                                formControlName="tel" [(ngModel)]="user.tel">
-                        </div>
-                        <div *ngIf='updateProfileForm.controls["tel"].invalid && (updateProfileForm.controls["tel"].touched 
-|| updateProfileForm.controls["tel"].dirty)'>
-                            <div *ngIf='updateProfileForm.controls["tel"].errors?.required' style="color:red "> Ce champ est
-                                obligatoire</div>
-                            <div *ngIf='updateProfileForm.controls["tel"].errors?.pattern' style="color:red"> Ce champ doit
-                                contenir 8 chiffres
-                            </div>
-                        </div>
-
-                        adresse
-                        <div class="col-md-12 form-group">
-                            <input type="text" class="form-control" name="name" placeholder="Adresse"
-                                formControlName="address" [(ngModel)]="user.address">
-                        </div>
-
-                        <div *ngIf='updateProfileForm.controls["address"].invalid && (updateProfileForm.controls["address"].touched 
-|| updateProfileForm.controls["address"].dirty)'>
-                            <div *ngIf='updateProfileForm.controls["address"].errors?.required' style="color:red"> Ce champ est
-                                obligatoire</div>
-                        </div>
-
-
-
-
-                        mot de passe
-                        <div class="col-md-12 form-group">
-                            <input type="password" class="form-control" name="name" placeholder="Mot de passe"
-                                formControlName="pwd" [(ngModel)]="user.pwd">
-                        </div>
-                        <div *ngIf='updateProfileForm.controls["pwd"].invalid && (updateProfileForm.controls["pwd"].touched 
-|| updateProfileForm.controls["pwd"].dirty)'>
-                            <div *ngIf='updateProfileForm.controls["pwd"].errors?.required' style="color:red"> Ce champ est
-                                obligatoire</div>
-                        </div>
-                        confirmer le mot de passe
-                        <div class="col-md-12 form-group">
-                            <input type="password" class="form-control" name="name"
-                                placeholder="Confirmer votre mot de passe" formControlName="confirmPassword">
-                        </div>
-
-                        <div *ngIf='updateProfileForm.controls["confirmPassword"].invalid && (updateProfileForm.controls["confirmPassword"].touched 
-   || updateProfileForm.controls["confirmPassword"].dirty)'>
-                            <div *ngIf='updateProfileForm.controls["confirmPassword"].errors?.mustMatch' style="color:red">
-                                Veuillez confirmer le mot de passe</div>
-                        </div>
-
-
-                        <div class="col-md-12 form-group">
-                            <div class="creat_account">
-                                <input type="checkbox" id="f-option2" name="selector">
-                                <label for="f-option2">Rester connecter</label>
-                            </div>
-                        </div>
-                        <div class="col-md-12 form-group">
-                            <button type="submit" (click)='editProfil()' class="primary-btn"
-                                >Modifier</button>
-                            <a href="#">Mot de passe oubliée?</a>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>  -->
-<br><br><br><br><br>
-<form [formGroup]="updateProfileForm">
-<div class="container rounded bg-white mt-5">
-    <div class="row">
-        <div class="col-md-4 border-right">
-            <div class="d-flex flex-column align-items-center text-center p-3 py-5">
-                <img class="rounded-circle mt-5" src="https://i.imgur.com/0eg0aG0.jpg" width="90">
-                <button type="button" (click)='filePicker.click()' class="btn btn-success imageBtn">Sélectionner image</button>
-                <div class="form-group">
-                    <input style="visibility: hidden;" type="file" class="form-control"
-                    #filePicker (change)='onImageSelected($event)' /> 
-                </div>
-                    <img style="width: 50px;height: 50px;" *ngIf="imagePreview" [src]="imagePreview">
-                </div>
-        </div>
-        <div class="col-md-8">
-            <div class="p-3 py-5">
-                <div class="d-flex justify-content-between align-items-center mb-3">
-                    <h6 class="text-right">Modifier mon profile</h6>
-                </div>
-                <div class="row mt-2">
-                    <div class="col-md-6">
-                        <input type="text" class="form-control" value="Nom" placeholder="Nom" formControlName="firstName"
-                        [(ngModel)]="user.firstName">
-                    </div> 
-                    <!-- first name validator and Error -->
-                    <div *ngIf='updateProfileForm.controls["firstName"].invalid && (updateProfileForm.controls["firstName"].touched 
-|| updateProfileForm.controls["firstName"].dirty)'>
-                        <div *ngIf='updateProfileForm.controls["firstName"].errors?.required' style="color:red">Ce champ
-                            est obligatoire</div>
-                    </div>
-                    <div class="col-md-6">
-                        <input type="text" class="form-control" value="Prénom" placeholder="Prénom" formControlName="lastName" [(ngModel)]="user.lastName">
-                    </div>
-                    <!-- last name validator and Error -->
-                    <div *ngIf='updateProfileForm.controls["lastName"].invalid && (updateProfileForm.controls["lastName"].touched 
-|| updateProfileForm.controls["lastName"].dirty)'>
-                        <div *ngIf='updateProfileForm.controls["lastName"].errors?.required' style="color:red">Ce champ est
-                            obligatoire</div>
-                    </div>
-                </div>
-                <div class="row mt-3">
-                    <div class="col-md-6">
-                        <input type="text" class="form-control" value="Adresse email" placeholder="Email" formControlName="email" [(ngModel)]="user.email">
-                        </div>
-                        <div *ngIf='updateProfileForm.controls["email"].invalid && (updateProfileForm.controls["email"].touched 
                         || updateProfileForm.controls["email"].dirty)'>
-                                                    <div *ngIf='updateProfileForm.controls["email"].errors?.email' style="color:red"> Veuillez entrez
-                                                        une adresse email valide</div>
-                                                    <div *ngIf='updateProfileForm.controls["email"].errors?.required' style="color:red">Ce champ est
-                                                        obligatoire</div>
-                                                </div>
-                    <div class="col-md-6"><input type="text" class="form-control" value="+19685969668"
-                            placeholder="Phone number" formControlName="tel" [(ngModel)]="user.tel">
+                            <div *ngIf='updateProfileForm.controls["email"].errors?.email' style="color:red"> Veuillez
+                                entrez
+                                une adresse email valide</div>
+                            <div *ngIf='updateProfileForm.controls["email"].errors?.required' style="color:red">Ce champ
+                                est
+                                obligatoire</div>
+                        </div>
+                        <div class="col-md-6"><input type="text" class="form-control" value="+19685969668"
+                                placeholder="Phone number" formControlName="tel" [(ngModel)]="user.tel">
                         </div>
                         <div *ngIf='updateProfileForm.controls["tel"].invalid && (updateProfileForm.controls["tel"].touched 
                         || updateProfileForm.controls["tel"].dirty)'>
-                                                    <div *ngIf='updateProfileForm.controls["tel"].errors?.required' style="color:red "> Ce champ est
-                                                        obligatoire</div>
-                                                    <div *ngIf='updateProfileForm.controls["tel"].errors?.pattern' style="color:red"> Ce champ doit
-                                                        contenir 8 chiffres
-                                                    </div>
-                                                </div>
-                </div>
-                <div class="row mt-3">
-                    <div class="col-md-12">
-                        <input type="text" class="form-control" placeholder="address"
-                            value="Adresse"   formControlName="address" [(ngModel)]="user.address">
+                            <div *ngIf='updateProfileForm.controls["tel"].errors?.required' style="color:red "> Ce champ
+                                est
+                                obligatoire</div>
+                            <div *ngIf='updateProfileForm.controls["tel"].errors?.pattern' style="color:red"> Ce champ
+                                doit
+                                contenir 8 chiffres
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-md-12">
+                            <input type="text" class="form-control" placeholder="address" value="Adresse"
+                                formControlName="address" [(ngModel)]="user.address">
                         </div>
                         <div *ngIf='updateProfileForm.controls["address"].invalid && (updateProfileForm.controls["address"].touched 
                         || updateProfileForm.controls["address"].dirty)'>
-                                                    <div *ngIf='updateProfileForm.controls["address"].errors?.required' style="color:red"> Ce champ est
-                                                        obligatoire</div>
-                                                </div>
-                   
-                </div>
-                <div class="row mt-3">
-                    <div class="col-md-6">
-                        <input type="text" class="form-control" value="Mot de passe" formControlName="pwd" [(ngModel)]="user.pwd">
+                            <div *ngIf='updateProfileForm.controls["address"].errors?.required' style="color:red"> Ce
+                                champ est
+                                obligatoire</div>
+                        </div>
+
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-md-6">
+                            <input type="text" class="form-control" value="Mot de passe" formControlName="pwd"
+                                [(ngModel)]="user.pwd">
                         </div>
                         <div *ngIf='updateProfileForm.controls["pwd"].invalid && (updateProfileForm.controls["pwd"].touched 
                         || updateProfileForm.controls["pwd"].dirty)'>
-                                                    <div *ngIf='updateProfileForm.controls["pwd"].errors?.required' style="color:red"> Ce champ est
-                                                        obligatoire</div>
-                                                </div>
-                    <div class="col-md-6">
-                        <input type="text" class="form-control" value="Confirmer le mot de passe"
-                            placeholder="Confirmer le mot de passe" formControlName="confirmPassword">
+                            <div *ngIf='updateProfileForm.controls["pwd"].errors?.required' style="color:red"> Ce champ
+                                est
+                                obligatoire</div>
+                        </div>
+                        <div class="col-md-6">
+                            <input type="text" class="form-control" value="Confirmer le mot de passe"
+                                placeholder="Confirmer le mot de passe" formControlName="confirmPassword">
                         </div>
                         <div *ngIf='updateProfileForm.controls["confirmPassword"].invalid && (updateProfileForm.controls["confirmPassword"].touched 
                         || updateProfileForm.controls["confirmPassword"].dirty)'>
-                                                 <div *ngIf='updateProfileForm.controls["confirmPassword"].errors?.mustMatch' style="color:red">
-                                                     Veuillez confirmer le mot de passe</div>
-                                             </div>
+                            <div *ngIf='updateProfileForm.controls["confirmPassword"].errors?.mustMatch'
+                                style="color:red">
+                                Veuillez confirmer le mot de passe</div>
+                        </div>
+                    </div>
+                    <div class="mt-5 text-right"><button class="btn btn-primary profile-button" type="button"
+                            (click)='editProfil()'>Modifier</button></div>
+                    <!-- <div>
+                        <button class="btn btn-info waves-effect" (click)="addToast({title:'Bootstrap Toasty', msg:'Turning standard Bootstrap alerts into awesome notifications', timeout: 5000, theme:'bootstrap', position:'bottom-right', type:'info'})">Info</button>
+                        <button type="button" class="btn btn-primary" id="liveToastBtn">Show live toast</button>
+
+                        <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 5">
+                          <div id="liveToast" class="toast hide" role="alert" aria-live="assertive" aria-atomic="true">
+                            <div class="toast-header">
+                              <img src="..." class="rounded me-2" alt="...">
+                              <strong class="me-auto">Bootstrap</strong>
+                              <small>11 mins ago</small>
+                              <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                            </div>
+                            <div class="toast-body">
+                              Hello, world! This is a toast message.
+                            </div>
+                          </div>
+                        </div>
+                    </div> -->
+
+
+
+                    
+
+
                 </div>
-                <div class="mt-5 text-right"><button class="btn btn-primary profile-button" type="button"
-                        (click)='editProfil()'>Modifier</button></div>
             </div>
         </div>
     </div>
-</div>
 </form>

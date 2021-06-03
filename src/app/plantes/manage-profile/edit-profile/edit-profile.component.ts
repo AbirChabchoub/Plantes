@@ -35,7 +35,8 @@ export class EditProfileComponent implements OnInit {
       tel: ['', [Validators.pattern("[0-9 ]{8}"), Validators.required]],
       pwd: ['', Validators.required],
       email: ['', [Validators.email, Validators.required]],
-      confirmPassword: ['']
+      confirmPassword: [''],
+      image: ['']
     },
       { validator: MustMatch('pwd', 'confirmPassword') }
     );
@@ -49,7 +50,7 @@ export class EditProfileComponent implements OnInit {
 
   editProfil() {
     let connectedUserId = JSON.parse(localStorage.getItem('connectedUser'));		
-    this.usersService.updateProfil(this.user).subscribe(
+    this.usersService.updateProfil(this.user,this.updateProfileForm.value.image).subscribe(
       (data) => {
         console.log('your profile is successfully updated', data.message);
         this.route.navigate([ `profile/${connectedUserId}` ]);

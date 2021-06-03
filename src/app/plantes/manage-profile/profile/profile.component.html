@@ -10,7 +10,7 @@
             <!-- <h5 class="card-title mb-0">Profile</h5> -->
           </div>
           <div class="card-body text-center sideBar">
-            <img src="./../../../assets/images/profile/bg-1.jpg" class="img-fluid rounded-circle mb-2" />
+            <img [src]="user?.image" class="img-fluid rounded-circle mb-2" />
             <div class="form-group">
             </div>
 
@@ -60,7 +60,7 @@
                   <tbody>
                     <tr *ngFor="let x of ad">
 
-                      <td> <img class="img-fluid products" [src]="x.image" alt="" style="width:70px;height: 90px;">
+                      <td> <img class="img-fluid products" [src]="x?.image" alt="" style="width:70px;height: 90px;">
 
 
                       </td>

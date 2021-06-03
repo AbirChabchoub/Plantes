@@ -20,7 +20,7 @@ import { ShopComponent } from './shop/shop.component';
 import { SignupComponent } from './signup/signup.component';
 
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-import { FAQComponent } from './faq/faq.component';
+
 
 import { CommentFormComponent } from './manage-comments/comment-form/comment-form.component';
 import { CommentComponent } from './manage-comments/comment/comment.component';
@@ -33,6 +33,14 @@ import { ReplyComponent } from './manage-comments/reply/reply.component';
 import { ManageAdsModule } from './manage-ads/manage-ads.module';
 import { OrdersComponent } from './manage-profile/orders/orders.component';
 import { WishlistComponent } from './manage-profile/wishlist/wishlist.component';
+import { BlogsComponent } from './blogs/blogs.component';
+import { ForumFormComponent } from './manage-forum/forum-form/forum-form.component';
+import { QuestionComponent } from './manage-forum/question/question.component';
+import { QuestionsComponent } from './manage-forum/questions/questions.component';
+import { EditAdComponent } from './manage-profile/edit-ad/edit-ad.component';
+import { ModalCommandeComponent } from './modal-commande/modal-commande.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { BasketComponent } from './basket/basket.component';
 
 @NgModule({
 	declarations: [
@@ -51,7 +59,7 @@ import { WishlistComponent } from './manage-profile/wishlist/wishlist.component'
 		ProductsComponent,
 		ShopComponent,
 		SignupComponent,
-		FAQComponent,
+		
 		CommentFormComponent,
 		CommentComponent,
 		CommentsComponent,
@@ -60,8 +68,16 @@ import { WishlistComponent } from './manage-profile/wishlist/wishlist.component'
 		JwPaginationComponent,
 		ReplyComponent,
 		OrdersComponent,
-		WishlistComponent
+		WishlistComponent,
+		BlogsComponent,
+		ForumFormComponent,
+		QuestionComponent,
+		QuestionsComponent,
+		EditAdComponent,
+		ModalCommandeComponent,
+		BasketComponent
 	],
-	imports: [ CommonModule, PlantesRoutingModule, ReactiveFormsModule, FormsModule, ManageAdsModule ]
+	imports: [ CommonModule, PlantesRoutingModule, ReactiveFormsModule, FormsModule, ManageAdsModule , NgbModule ],
+	entryComponents: [ ModalCommandeComponent ]
 })
 export class PlantesModule {}

@@ -15,7 +15,7 @@ import { JSDocCommentStmt } from '@angular/compiler';
 export class AdFormComponent implements OnInit {
   adForm!: FormGroup;
   ad: any = {};
-  category: any;
+  category: any= {};
   imagePreview: String;
   connectedUserId: any
   constructor(private formBuilder: FormBuilder,
@@ -24,7 +24,7 @@ export class AdFormComponent implements OnInit {
     private AddCategoryService: AddCatogoryService) { }
 
   ngOnInit() {
-    
+
 
     this.getAllCategories();
     this.adForm = this.formBuilder.group({
@@ -43,22 +43,24 @@ export class AdFormComponent implements OnInit {
   }
 
 
- 
 
-  add() {
-     this.ad.userId = JSON.parse(localStorage.getItem('connectedUser'));
-    this.addService.addAd(this.ad,this.adForm.value.image).subscribe(
 
-      () => {
-        console.log("added succesfully");
-        this.route.navigate(["ads"]);
-      });
-  }
+  // add() {
+  //   this.ad.userId = JSON.parse(localStorage.getItem('connectedUser'));
+  //   this.ad.vendu = false
+  //   this.addService.addAd(this.ad, this.adForm.value.image).subscribe(
+  //     () => {
+  //       console.log("added succesfully");
+  //       this.route.navigate(["ads"]);
+  //     });
+  // }
 
   getAllCategories() {
     this.AddCategoryService.getAllCategories().subscribe(
       (data) => {
         this.category = data.category;
+        console.log('here gett all ca', this.category);
+
       });
   }
 
@@ -73,6 +75,26 @@ export class AdFormComponent implements OnInit {
     };
     reader.readAsDataURL(file);
   }
+
+
+
+  add() {
+    var isConnectedUser = JSON.parse(localStorage.getItem('connectedUser'));
+    if (isConnectedUser == null) {
+      this.route.navigate(['login']);
+
+    } else {
+      this.ad.userId = JSON.parse(localStorage.getItem('connectedUser'));
+      this.ad.vendu = false
+      this.addService.addAd(this.ad, this.adForm.value.image).subscribe(
+        () => {
+          console.log("added succesfully");
+          this.route.navigate(["ads"]);
+        });
+    }
+  }
+
+
 
 
 

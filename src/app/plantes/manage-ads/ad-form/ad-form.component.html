@@ -36,12 +36,9 @@
 
                         <div class="col-md-12 form-group">
                         <select class="form-select" aria-label="Default select example" [(ngModel)]="ad.category" [ngModelOptions]="{standalone:true}" >
-                            <option selected *ngFor="let x of category" >{{x?.categoryName}}</option>
-
-                            <!-- <option value="arbre">arbre</option>
-                            <option value="bouture">bouture</option>
-                            <option value="graines">graines</option>
-                            <option value="Pot">Pot</option> -->
+                            <option  >Séléctionnez une catégorie</option>
+                            <option  *ngFor="let x of category" >{{x?.categoryName}}</option>
+               
                           </select>
                         </div>
 
@@ -89,7 +86,7 @@
                             
                         </div>
                         <div class="col-md-12 form-group">
-                            <button type="submit" value="submit" class="primary-btn" >Publier</button>
+                            <button type="submit" value="submit"[disabled]='adForm.invalid' class="primary-btn" >Publier</button>
                            
                         </div>
                     </form>

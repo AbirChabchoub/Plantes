@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { WishlistService } from 'src/app/services/wishlist.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { UsersService } from 'src/app/services/users.service';
+import { Route } from '@angular/compiler/src/core';
 
 @Component({
   selector: 'app-wishlist',
@@ -15,7 +16,8 @@ export class WishlistComponent implements OnInit {
   user: any = {}
   constructor(private wishlistService: WishlistService,
     private activatedRoute: ActivatedRoute,
-    private usersService: UsersService) { }
+    private usersService: UsersService,
+    private router:Router) { }
 
   ngOnInit() {
     var connectedUserId = JSON.parse(localStorage.getItem('connectedUser'));
@@ -44,4 +46,11 @@ export class WishlistComponent implements OnInit {
       });
 
   }
+
+	goToEditProfile() {
+		let connectedUserId = JSON.parse(localStorage.getItem('connectedUser'));
+		this.router.navigate([ `editProfile/${connectedUserId}` ]);
+	}
+
+
 }

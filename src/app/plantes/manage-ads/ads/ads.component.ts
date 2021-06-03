@@ -20,28 +20,37 @@ export class AdsComponent implements OnInit {
     this.getAllCategories();
     this.adService.getAllAds().subscribe(
       (data) => {
-        this.ads = data.ads;
+        this.ads=data.ads
+        console.log('here data ads', this.ads);
+        var findedObj
+        // for (let i = 0; i < data.ads[i].length; i++) {
+        //   if (data.ads[i].vendu === 'false') {
+        //     findedObj = data.ads[i]
+        //     console.log('heheheheheh', findedObj);
+        //   }
+        //   // return findedObj
+        // }
+        
       });
 
   }
 
-  
-  getAllCategories(){
+
+  getAllCategories() {
     this.addCategoryService.getAllCategories().subscribe(
-      (data)=>{
+      (data) => {
         console.log('here categories', data.category);
-        
-        this.categories=data.category;
+        this.categories = data.category;
       });
   }
 
 
   clickme($event) {
     const evtMsg = $event.target.textContent;
-    this.categoryName=evtMsg;
+    this.categoryName = evtMsg;
     alert(this.categoryName);
-		
-	}
+
+  }
 
 
 

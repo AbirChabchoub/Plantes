@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UsersService } from 'src/app/services/users.service';
 import { AdsService } from 'src/app/services/ads.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { OrdersService } from 'src/app/services/orders.service';
 
 @Component({
@@ -14,12 +14,14 @@ export class OrdersComponent implements OnInit {
   constructor(private usersService: UsersService,
     private adsService: AdsService,
     private activatedRoute: ActivatedRoute,
-    private orderService: OrdersService) { }
+    private orderService: OrdersService,
+    private router:Router) { }
   id: any;
   user: any = {};
   connectedUser: any;
   ad: any;
   orders: any;
+  solds: any;
   ngOnInit() {
     this.connectedUser = JSON.parse(localStorage.getItem('connectedUser'));
     this.id = this.activatedRoute.snapshot.paramMap.get('id');
@@ -27,6 +29,7 @@ export class OrdersComponent implements OnInit {
       this.user = data.users;
     });
     this.getMyOrders();
+    this.getMyProductSold();
   }
 
 
@@ -40,6 +43,16 @@ export class OrdersComponent implements OnInit {
       
       
   }
-
+  goToEditProfile() {
+		let connectedUserId = JSON.parse(localStorage.getItem('connectedUser'));
+		this.router.navigate([ `editProfile/${connectedUserId}` ]);
+  }
+  getMyProductSold(){
+this.adsService.getAllAdsSold(this.id).subscribe((res)=>{
+  console.log('here solds', res.ads);
+  this.solds=res.ads
+  
+})
+  }
 
 }

@@ -9,7 +9,7 @@ import { User } from '../../../../../backend/models/user';
 @Component({
 	selector: 'app-comment-form',
 	templateUrl: './comment-form.component.html',
-	styleUrls: [ './comment-form.component.scss' ]
+	styleUrls: ['./comment-form.component.scss']
 })
 export class CommentFormComponent implements OnInit {
 	userIsAuthenticated: User;
@@ -17,31 +17,66 @@ export class CommentFormComponent implements OnInit {
 	commentForm: FormGroup;
 	comment: any = {};
 	id: any;
+
 	constructor(
 		private formBuilder: FormBuilder,
 		private commentService: CommentsService,
 		private authService: UsersService,
-		private router: Router // private ActivatedRoute: ActivatedRoute // private router: Router,
-	) {}
+		private route: Router // private ActivatedRoute: ActivatedRoute // private router: Router,
+	) { }
 
 	ngOnInit() {
 		this.authService.currentUser.subscribe((x) => (this.userIsAuthenticated = x));
-		// this.id = this.ActivatedRoute.snapshot.paramMap.get('id');
 		this.commentForm = this.formBuilder.group({
-			message: [ '' ]
+			message: ['']
 		});
+		this.id = JSON.parse(localStorage.getItem('connectedUser'));
 	}
+
 	ngOnDestroy() {
 		this.authListenerSubs.unsubscribe();
 	}
 
+	// addComment() {
+	// 	this.authService.getConnectedUser(this.id).subscribe(
+	// 		(data) => {
+	// 			this.comment.adId = JSON.parse(localStorage.getItem('prToReserve'));
+	// 			this.comment.commentUserId = this.id;
+	// 			this.comment.firstName =data.users.firstName;
+	// 			this.comment.lastName=data.users.lastName;
+	// 			this.comment.image=data.users.image;
+	// 			this.comment.date=new Date().getDate().toString() + '-' +(new Date().getMonth() + 1).toString() + '-' + new Date().getFullYear().toString();
+	// 			this.commentService.addComment(this.comment).subscribe(() => {
+	// 				console.log('added succesfully');
+	// 			});
+	// 		});
+
+
+	// }
+
 	addComment() {
-		this.comment.prId = JSON.parse(localStorage.getItem('prToReserve'));
-		this.comment.commentUserId = JSON.parse(localStorage.getItem('connectedUser'));
-		console.log('here connected User in add comment', this.comment.commentUserId);
-		this.commentService.addComment(this.comment).subscribe(() => {
-			console.log('added succesfully');
-		});
-		// this.router.navigate([ `product-details/${this.id}` ]);
-	}
+		var isConnectedUser = JSON.parse(localStorage.getItem('connectedUser'));
+		if (isConnectedUser == null) {
+		  this.route.navigate(['login']);
+	
+		} else {
+			this.authService.getConnectedUser(this.id).subscribe(
+				(data) => {
+					this.comment.adId = JSON.parse(localStorage.getItem('prToReserve'));
+					this.comment.commentUserId = this.id;
+					this.comment.firstName =data.users.firstName;
+					this.comment.lastName=data.users.lastName;
+					this.comment.image=data.users.image;
+					this.comment.date=new Date().getDate().toString() + '-' +(new Date().getMonth() + 1).toString() + '-' + new Date().getFullYear().toString();
+					this.commentService.addComment(this.comment).subscribe(() => {
+						console.log('added succesfully');
+					});
+				});
+		}
+	  }
+	
+
+
+
+
 }
