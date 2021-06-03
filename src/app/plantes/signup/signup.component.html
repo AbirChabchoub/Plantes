@@ -112,16 +112,11 @@
                             <div *ngIf='signupForm.controls["confirmPassword"].errors?.mustMatch' style="color:red">
                                 Veuillez confirmer le mot de passe</div>
                         </div>
-                        <div class="col-md-12 form-group">
-                            <div class="creat_account">
-                                <input type="checkbox" id="f-option2" name="selector">
-                                <label for="f-option2">Rester connecter</label>
-                            </div>
-                        </div>
+                       
                         <div class="col-md-12 form-group">
                             <button type="submit" (click)='signup(signupForm.value)' class="primary-btn"
                                 [disabled]="signupForm.invalid">S'inscrire</button>
-                            <a href="#">Mot de passe oubliée?</a>
+                            <a>Vous avez deja un compte?</a>
                         </div>
                     </form>
                 </div>

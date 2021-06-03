@@ -6,7 +6,7 @@ import { Component, Input, OnInit } from '@angular/core';
 	styleUrls: [ './reply.component.scss' ]
 })
 export class ReplyComponent implements OnInit {
-	@Input() showMePartially: boolean;
+	// @Input() showMePartially: boolean;
 	constructor() {}
 
 	ngOnInit() {}

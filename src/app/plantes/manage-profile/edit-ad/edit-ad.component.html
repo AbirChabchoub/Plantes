@@ -16,7 +16,7 @@
 
                         <div class="col-md-12 form-group">
                         <select class="form-select" aria-label="Default select example" [(ngModel)]="ad.category" [ngModelOptions]="{standalone:true}" >
-                            <option  >--select category--</option>
+                            <option  >Séléctionnez une catégorie</option>
                             <option  *ngFor="let x of category" [ngValue]="x?.categoryName">{{x?.categoryName}}</option>
                
                           </select>

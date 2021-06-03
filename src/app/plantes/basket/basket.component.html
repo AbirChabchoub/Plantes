@@ -1,0 +1,68 @@
+
+<main class="content ">
+    <div class="container-fluid ">
+  
+      <!-- <h1 class="h3 mb-3">Profile</h1> -->
+  
+      <div class="row">
+        <div class="col-md-3 col-xl-3 profileSideBar ">
+          <div class="card mb-3">
+            <div class="card-header">
+              <!-- <h5 class="card-title mb-0">Profile</h5> -->
+            </div>
+            <div class="card-body text-center sideBar">
+              <img [src]="user?.image" class="img-fluid rounded-circle mb-2" />
+              <div class="form-group">
+              </div>
+  
+              <h5 class="card-title mb-0">Bienvenue {{user.lastName }} {{user.firstName}} ! </h5>
+              <!-- <div class="text-muted mb-2">{{user.email}}</div> -->
+  
+              <div>
+                <button class="btn btn-primary btn-sm profilButtons" id="ad" (click)="goToAdForm()">Je vends</button>
+                <br>
+                <button class="btn btn-primary btn-sm profilButtons" id="updateBtn" (click)="goToEditProfile()"> Modifier
+                  mon profile</button>
+              </div>
+            </div>
+          </div>
+        </div>
+  
+        <div class="col-md-8 col-xl-9 profileSideBar">
+          <div class="card">
+            <div class="card-header">
+              <h5 class="card-title mb-0 ">Mon jardin </h5>
+            </div>
+            <br>
+            <!-- <section class="lattest-product-area pb-40 category-list">
+                          <div class="row">
+                              <div class="col-lg-4 col-md-6" *ngFor="let x of ad">
+                                  <app-ad [adsInput]="x"></app-ad>
+                              </div>
+                          </div>
+                      </section> -->
+  
+            <div class="row">
+             
+    
+                <div id="basket"></div>
+             
+  
+              </div>
+           
+  
+            </div>
+  
+  
+  
+  
+  
+          </div>
+        </div>
+      </div>
+  
+  
+  </main>
+
+
+ 

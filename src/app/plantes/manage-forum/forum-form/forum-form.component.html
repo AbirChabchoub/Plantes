@@ -1,25 +1,12 @@
-<!-- <div class="review_box" *ngIf="userIsAuthenticated">
-    <h4>Poser une question</h4>
-    <form class="row contact_form" #forumForm="ngForm" (ngSubmit)="addQuestion()">
 
-        <div class="col-md-12">
-            <div class="form-group">
-                <textarea class="form-control" name="message" rows="1" placeholder="Votre question"
-                    [(ngModel)]="question.question"></textarea>
-            </div>
-        </div>
-        <div class="col-md-12 text-right">
-            <button type="submit" value="submit" class="btn primary-btn">Poser</button>
-        </div>
-    </form>
-</div> -->
 
 <div>
-    <form class="row contact_form" #forumForm="ngForm" (ngSubmit)="addQuestion()">
+    <form class="row contact_form" #forumForm="ngForm" >
         <input class="form-control question" type="text"  [(ngModel)]="question.question" [ngModelOptions]="{standalone:true}" placeholder="Votre question">
     </form>
     <div class="col-md-12 text-right questionBtn">
         <button type="submit" value="submit" class="btn primary-btn" style="color:white" (click)="addQuestion()">Poser</button>
     </div>
+   
 </div>
 <br><br>
