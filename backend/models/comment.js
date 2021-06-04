@@ -1,9 +1,13 @@
 const mongoose = require('mongoose');
 const commentSchema = mongoose.Schema({
-	fullName: String,
 	commentUserId: String,
 	message: String,
-	prId: String
+	adId: String,
+	firstName: String,
+	lastName: String,
+	date:String,
+	image:String
+   
 });
 
 const comment = mongoose.model('Comment', commentSchema);

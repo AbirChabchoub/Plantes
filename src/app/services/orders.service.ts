@@ -14,4 +14,19 @@ export class OrdersService {
 	getOrderByUserId(id: any) {
 		return this.httpClient.get<{ order: any }>(`${this.orderUrl}/${id}`);
 	}
+	getAllOrders() {
+		return this.httpClient.get<{ orders: any }>(this.orderUrl);
+	}
+
+	deleteFromOrder(id: any) {
+		return this.httpClient.delete<{ message: String }>(`${this.orderUrl}/${id}`);
+	}
+
+	getOrdersPdf() {
+		return this.httpClient.get<{ message: String }>(`${this.orderUrl}/pdf`);
+	}
+
+	getOrderById(id: any) {
+		return this.httpClient.get<{ order: any }>(`${this.orderUrl}/orderId/${id}`);
+	}
 }

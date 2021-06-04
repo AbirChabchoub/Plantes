@@ -14,6 +14,7 @@ export class EditUserComponent implements OnInit {
   user: any = {};
   updateProfileForm: FormGroup;
   id: any;
+  
   constructor(private formBuilder: FormBuilder, 
     private adminService: AdminUsersService, 
     private usersService:UsersService,
@@ -23,9 +24,9 @@ export class EditUserComponent implements OnInit {
   ngOnInit() {
     this.id = this.activatedRoute.snapshot.paramMap.get('id');
     this.adminService.getUserByIdFromAdmin(this.id).subscribe(
-      (data) => {
-        this.user = data.user
-      });
+    (data)=>{
+     this.user=data.user;
+  });
 
 
     this.updateProfileForm = this.formBuilder.group({
@@ -45,11 +46,15 @@ export class EditUserComponent implements OnInit {
 
 
 
-  editProfil() {
-    this.adminService.updateUser(this.user).subscribe(
+  editProfil(user:any) {  
+    user._id=this.id;
+    console.log('here user to update', user);
+    this.adminService.updateUser(user).subscribe(
       (data) => {
         console.log('your profile is successfully updated', data.message);
-        this.route.navigate(['profile']);
+        
+        
+        this.route.navigate(['users']);
       });
     
   }

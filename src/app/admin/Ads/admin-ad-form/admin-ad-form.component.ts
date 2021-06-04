@@ -34,18 +34,19 @@ export class AdminAdFormComponent implements OnInit {
       firstPicture: [''],
       secondPicture: [''],
       price: [''],
-      image: ['']
+      image: [''],
+      vendu: ['']
     });
   }
 
   add() {
-    
+    this.ad.vendu=false
     this.ad.userId = JSON.parse(localStorage.getItem('connectedUser'));
    this.addService.addAd(this.ad,this.adForm.value.image).subscribe(
 
      () => {
        console.log("added succesfully");
-       this.route.navigate(["ads"]);
+       this.route.navigate(["adminAds"]);
      });
      this.showToast();
  }
@@ -64,6 +65,8 @@ getAllCategories() {
   this.AddCategoryService.getAllCategories().subscribe(
     (data) => {
       this.category = data.category;
+      console.log('here category', this.category);
+      
     });
 }
 

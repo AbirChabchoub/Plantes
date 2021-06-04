@@ -1,0 +1,41 @@
+
+
+<div class="row">
+    <!-- [ Hover-table ] start -->
+    <div class="col-md-12">
+      <div class="table-responsive">
+        <table class="table table-hover">
+          <thead>
+            <tr>
+            
+              <th>Image</th>
+              <th>Nom du produit</th>
+              <th>Prix</th>
+              <th>Catégorie</th>
+              <th></th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let x of orders">
+             
+              <td><img [src]="x.image" style="height: 90px; width:70px"></td>
+              <td >{{x.productName}}</td>
+              <td>{{x.price}}</td>
+              <td>{{x.category}}</td>
+              <td>{{x.address}}</td> 
+              <td>
+            <i class="fas fa-trash-alt fa-lg" style="color: green;margin-top: 20px; margin:20px;cursor: pointer;" (click)="deleteFromOrders(x._id)"></i>
+            <button type="submit" (click)="deleteFromOrders(x._id)"></button>
+            <i class="fa fa-pencil-alt fa-lg" style="color: green;margin-top: 20px;cursor: pointer;"></i>
+                
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+  
+    </div>
+    <!-- [ Hover-table ] end -->
+  
+  </div>

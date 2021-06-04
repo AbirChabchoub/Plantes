@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { NgbDropdownConfig } from '@ng-bootstrap/ng-bootstrap';
 import { UsersService } from 'src/app/services/users.service';
 import{Admin} from '../../../../../backend/models/Admin';
+import { AdminUsersService } from '../../Admin-services/admin-users.service';
+import { Router } from '@angular/router';
 @Component({
 	selector: 'app-nav-right',
 	templateUrl: './nav-right.component.html',
@@ -9,12 +11,21 @@ import{Admin} from '../../../../../backend/models/Admin';
 	providers: [ NgbDropdownConfig ]
 })
 export class NavRightComponent implements OnInit {
-	userIsAuthenticated: Admin;
-
-	constructor(private authService: UsersService) {}
+	adminIsAuthenticated: Admin;
+	fullName: string;
+	id:any;
+	admin:any;
+	constructor(private authService: AdminUsersService,
+		private router:Router) {}
 
 	ngOnInit() {
-		this.authService.currentUser.subscribe((x) => (this.userIsAuthenticated = x));
+		this.authService.currentUser.subscribe((x) => (this.adminIsAuthenticated = x));
+		this.fullName=JSON.parse(localStorage.getItem('adminFullName'));
+		// this.id=  this.fullName=JSON.parse(localStorage.getItem('connectedAdmin'));
+		this.authService.getAdminById(this.adminIsAuthenticated).subscribe(
+			(data)=>{
+			 this.admin=data.admin
+			});
 
 	}
 
@@ -22,6 +33,9 @@ export class NavRightComponent implements OnInit {
 		this.authService.logout();
 	}
 
-
+	goToEditProfile() {
+		let connectedAdmin = JSON.parse(localStorage.getItem('connectedAdmin'));
+		this.router.navigate([ `profilAdmin/${connectedAdmin}` ]);
+	}
 
 }

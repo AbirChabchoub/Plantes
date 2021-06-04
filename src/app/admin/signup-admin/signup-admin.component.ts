@@ -29,15 +29,14 @@ this.signupAdmin=this.formBuilder.group({
 };
   
 
-  signup(user: any) {
-    localStorage.setItem('connectedAdmin', JSON.stringify(user.id));
-        console.log('here my user', user);
+  signup(admin: any) {
+        console.log('here my user', admin);
         // this.insertToDB("users", user);
-        this.adminService.signupAdmin(user).subscribe(
+        this.adminService.signupAdmin(admin).subscribe(
           (data) => {
             console.log(data.message);
-            let connectedUserId = JSON.parse(localStorage.getItem('connectedUser'));
-            this.router.navigate([ `dashboard/${connectedUserId}` ]);    
+            // let connectedAdminId = JSON.parse(localStorage.getItem('connectedAdmin'));
+            this.router.navigate([ `loginAdmin` ]);    
           });
       }
 

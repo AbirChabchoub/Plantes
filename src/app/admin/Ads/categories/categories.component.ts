@@ -9,50 +9,60 @@ import { ToastType, Toaster } from 'ngx-toast-notifications';
   styleUrls: ['./categories.component.scss']
 })
 export class CategoriesComponent implements OnInit {
-  category:any={};
-  addCategory:FormGroup;
+  category: any = {};
+  addCategory: FormGroup;
+  AllCategory: any
   private types: Array<ToastType> = ['success'];
   private text = ' √ La catégorie est bien ajouté';
-  constructor(private categoryService:AddCatogoryService,
-    private formBuilder:FormBuilder,
+  constructor(private categoryService: AddCatogoryService,
+    private formBuilder: FormBuilder,
     private toaster: Toaster) { }
 
   ngOnInit() {
-    this.addCategory=this.formBuilder.group(
-      { 
-        categoryName:['']
+    this.addCategory = this.formBuilder.group(
+      {
+        categoryName: ['']
       });
-this.getAllCategories();
+    this.getAllCategories();
   }
 
 
-  addCategoryToSelect(){
+  addCategoryToSelect() {
     this.categoryService.AddCategory(this.category).subscribe(
-      (data)=>{
-     console.log( data.message);
+      (data) => {
+        console.log(data.message);
+        console.log('here category name', this.category);
       });
-      this.showToast();
+    this.showToast();
   }
 
 
-  getAllCategories(){
+  getAllCategories() {
     this.categoryService.getAllCategories().subscribe(
-      (data)=>{
-        this.category=data.category;
+      (data) => {
+        this.AllCategory = data.category;
       });
   }
 
-    get randomType() {
-      return this.types[Math.ceil((Math.random() * 8)) % this.types.length];
-    }
+  get randomType() {
+    return this.types[Math.ceil((Math.random() * 8)) % this.types.length];
+  }
+
+  showToast() {
+    const type = this.randomType;
+    this.toaster.open({
+
+      caption: this.text,
+      type: type,
+    });
+  }
+
+  deleteCategory(id){
+this.categoryService.deleteCategory(id).subscribe((data)=>{
+  console.log(data.message);
+  this.getAllCategories();
   
-    showToast() {
-      const type = this.randomType;
-      this.toaster.open({
-       
-        caption: this.text,
-        type: type,
-      });
-    }
+})
+  }
 
 }
