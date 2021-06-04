@@ -28,17 +28,28 @@ import { AdminQuestionsComponent } from './admin-questions/admin-questions.compo
 import { AdminOrdersComponent } from './admin-orders/admin-orders.component';
 import { OrderDetailsComponent } from './order-details/order-details.component';
 
-
-
-
-
-
-
-
 @NgModule({
-	declarations: [ DashboardComponent,  UsersComponent, AddUserComponent, AllAdsComponent, EditUserComponent, AllAdComponent, AdminAdFormComponent, FilterPipe, EditAdComponent, AdminBlogComponent, AllOrdersComponent, ApexChartComponent, ChartsComponent, ChartComponent, ProfilAdminComponent, CategoriesComponent, AdminQuestionsComponent, AdminOrdersComponent, OrderDetailsComponent],
-	imports: [ CommonModule, AdminRoutingModule , FormsModule,ReactiveFormsModule,ChartsModule , DataTableModule ]
-	
-	
+	declarations: [
+		DashboardComponent,
+		UsersComponent,
+		AddUserComponent,
+		AllAdsComponent,
+		EditUserComponent,
+		AllAdComponent,
+		AdminAdFormComponent,
+		FilterPipe,
+		EditAdComponent,
+		AdminBlogComponent,
+		AllOrdersComponent,
+		ApexChartComponent,
+		ChartsComponent,
+		ChartComponent,
+		ProfilAdminComponent,
+		CategoriesComponent,
+		AdminQuestionsComponent,
+		AdminOrdersComponent,
+		OrderDetailsComponent
+	],
+	imports: [ CommonModule, AdminRoutingModule, FormsModule, ReactiveFormsModule, ChartsModule, DataTableModule ]
 })
 export class AdminModule {}

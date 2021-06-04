@@ -1,13 +1,7 @@
 <!-- 
-
-
-
-
-
 <form #addCategory="ngForm">
 <input type="text" class="form-control category" [(ngModel)]='category.categoryName' [ngModelOptions]="{standalone:true}" placeholder="Ajouter une catégorie">
 </form>
-
 <div class="col-md-12 text-right questionBtn">
     <button type="submit" value="submit" class="btn primary-btn" style="color:white" (click)="  addCategoryToSelect()">Ajouter</button>
 </div>
@@ -42,9 +36,9 @@
     </thead>
     <tbody>
         <tr *ngFor="let x of AllCategory">
-          
+
             <td>{{x?.categoryName}}</td>
-           
+
             <td> <i class="fas fa-trash-alt fa-lg" style="color: green;margin-top: 20px;"
                     (click)="deleteCategory(x._id)"></i>
             </td>
