@@ -47,4 +47,5 @@ export class AdsService {
 	vendu(ad:any){
 		return this.httpClient.put<{message:string}>(`${this.adUrl}/vendu/${ad._id}`, ad);
 	}
+	abir(){}
 }
