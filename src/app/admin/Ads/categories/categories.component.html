@@ -1,4 +1,4 @@
-
+<!-- 
 
 
 
@@ -11,7 +11,48 @@
 <div class="col-md-12 text-right questionBtn">
     <button type="submit" value="submit" class="btn primary-btn" style="color:white" (click)="  addCategoryToSelect()">Ajouter</button>
 </div>
+<form class="form-inline">
+    
+    <div class="form-group mx-sm-3 mb-2">
+      <label for="inputPassword2" class="sr-only">Password</label>
+      <input type="password" class="form-control" id="inputPassword2" placeholder="Password">
+    </div>
+    
+  </form> -->
+<form #addCategory="ngForm" (ngSubmit)="addCategoryToSelect()">
+    <p>ajouter category</p>
+    <div class="form-row">
+        <div class="form-group col-md-9">
+
+            <input type="email" class="form-control" [(ngModel)]='category.categoryName'
+                [ngModelOptions]="{standalone:true}" placeholder="Ajouter une catégorie">
+        </div>
+        <div class="form-group col-md-3">
+            <button type="submit" class="btn btn-success mb-2">Ajouter</button>
+        </div>
+    </div>
+</form>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Nom</th>
+            <th>Action</th>
+
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let x of AllCategory">
+          
+            <td>{{x?.categoryName}}</td>
+           
+            <td> <i class="fas fa-trash-alt fa-lg" style="color: green;margin-top: 20px;"
+                    (click)="deleteCategory(x._id)"></i>
+            </td>
+            <td>
 
 
+            </td>
+        </tr>
 
-
+    </tbody>
+</table>

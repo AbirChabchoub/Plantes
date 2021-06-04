@@ -64,18 +64,13 @@
                                    </div>
 
 
-              <div class="form-group text-left mt-2">
-                <div class="checkbox checkbox-primary d-inline">
-                  <input type="checkbox" name="checkbox-fill-2" id="checkbox-fill-2">
-                  <label for="checkbox-fill-2" class="cr">Send me the <a href="javascript:"> Newsletter</a> weekly.</label>
-                </div>
-              </div>
+             
               <button class="btn btn-primary btn-block mb-4 signupButton" (click)="signup(signupAdmin.value)">S'inscrire</button>
-              <p class="mb-2">Vous avez deja un compte? <a [routerLink]="['loginAdmin']" class="f-w-400">Se connecter</a></p>
+              <p class="mb-2">Vous avez deja un compte? <a [routerLink]="['/loginAdmin']" class="f-w-400">Se connecter</a></p>
             </div>
           </div>
         </div>
-      </div>
+      </div>    
     </div>
   </div>
 </form>

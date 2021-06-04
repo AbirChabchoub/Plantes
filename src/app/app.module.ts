@@ -24,7 +24,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { LoginAdminComponent } from './admin/login-admin/login-admin.component';
 import { SignupAdminComponent } from './admin/signup-admin/signup-admin.component';
-import { ChartsModule } from 'ng2-charts' ; 
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastNotificationsModule } from "ngx-toast-notifications";
+
+
 
 
 @NgModule({
@@ -44,7 +47,8 @@ import { ChartsModule } from 'ng2-charts' ;
 		HeaderComponent,
 		FooterComponent,
 		LoginAdminComponent,
-		SignupAdminComponent
+		SignupAdminComponent,
+	
 	],
 	imports: [
 		BrowserModule,
@@ -55,7 +59,9 @@ import { ChartsModule } from 'ng2-charts' ;
 		FormsModule,
 		ReactiveFormsModule,
 		HttpClientModule,
-	ChartsModule
+		BrowserAnimationsModule,
+		ToastNotificationsModule
+	
 	],
 	exports: [ FormsModule, ReactiveFormsModule ],
 	providers: [ NavigationItem ],

@@ -1,0 +1,52 @@
+// .login_box_area {
+// 	margin-top: 30px;
+// 	justify-content: center;
+// 	margin-left: 480px;
+// }
+// section {
+// 	h3 {
+// 		color: #335022;
+// 		font-weight: 600;
+// 		font-size: 20px;
+// 	}
+// }
+
+
+body {
+	background: #3D9830;
+
+}
+
+.form-control:focus {
+    box-shadow: none;
+    border-color: #3D9830
+}
+
+.profile-button {
+    background: #3D9830;
+    box-shadow: none;
+    border: none
+}
+
+.profile-button:hover {
+    background: #3D9830
+}
+
+.profile-button:focus {
+    background: #3D9830;
+    box-shadow: none
+}
+
+.profile-button:active {
+    background: #3D9830;
+    box-shadow: none
+}
+
+.back:hover {
+    color: #3D9830;
+    cursor: pointer
+}
+
+.imageBtn{
+    margin-top: 40px;
+}

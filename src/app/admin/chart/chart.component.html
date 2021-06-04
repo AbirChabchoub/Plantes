@@ -1,9 +1,32 @@
-<!-- <div class = "top-charts" >
- <div class = "chart" >
- <canvas baseChart [data] = "pieChartData"
-[labels] = "pieChartLabels" [chartType] = "pieChartType"
- [options] = "pieChartOptions" [plugins] = "pieChartPlugins"
-[colors] = "pieChartColors" [legend] = "pieChartLegend" >
- </canvas >
- </div >
-</div > -->
+<div class=" col-md-9">
+    <div class="col-md-4 col-xl-3 userStat">
+        <div class="card bg-c-blue order-card">
+            <div class="card-block" style="background-color:#afd5e7;width: 300px;">
+                <h6 class="m-b-20">Nombre d'utilisateurs</h6>
+                <h2 class="text-right"><i class="fa fa-cart-plus f-left"></i><span>{{users}}</span></h2>
+                <p class="m-b-0" style="color:black;">Date:<span class="f-right">{{currentDate}}</span></p>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4 col-xl-3  adStat">
+        <div class="card bg-c-blue order-card">
+            <div class="card-block" style="background-color:#afd5e7;width: 300px;">
+                <h6 class="m-b-20">Nombre d'annonces</h6>
+                <h2 class="text-right"><i class="fa fa-cart-plus f-left"></i><span>{{ads}}</span></h2>
+                <p class="m-b-0" style="color:black;">Date:<span class="f-right">{{currentDate}}</span></p>
+            </div>
+        </div>
+    </div>
+
+
+<br><br>
+    <h6 class="m-b-20">Nombre d'annonces par catégorie</h6>
+<div class="top-charts pieChart">
+    <div class="chart">
+        <canvas baseChart [data]="pieChartData" [labels]="pieChartLabels" [chartType]="pieChartType"
+            [options]="pieChartOptions" [plugins]="pieChartPlugins" [colors]="pieChartColors" [legend]="pieChartLegend">
+        </canvas>
+    </div>
+</div>
+</div>

@@ -31,7 +31,7 @@ export class UsersService {
 			console.log(res);
 			localStorage.setItem('connectedUser', JSON.stringify(res.user.id));
 			if (res.user.role == 'user') {
-				this.router.navigate([ '/' ]);
+				this.router.navigate([ 'ads' ]);
 			} else {
 				this.router.navigate([ '/' ]);
 			}
@@ -45,8 +45,18 @@ export class UsersService {
 		this.currentUserSubject.next(null);
 	}
 
-	updateProfil(user: any) {
-		return this.httpClient.put<{ message: string }>(`${this.userUrl}/${user._id}`, user);
+	updateProfil(user: any , image:File) {
+		const formdata = new FormData();
+		formdata.append('firstName', user.firstName);
+		formdata.append('lastName', user.lastName);
+		formdata.append('email', user.email);
+		formdata.append('tel', user.tel);
+		formdata.append('address', user.address);
+		formdata.append('pwd', user.pwd);
+		formdata.append('confirmPassword', user.confirmPassword);
+		formdata.append('image', image);
+
+		return this.httpClient.put<{ message: string }>(`${this.userUrl}/${user._id}`,formdata);
 	}
 
 	getConnectedUser(id: any) {

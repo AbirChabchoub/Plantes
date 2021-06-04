@@ -24,7 +24,9 @@ this.loginAdminForm=this.formBuilder.group({
 
   validateLogin(user) {
     this.adminService.login(user);
-    // this.router.navigate(['ads']);
+    let connectedAdminId = JSON.parse(localStorage.getItem('connectedAdmin'));
+            // this.router.navigate([ `dashboard/${connectedAdminId}` ]); 
+            this.router.navigate([ '/dashboard' ]);   
   }
   
 }
