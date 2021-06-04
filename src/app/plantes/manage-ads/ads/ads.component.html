@@ -15,19 +15,25 @@
                 </ul> -->
             </div>
             <div class="sidebar-filter mt-50">
-                <div class="top-filter-head" style="margin-top: 100px;">Rechercher</div>
+                <div class="top-filter-head" style="margin-top: 100px;">Rechercher </div>
                 <div class="common-filter">
                     <div class="head">Les catégories</div>
-                    <form action="#">
+                    <form>
+                        <ul>
+                            <li class="filter-list">
+                                <a class=" a" (click)="allCategory()">--touts catégories-- </a>
+                            </li>
+
+                        </ul>
+
                         <ul *ngFor="let x of categories">
-                            <li class="filter-list"><input class="pixel-radio" type="radio" id="apple" name="brand">
-                                    <label for="apple"> {{x?.categoryName}}
-                                      
-                                    </label>                               
-                                </li>
+                            <li class="filter-list">
+                                <a class=" a" (click)="filterProducts(x)">{{x?.categoryName}}</a>
+                            </li>
                         </ul>
                     </form>
                 </div>
+
                 <!-- <div class="common-filter">
                     <div class="head">Color</div>
                     <form action="#">
@@ -66,7 +72,7 @@
         <div class="col-xl-9 col-lg-8 col-md-7">
             <!-- Start Filter Bar -->
             <div class="filter-bar d-flex flex-wrap align-items-center" style="margin-top: 150px;">
-              
+
                 <form>
                     <div class="col-md-12 form-group">
                         <input type="text" class="form-control searchInput" placeholder="Rechercher" [(ngModel)]='ll'

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { AddCatogoryService } from '../../Admin-services/add-catogory.service';
 import { ToastType, Toaster } from 'ngx-toast-notifications';
+import { Router } from '@angular/router';
 
 @Component({
 	selector: 'app-categories',
@@ -17,7 +18,8 @@ export class CategoriesComponent implements OnInit {
 	constructor(
 		private categoryService: AddCatogoryService,
 		private formBuilder: FormBuilder,
-		private toaster: Toaster
+		private toaster: Toaster,
+		private router: Router
 	) {}
 
 	ngOnInit() {

@@ -47,44 +47,46 @@
 </div> -->
 <div class="example-header">
   <div>
-      <input class="form-control ng-dirty ng-valid ng-touched"  (keyup)="applyFilter($event.target.value)" placeholder="filter">
-</div>
+    <input class="form-control ng-dirty ng-valid ng-touched" (keyup)="applyFilter($event.target.value)"
+      placeholder="filter">
+  </div>
 </div>
 
 <div class="example-container mat-elevation-z8">
 
   <mat-table [dataSource]="dataSource" matSort>
 
-      <!-- ID Column -->
-      <ng-container matColumnDef="id">
-          <mat-header-cell *matHeaderCellDef mat-sort-header> Nom </mat-header-cell>
-          <mat-cell *matCellDef="let row"> {{row.lastName}} </mat-cell>
-      </ng-container>
+    <!-- ID Column -->
+    <ng-container matColumnDef="id">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Nom </mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row.lastName}} </mat-cell>
+    </ng-container>
 
-      <!-- Progress Column -->
-      <ng-container matColumnDef="progress">
-          <mat-header-cell *matHeaderCellDef mat-sort-header> Prénom </mat-header-cell>
-          <mat-cell *matCellDef="let row"> {{row.firstName}} </mat-cell>
-      </ng-container>                                   
+    <!-- Progress Column -->
+    <ng-container matColumnDef="progress">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Prénom </mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row.firstName}} </mat-cell>
+    </ng-container>
 
-      <!-- Name Column -->
-      <ng-container matColumnDef="name">
-          <mat-header-cell *matHeaderCellDef mat-sort-header> Adresse email </mat-header-cell>
-          <mat-cell *matCellDef="let row"> {{row.email}} </mat-cell>
-      </ng-container>
+    <!-- Name Column -->
+    <ng-container matColumnDef="name">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Adresse email </mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row.email}} </mat-cell>
+    </ng-container>
 
-      <!-- Color Column -->
-      <ng-container matColumnDef="color">           
-   
-          <mat-header-cell *matHeaderCellDef mat-sort-header> Action </mat-header-cell>
-          
-        <mat-cell *matCellDef="let row" [style.color]="row.color"> <i class="fas fa-trash-alt fa-lg" style="color: green;margin-top: 20px;cursor: pointer;" (click)="deleteUser(row._id)"></i></mat-cell>
+    <!-- Color Column -->
+    <ng-container matColumnDef="color">
 
-      </ng-container>
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Action </mat-header-cell>
 
-      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-      <mat-row *matRowDef="let row; columns: displayedColumns;">
-      </mat-row>
+      <mat-cell *matCellDef="let row" [style.color]="row.color"> <i class="fas fa-trash-alt fa-lg"
+          style="color: green;margin-top: 20px;cursor: pointer;" (click)="deleteUser(row._id)"></i></mat-cell>
+
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;">
+    </mat-row>
   </mat-table>
 
   <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
