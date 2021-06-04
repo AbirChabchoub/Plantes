@@ -1,0 +1,45 @@
+<section class="login_box_area section_gap">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="login_form_inner">
+                    <h3 id="titleOne">Ajouter un article </h3>
+                    <form class="row login_form" #blogForm='ngForm' (ngSubmit)="addArticleToBlog()">
+
+                        <div class="col-md-12 form-group">
+                            <div class="form-floating mb-3">
+                                <input type="text" class="form-control" id="floatingInput" placeholder="Nom du produit"  [(ngModel)]="blog.title" [ngModelOptions]="{standalone:true}">
+                                <label for="floatingInput">Titre de l'article</label>
+                              </div>
+                        </div>   
+                        <div class="col-md-12 form-group">
+                            <div class="form-floating mb-3">
+                                <input type="text" class="form-control" id="floatingInput" placeholder="Description"   [(ngModel)]="blog.article" [ngModelOptions]="{standalone:true}" style="height: 100px;">
+                                <label for="floatingInput">L'article</label>
+                              </div>
+                        </div>
+                  <hr class="hr">
+                        <br><br>
+                        
+                        <h3>L'image de l'article </h3>
+                        <div class="col">
+                        <div class="col-md-12 form-group">
+                            <label for="firstImg">
+                                <i class="fa fa-camera fa-7x" style="cursor: pointer;" (click)='filePicker.click()' ></i></label>
+                            <input type="file" class="form-control" name="name"  [(ngModel)]="blog.image"
+                                [ngModelOptions]="{standalone:true}" style="display:none;visibility:none;"  #filePicker (change)='onImageSelected($event)'>
+                                <img [src]="imagePreview" *ngIf="imagePreview" height="150px" width="150px">
+                                
+                        </div>
+                    </div>
+                    <hr class="hr">
+                    <br><br>                                   
+                        <div class="col-md-12 form-group">
+                            <button type="submit" value="submit" class="primary-btn" >Publier</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

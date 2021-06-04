@@ -42,7 +42,7 @@ export class AllAdComponent implements OnInit {
   }
 
   deleteAdFromAdmin(id:any){
-this.adminAdsService.deleteAd(id).subscribe(
+this.adminAdsService.deleteAdByAdmin(id).subscribe(
   ()=>{
 console.log('ad deleted succssefully from admin');
 this.getAllAds();

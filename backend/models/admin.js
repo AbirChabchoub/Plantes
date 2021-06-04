@@ -4,7 +4,8 @@ const adminSchema = mongoose.Schema({
     fullName: String,
     adminEmail: String,
     adminPassword: String,
-    adminConfirmPassword: String
+    adminConfirmPassword: String,
+    image:String
    
     
 });

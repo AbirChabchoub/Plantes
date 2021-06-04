@@ -17,6 +17,7 @@ export class AdsService {
 		formData.append('price', ad.price);
 		formData.append('image', image);
 		formData.append('userId', ad.userId);
+		formData.append('vendu', ad.vendu);
 
 		return this.httpClient.post<{ message: string }>(this.adUrl, formData);
 	}
@@ -24,6 +25,9 @@ export class AdsService {
 
 	getAllAds() {
 		return this.httpClient.get<{ ads: any }>(this.adUrl);
+	}
+	getAllAdsSold(id:any) {
+		return this.httpClient.get<{ ads: any }>(`${this.adUrl}/vendu/${id}`);
 	}
 
 	getAdById(id: any) {
@@ -33,5 +37,14 @@ export class AdsService {
 		return this.httpClient.get<{ ad: any }>(`${this.adUrl}/user/${id}`);
 	}
 
-	
+	deleteAdByUser(id: any) {
+		return this.httpClient.delete<{ message: String }>(`${this.adUrl}/${id}`);
+	}
+	updateAdByUser(ad: any) {
+		return this.httpClient.put<{ message: String }>(`${this.adUrl}/${ad._id}`, ad);
+	}
+
+	vendu(ad:any){
+		return this.httpClient.put<{message:string}>(`${this.adUrl}/vendu/${ad._id}`, ad);
+	}
 }

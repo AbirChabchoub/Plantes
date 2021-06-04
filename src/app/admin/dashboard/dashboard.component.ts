@@ -10,18 +10,15 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit {
-  admin: any = {};
-  id: any
-  constructor(private adminService: AdminUsersService,
-    private activatedRoute: ActivatedRoute) { }
+  
+  fullName: string
+
+  constructor() { }
 
   ngOnInit() {
-    this.id = this.activatedRoute.snapshot.paramMap.get('id');
-    this.adminService.getAdminById(this.id).subscribe(
-      (data) => {
-        this.admin = data.admin;
-
-      });
+  
+      this.fullName=JSON.parse(localStorage.getItem('adminFullName'));
+     
   }
 
 

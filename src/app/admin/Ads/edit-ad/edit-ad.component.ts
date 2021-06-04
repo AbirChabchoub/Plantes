@@ -38,13 +38,13 @@ export class EditAdComponent implements OnInit {
     });
   }
 
-  editAdByAdmin() {
-    this.adminAdService.updateAdByAdmin(this.ad).subscribe(
-      () => {
-        console.log('ad updated successfully from admin');
+  // editAdByAdmin() {
+  //   this.adminAdService.updateAdByAdmin(this.ad).subscribe(
+  //     () => {
+  //       console.log('ad updated successfully from admin');
 
-      });
-  }
+  //     });
+  // }
 
 
 

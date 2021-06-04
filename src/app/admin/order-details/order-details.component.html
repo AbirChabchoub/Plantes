@@ -1,0 +1,99 @@
+<div class="banner"></div>
+<div class="contact" id="registration">
+    <div class="container">
+        <div class="section-header">
+
+            <h2> Facture </h2>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="invoice-title">
+
+                       
+                    </div>
+                    <hr>
+
+                    <div class="row">
+                        <div class="col-xs-6">
+
+                            <address class="border">
+                                <h6 class="pull-right" >Numéro de la commande : {{order?._id}}</h6>
+                                <strong>Date de la commande:</strong><br>
+                                {{date}}<br><br>
+
+                                <strong>Expédiés à:</strong><br>
+                                {{user?.firstName}}<br>
+                                {{user?.lastName}}<br>
+                                {{user?.lAddress}}<br>
+                                {{user?.tel}}
+
+                            </address>
+                          
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title"><strong>Résumé commande</strong></h3>
+                        </div>
+                        <div class="panel-body">
+                            <div class="table-responsive">
+                                <table class="table table-condensed">
+                                    <thead>
+                                        <tr>
+                                            <td><strong>Nom du produit</strong></td>
+
+                                                                               
+                                            <td class="text-center"><strong> catégorie</strong></td>                                           
+                                            <td class="text-right"><strong>Prix initial</strong></td>
+                                            <td class="text-right"><strong>Prix livraison </strong></td>
+                                           
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <!-- foreach ($order->lineItems as $line) or some such thing here -->
+                                        <tr>
+                                            <td>{{order?.productName}}</td>
+                                           
+                                            <td class="text-center">{{order?.category}}</td>
+                                                                                    
+                                            <td class="text-right">{{order?.price}} DT</td>
+                                            <td class="text-right">7 DT</td>
+                                          
+                                        </tr>
+
+                                       
+                                       
+                                        <tr>
+                                            <td class="no-line"></td>
+                                            <td class="no-line"></td>
+                                          
+                                            <td class="no-line text-center"><strong>Total</strong></td>
+                                            <!-- <td class="no-line text-right"></td> -->
+                                            <td class="no-line text-right">
+                                                {{order?.price +7}} DT
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div>
+    <hr>
+    <button class="btn btn-success telecharger" (click)="printPage()">Imprimer</button><br><br><br>
+    
+</div>

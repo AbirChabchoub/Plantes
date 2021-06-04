@@ -1,0 +1,81 @@
+<br><br><br><br><br>
+<form [formGroup]="updateProfilAdmin">
+    <div class="container rounded bg-white mt-5">
+        <div class="row">
+            <div class="col-md-4 border-right">
+                <div class="d-flex flex-column align-items-center text-center p-3 py-5">
+                    <img class="rounded-circle mt-5" [src]="admin?.image" width="90">
+                    <button type="button" (click)='filePicker.click()' class="btn btn-success imageBtn">Sélectionner
+                        image</button>
+                    <div class="form-group">
+                        <input style="visibility: hidden;" type="file" class="form-control" #filePicker
+                            (change)='onImageSelected($event)' />
+                    </div>
+                    <img style="width: 50px;height: 50px;" *ngIf="imagePreview" [src]="imagePreview">
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div class="p-3 py-5">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <h6 class="text-right">Modifier mon profile</h6>
+                    </div>
+                    <div class="row mt-2">
+                        <div class="col-md-12">
+                            <input type="text" class="form-control" value="Nom & prénom" placeholder="Nom & prénom"
+                                formControlName="fullName" [(ngModel)]="admin.fullName">
+                        </div>
+                        <!-- first name validator and Error -->
+                        <div *ngIf='updateProfilAdmin.controls["fullName"].invalid && (updateProfilAdmin.controls["fullName"].touched 
+|| updateProfilAdmin.controls["fullName"].dirty)'>
+                            <div *ngIf='updateProfilAdmin.controls["fullName"].errors?.required' style="color:red">Ce
+                                champ
+                                est obligatoire</div>
+                        </div>                         
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-md-12">
+                            <input type="text" class="form-control" value="Adresse email" placeholder="Email"
+                                formControlName="adminEmail" [(ngModel)]="admin.adminEmail">
+                        </div>
+                        <div *ngIf='updateProfilAdmin.controls["adminEmail"].invalid && (updateProfilAdmin.controls["adminEmail"].touched 
+                        || updateProfilAdmin.controls["adminEmail"].dirty)'>
+                            <div *ngIf='updateProfilAdmin.controls["adminEmail"].errors?.email' style="color:red"> Veuillez
+                                entrez
+                                une adresse email valide</div>
+                            <div *ngIf='updateProfilAdmin.controls["adminEmail"].errors?.required' style="color:red">Ce champ
+                                est
+                                obligatoire</div>
+                        </div>
+                       
+                    </div>
+              
+                    <div class="row mt-3">
+                        <div class="col-md-6">
+                            <input type="password" class="form-control" value="Mot de passe" formControlName="adminPassword"
+                                [(ngModel)]="admin.adminPassword">
+                        </div>
+                        <div *ngIf='updateProfilAdmin.controls["adminPassword"].invalid && (updateProfilAdmin.controls["adminPassword"].touched 
+                        || updateProfilAdmin.controls["adminPassword"].dirty)'>
+                            <div *ngIf='updateProfilAdmin.controls["adminPassword"].errors?.required' style="color:red"> Ce champ
+                                est
+                                obligatoire</div>
+                        </div>
+                        <div class="col-md-6">
+                            <input type="password" class="form-control" value="Confirmer le mot de passe"
+                                placeholder="Confirmer le mot de passe" formControlName="adminConfirmPassword">
+                        </div>
+                        <div *ngIf='updateProfilAdmin.controls["adminConfirmPassword"].invalid && (updateProfilAdmin.controls["adminConfirmPassword"].touched 
+                        || updateProfilAdmin.controls["adminConfirmPassword"].dirty)'>
+                            <div *ngIf='updateProfilAdmin.controls["adminConfirmPassword"].errors?.mustMatch'
+                                style="color:red">
+                                Veuillez confirmer le mot de passe</div>
+                        </div>
+                    </div>
+                    <div class="mt-5 text-right"><button class="btn btn-primary profile-button" type="button"
+                            (click)='editProfil()'>Modifier</button></div>
+                   
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

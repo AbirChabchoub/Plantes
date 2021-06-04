@@ -18,6 +18,14 @@ const Comment = require('./models/comment');
 const Wishlist = require('./models/wishlist');
 //importer le modéle admin
 const Admin = require('./models/admin');
+//importer le modéle blog
+const Blog = require('./models/blog');
+//importer le modéle response
+const Response = require('./models/response');
+//importer le modéle order
+const Order = require('./models/order');
+//importer le modéle order
+const Question = require('./models/question');
 //importer le module de cryptage du pwd
 const bcrypt = require('bcrypt');
 //importer le pdfKit
@@ -68,7 +76,7 @@ const storage = multer.diskStorage({
 	}
 });
 
-// Security configuration
+// Security configuration 
 app.use((req, res, next) => {
 	res.setHeader('Access-Control-Allow-Origin', '*');
 	res.setHeader('Access-Control-Allow-Headers', 'Origin, Accept, Content-Type, X-Requested-with, Authorization');
@@ -94,7 +102,8 @@ app.post('/ads', multer({ storage: storage }).single('image'), (req, res) => {
 		description: req.body.description,
 		price: req.body.price,
 		image: url + '/images/' + req.file.filename,
-		userId: req.body.userId
+		userId: req.body.userId,
+		vendu: req.body.vendu
 	});
 	console.log(req.body.userId);
 	ad.save().then(
@@ -107,7 +116,20 @@ app.post('/ads', multer({ storage: storage }).single('image'), (req, res) => {
 //traitement logique de afficher tous les annonces
 app.get('/ads', (req, res) => {
 	console.log('here in add annonce', req.body);
-	Ad.find((err, docs) => {
+	Ad.find({ vendu: false }, (err, docs) => {
+		if (err) {
+			console.log('error with db ');
+		} else {
+			res.status(200).json({
+				ads: docs
+			});
+		}
+	});
+});
+//traitement logique de afficher tous les annonces vendu
+app.get('/ads/vendu/:id', (req, res) => {
+	console.log('here in add annonce', req.body);
+	Ad.find({ userId: req.params.id, vendu: true }, (err, docs) => {
 		if (err) {
 			console.log('error with db ');
 		} else {
@@ -119,9 +141,11 @@ app.get('/ads', (req, res) => {
 });
 
 //traitement logique de signup
-app.post('/users/signup', (req, res) => {
+app.post('/users/signup', multer({ storage: storage }).single('image'), (req, res) => {
 	bcrypt.hash(req.body.pwd, 10).then((cryptedPwd) => {
 		console.log('here in signup', req.body); //req.body te5ouli les valeurs mta3 formulaire li 3abitou
+		url = req.protocol + '://' + req.get('host');
+
 		const user = new User({
 			firstName: req.body.firstName,
 			lastName: req.body.lastName,
@@ -130,8 +154,10 @@ app.post('/users/signup', (req, res) => {
 			address: req.body.address,
 			pwd: cryptedPwd,
 			confirmPassword: cryptedPwd,
-			role: req.body.role
+			role: req.body.role,
+			image: url + '/images/profile.png'
 		});
+
 
 		user.save().then(
 			res.status(200).json({
@@ -189,14 +215,67 @@ app.get('/ads/:id', (req, res) => {
 		}
 	});
 });
+//tratement logique de delete ad by user
+app.delete('/ads/:id', (req, res) => {
+	0
+	console.log('here in delete ad by user');
+	Ad.deleteMany({ _id: req.params.id }).then(
+		res.status(200).json({
+			message: 'ad deleted'
+		})
+	);
 
+});
+//traitement logique de get ad by id if vendu
+app.put('/ads/vendu/:id', (req, res) => {
+	console.log('here in update ad by user', req.params.id);
+	const ad = new Ad({
+		_id: req.body._id,
+		productName: req.body.productName,
+		category: req.body.category,
+		description: req.body.description,
+		price: req.body.price,
+		userId: req.body.userId,
+		vendu: req.body.vendu
+	});
+	Ad.updateOne({ _id: req.params.id }, ad).then(
+		(result) => {
+			if (result) {
+				res.status(200).json({
+					message: 'ad updated with success'
+				});
+			}
+		});
+});
+//traitement logique de update ad by user
+app.put('/ads/:id', (req, res) => {
+	console.log('here in update ad by user', req.params.id);
+	const ad = new Ad({
+		_id: req.body._id,
+		productName: req.body.productName,
+		category: req.body.category,
+		description: req.body.description,
+		price: req.body.price,
+		userId: req.body.userId,
+		vendu: req.body.vendu
+	});
+	Ad.updateOne({ _id: req.params.id }, ad).then(
+		(result) => {
+			if (result) {
+				res.status(200).json({
+					message: 'ad updated with success'
+				});
+			}
+		});
+});
 //traitement logique d'ajout d'une catégorie
 app.post('/adCategory', (req, res) => {
-	console.log('here in add category');
+
 	const category = new Category({
 		categoryName: req.body.categoryName
+
 	});
-	console.log(req.body.categoryName);
+	console.log('here in add category', req.body.categoryName);
 
 	category.save().then(
 		res.status(200).json({
@@ -257,7 +336,7 @@ app.post('/users/login', (req, res) => {
 app.post('/admin', (req, res) => {
 	console.log('here in login', req.body);
 	const user = new User({
-		fullName: req.body.fullName,
+		firstName: req.body.firstName,
 		lastName: req.body.lastName,
 		email: req.body.email,
 		tel: req.body.tel,
@@ -287,7 +366,7 @@ app.get('/admin', (req, res) => {
 	});
 });
 
-//traitement logique de supprimer utilsateur
+//traitement logique de supprimer utilsateur by admin
 app.delete('/admin/:id', (req, res) => {
 	console.log('here in delete');
 	User.deleteOne({ _id: req.params.id }).then(
@@ -296,38 +375,25 @@ app.delete('/admin/:id', (req, res) => {
 		})
 	);
 });
-
-//traitement logique de update utilsateur
-app.put('/admin/:id', (req, res) => {
-	console.log('here in update', req.params.id);
-	const user = new User({
-		_id: req.body.id,
-		firstName: req.body.firstName,
-		lastName: req.body.lastName,
-		email: req.body.email,
-		address: req.body.address,
-		tel: req.body.tel,
-		pwd: req.body.pwd
-	});
-	User.updateOne({ _id: req.params.id }, user).then((result) => {
-		if (result) {
-			res.status(200).json({
-				message: 'user updated with success'
-			});
-		}
-	});
+//traitement logique de supprimer annonce by admin
+app.delete('/admin/ad/:id', (req, res) => {
+	console.log('here in delete ad by admin');
+	Ad.deleteOne({ _id: req.params.id }).then(
+		res.status(200).json({
+			message: 'ad deleted'
+		})
+	);
 });
-
 //traitement logique de afficher  les commentaires by id de produit
 app.get('/comments/:id', (req, res) => {
 	console.log('here id', req.params.id);
-	Comment.find({ prId: req.params.id }).then((findedObj) => {
+	Comment.find({ adId: req.params.id }).then((findedObj) => {
 		if (findedObj) {
 			res.status(200).json({
 				comments: findedObj
 			});
 		}
-		console.log('here comment', comments);
+		console.log('here comment', findedObj);
 	});
 });
 
@@ -335,10 +401,13 @@ app.get('/comments/:id', (req, res) => {
 app.post('/comments', (req, res) => {
 	console.log('here in add comment', req.body);
 	const comment = new Comment({
-		fullName: req.body.fullName,
 		commentUserId: req.body.commentUserId,
 		message: req.body.message,
-		prId: req.body.prId
+		adId: req.body.adId,
+		firstName: req.body.firstName,
+		lastName: req.body.lastName,
+		date: req.body.date,
+		image: req.body.image
 	});
 	comment.save().then(
 		res.status(200).json({
@@ -346,28 +415,21 @@ app.post('/comments', (req, res) => {
 		})
 	);
 });
-//traitement logique de save the date
-app.post('/comments', (req, res) => {
-	req.body.created_at = new Date();
-	db.collection('comments').save(req.body, (err, result) => {
-		if (err) return console.log(err);
-
-		console.log('saved to database');
-	});
-});
 
 //traitement logique de edit profil
-app.put('/users/:id', (req, res) => {
+app.put('/users/:id', multer({ storage: storage }).single('image'), (req, res) => {
 	console.log('here in update', req.params.id);
+	url = req.protocol + '://' + req.get('host');
 	const user = new User({
-		_id: req.body._id,
+		_id: req.params.id,
 		firstName: req.body.firstName,
 		lastName: req.body.lastName,
 		email: req.body.email,
 		tel: req.body.tel,
-		address: req.body.tel,
+		address: req.body.address,
 		pwd: req.body.pwd,
-		confirmPassword: req.body.confirmPassword
+		confirmPassword: req.body.confirmPassword,
+		image: url + '/images/' + req.file.filename
 	});
 	User.updateOne({ _id: req.params.id }, user).then(
 		(result) => {
@@ -375,9 +437,13 @@ app.put('/users/:id', (req, res) => {
 				res.status(200).json({
 					message: 'profil updated with success'
 				});
+
+
 			}
 		});
 });
+
+
 
 //traitement logique de get connectedUser
 app.get('/users/:id', (req, res) => {
@@ -392,15 +458,18 @@ app.get('/users/:id', (req, res) => {
 	});
 });
 
-//traitement logique de get ad by user id
 //traitement logique de ajouter article au wishlist
 app.post('/wishlist', (req, res) => {
 	console.log('here in add to wishlist');
 	const wishlist = new Wishlist({
 		adId: req.body.adId,
-		wishlistUserId: req.body.wishlistUserId
+		wishlistUserId: req.body.wishlistUserId,
+		productName: req.body.productName,
+		category: req.body.category,
+		description: req.body.description,
+		price: req.body.price,
+		image: req.body.image
 	});
-
 	wishlist.save().then(
 		res.status(200).json({
 			message: 'added to wishlist'
@@ -417,19 +486,7 @@ app.delete('/wishlist/:id', (req, res) => {
 		})
 	);
 });
-//traitement logique de get wihlist by userId
-app.get('/wishlist/:id', (req, res) => {
-	console.log('here in my wishlist');
-	Wishlist.findOne({ _id: req.params.id }).then((findedObj) => {
-		//_id !!! 5ater fel bd yetkteb hakek id sinn undefined
-		if (findedObj) {
-			res.status(200).json({
-				wishlist: findedObj
-			});
-		}
-	});
 
-});
 // Traitement logique de get ads by userId
 app.get('/ads/user/:id', (req, res) => {
 	console.log('here in ads profile', req.params.id);
@@ -442,8 +499,17 @@ app.get('/ads/user/:id', (req, res) => {
 	});
 	console.log('here ok ');
 });
-//traitement logique de supprimer annonce par l'admin
+// delete category
 app.delete('/adCategory/:id', (req, res) => {
+	console.log('here in delete gategory', req.params.id);
+	Category.deleteOne({ _id: req.params.id }).then(
+		res.status(200).json({
+			message: 'category deleted '
+		})
+	);
+});
+//traitement logique de supprimer annonce par l'admin
+app.delete('/adCategory/ad/:id', (req, res) => {
 	console.log('here in delete from ads', req.params.id);
 	Ad.deleteOne({ _id: req.params.id }).then(
 		res.status(200).json({
@@ -483,20 +549,7 @@ app.get('/adCategory/:id', (req, res) => {
 		}
 	})
 });
-//traitement logique passer commande
-app.post('/orders/:id', (req, res) => {
-	console.log('here in orders', req.params.id);
-	const order = new Order({
-		orderUserId: req.params.orderUserId,
-		productId: req.params.productId
 
-	});
-	order.save().then(
-		res.status(200).json({
-			message: 'added to basket'
-		})
-	);
-});
 //traitement logique de get admin by id
 app.get('/dashboard/:id', (req, res) => {
 	console.log('here in get admin by id', req.params.id);
@@ -510,14 +563,16 @@ app.get('/dashboard/:id', (req, res) => {
 
 });
 //traitement logique de signup Admin
-app.post('/admin/signup', (req, res) => {
+app.post('/admin/signup', multer({ storage: storage }).single('image'), (req, res) => {
 	bcrypt.hash(req.body.adminPassword, 10).then((cryptedPwd) => {
 		console.log('here in signup Admin', req.body); //req.body te5ouli les valeurs mta3 formulaire li 3abitou
+		url = req.protocol + '://' + req.get('host');
 		const admin = new Admin({
 			fullName: req.body.fullName,
 			adminEmail: req.body.adminEmail,
 			adminPassword: cryptedPwd,
-			adminConfirmPassword: cryptedPwd
+			adminConfirmPassword: cryptedPwd,
+			image: url + '/images/adminProfil.jpg'
 		});
 
 		admin.save().then(
@@ -565,28 +620,58 @@ app.post('/admin/login', (req, res) => {
 
 //traitement logique de get wishlist by id
 app.get('/wishlist/:id', (req, res) => {
-	console.log('here in get my wishlist');
-	Wishlist.find({ wishlistUserId: req.params.id })
-		.then((findedObj) => {
-			if (findedObj) {
-				res.status(200).json({
-				message:'0'
-				});
-			}
-console.log('heere',findedObj.adId);
+	console.log('here in get my wishlist', req.params.id);
+	Wishlist.find({ wishlistUserId: req.params.id }).then((findedObj) => {
+		if (findedObj) {
+			res.status(200).json({
+				wishlist: findedObj
 
-		})
+			});
 
-	Ad.find({_id: findedObj.adId}).then((finalUser) => {
-	
-		res.status(200).json({
-			wishlist:finalUser 
-			
-		});
+		}
+
+
 	});
+
+
+
 });
+//traitement logique de get connected Admin
+app.get('/admin/:id', (req, res) => {
+	console.log('here in get connected admin ', req.params.id);
+	Admin.findOne({ _id: req.params.id }).then((findedObj) => {
+		if (findedObj) {
+			res.status(200).json({
+				admin: findedObj
+
+			});
+		}
+	});
+
+});
+//traitement logique de update admin profil
+app.put('/admin/:id', multer({ storage: storage }).single('image'), (req, res) => {
+	console.log('here in update', req.params.id);
+	url = req.protocol + '://' + req.get('host');
+	const admin = new Admin({
+		_id: req.params.id,
+		fullName: req.body.fullName,
+		adminEmail: req.body.adminEmail,
+		adminPassword: req.body.adminPassword,
+		adminConfirmPassword: req.body.adminConfirmPassword,
+		image: url + '/images/' + req.file.filename
+	});
+	Admin.updateOne({ _id: req.params.id }, admin).then(
+		(result) => {
+			if (result) {
+				res.status(200).json({
+					message: 'profil updated with success'
+				});
 
 
+			}
+		});
+});
 //traitement logique de users chart
 app.get('/admin', (req, res) => {
 	console.log('here in users chart ');
@@ -603,7 +688,7 @@ app.get('/admin', (req, res) => {
 
 })
 //traitement logique de edit user profile by admin
-app.put('/admin/:id', (req, res) => {
+app.put('/admin/user/:id', (req, res) => {
 	console.log('here in update', req.params.id);
 	const user = new User({
 		_id: req.body._id,
@@ -611,9 +696,9 @@ app.put('/admin/:id', (req, res) => {
 		lastName: req.body.lastName,
 		email: req.body.email,
 		tel: req.body.tel,
-		address: req.body.tel,
-		pwd: req.body.pwd,
-		confirmPassword: req.body.confirmPassword
+		address: req.body.address,
+		pwd: req.body.pwd
+
 	});
 	User.updateOne({ _id: req.params.id }, user).then(
 		(result) => {
@@ -624,19 +709,281 @@ app.put('/admin/:id', (req, res) => {
 			}
 		});
 });
+//traitement logique de get user by id from admin
+app.get('/admin/user/:id', (req, res) => {
+	console.log('here in get user by Id from admin');
+	User.findOne({ _id: req.params.id }).then((findedUser) => {
+		if (findedUser) {
+			res.status(200).json({
+				user: findedUser
 
-//traitement logique de get UserByIdFromAdmin
-// app.get('/admin/:id', (req, res) => {
-// 	console.log('here UserIdFromAdmin', req.params.id);
-// 	User.findOne({ _id: req.params.id }).then((findedObj) => {
-// 		//_id !!! 5ater fel bd yetkteb hakek id sinn undefined
-// 		if (findedObj) {
-// 			res.status(200).json({
-// 				user: findedObj
-// 			});
-// 		}
-// 	});
-// });
+			});
+		}
+	})
+
+});
+
+//traitement logique passer commande
+app.post('/orders', (req, res) => {
+	console.log('here in orders');
+	const order = new Order({
+		orderUserId: req.body.orderUserId,
+		productId: req.body.productId,
+		productName: req.body.productName,
+		category: req.body.category,
+		description: req.body.description,
+		price: req.body.price,
+		image: req.body.image,
+		vendu: req.body.vendu
+
+	});
+	order.save().then(
+		res.status(200).json({
+			message: 'added to basket'
+		})
+	);
+});
+//traitement logique de get order by user id
+app.get('/orders/:id', (req, res) => {
+	console.log('here in get order by user id');
+	Order.find({ orderUserId: req.params.id }).then((findedObj) => {
+		if (findedObj) {
+			res.status(200).json({
+				order: findedObj
+			})
+		}
+	});
+
+});
+//traitement logique de get all orders
+app.get('/orders', (req, res) => {
+	console.log('here in get all orders');
+	Order.find((err, docs) => {
+		console.log(docs);
+		if (err) {
+			console.log('error with db ');
+		} else {
+			res.status(200).json({
+				orders: docs
+			});
+		}
+	});
+});
+//traitement logique de delete order 
+app.delete('/orders/:id', (req, res) => {
+	console.log('here in delete order');
+	Order.deleteMany({ adId: req.params.id }).then(
+		res.status(200).json({
+			message: ' deleted from order'
+		})
+	)
+
+});
+//traitement logique de publier un blog
+app.post('/adminBlog', multer({ storage: storage }).single('image'), (req, res) => {
+	console.log('here in add article', req.body);
+	url = req.protocol + '://' + req.get('host');
+	const blog = new Blog({
+		title: req.body.title,
+		article: req.body.article,
+		image: url + '/images/' + req.file.filename
+
+	});
+	blog.save().then(
+		res.status(200).json({
+			message: 'Article Added successfully'
+		})
+	);
+});
+//traitement logique de get all articles in blog
+app.get('/adminBlog', (req, res) => {
+	console.log('here in blog ');
+	Blog.find((err, docs) => {
+		if (err) {
+			console.log('error with DB');
+
+		} else {
+			res.status(200).json({
+				blog: docs
+			})
+		}
+	})
+
+});
+//traitement logique de update ad by admin 
+app.put('/admin/ad/:id', multer({ storage: storage }).single('image'), (req, res) => {
+	console.log('here in add article', req.body);
+	url = req.protocol + '://' + req.get('host');
+	const ad = new Ad({
+		productName: req.body.productName,
+		category: req.body.category,
+		description: req.body.description,
+		price: req.body.price,
+		userId: req.body.userId,
+		vendu: req.body.vendu,
+		image: url + '/images/' + req.file.filename
+
+	});
+	blog.save().then(
+		res.status(200).json({
+			message: 'Article Added successfully'
+		})
+	);
+
+
+
+});
+//traitement logique de ajouter une réponse à un commentaire
+app.post('/response', (req, res) => {
+	console.log('here in add response');
+	var response = new Response({
+		responseUserId: req.body.responseUserId,
+		response: req.body.response,
+		commentId: req.body.commentId,
+		firstName: req.body.firstName,
+		lastName: req.body.lastName,
+		date: req.body.date,
+		image: req.body.image
+	});
+
+	response.save().then(
+		res.status(200).json({
+			message: 'response added successfully'
+		})
+	)
+});
+//traitement logique de get response by comment id
+app.get('/response/:id', (req, res) => {
+	console.log('here in get response by comment id');
+	Response.find({ commentId: req.params.id }).then((findedObj) => {
+		if (findedObj) {
+			res.status(200).json({
+				response: findedObj
+
+			});
+
+		}
+
+
+	});
+
+});
+//traitement logique de get all responses 
+app.get('/response', (req, res) => {
+	console.log('here in get all responses');
+	Response.find((err, docs) => {
+		console.log(docs);
+		if (err) {
+			console.log('error with db ');
+		} else {
+			res.status(200).json({
+				response: docs
+			});
+		}
+	});
+
+});
+//traitement logique de delete wishlist by ad id
+app.delete('/wishlist/ads/:id', (req, res) => {
+	console.log('here in delete wishlist by ad id', req.params.id);
+	Wishlist.deleteMany({ adId: req.params.id }).then(
+		res.status(200).json({
+			message: ' deleted from wishlist'
+		})
+	);
+});
+//traitement logique de poser question dans le forum
+app.post('/forum', (req, res) => {
+	console.log('here in add a question');
+	const question = new Question({
+		questionUserId: req.body.questionUserId,
+		question: req.body.question,
+		adId: req.body.adId,
+		firstName: req.body.firstName,
+		lastName: req.body.lastName,
+		date: req.body.date,
+		image: req.body.image
+	});
+	question.save().then(
+		res.status(200).json({
+			message: 'question added successfully'
+		})
+	)
+});
+//traitement logique de get all question 
+app.get('/forum', (req, res) => {
+	Question.find((err, docs) => {
+		console.log('here in get all questions', docs);
+
+		if (err) {
+			console.log('error with DB');
+
+		} else {
+			res.status(200).json({
+				questions: docs
+			});
+		}
+	});
+
+});
+
+//traitement logique de supprimer question 
+app.delete('/forum/:id', (req, res) => {
+	console.log('here in delete question', req.params.id);
+	Question.deleteOne({ _id: req.params.id }).then(
+		res.status(200).json({
+			message: ' deleted from forum'
+		})
+	);
+});
+//traitement logique de generate pdf
+app.get("/orders/pdf", (req, res) => {
+	console.log('here in generate pdf');
+	const doc = new PDFDocument();
+	doc.pipe(fs.createWriteStream("backend/pdf/orders.pdf"));
+	doc
+
+		.fillColor("#444444")
+		.fontSize(20)
+		.text("Patient Information.", 110, 57)
+		.fontSize(10)
+		.text("725 Fowler Avenue", 200, 65, { align: "right" })
+		.text("Chamblee, GA 30341", 200, 80, { align: "right" })
+		.moveDown();
+	// Create the table 
+	const table = {
+		headers: ["Nom du produit", "Catégorie", "Description", "Prix"],
+		rows: []
+	};
+	console.log('here in get all orders by pdf');
+	Order.find((err, docs) => {
+		if (err) {
+			console.log('error with DB');
+		} else {
+			for (const orders of docs) {
+				table.rows.push([orders.productName, orders.category, orders.description, orders.price]);
+
+			}
+			doc.moveDown().table(table, 10, 125, { width: 590 });
+			doc.end();
+			res.status(200).json({
+				message: 'done for PDF'
+			})
+		}
+	})
+});
+//traitement logique de get order by id
+app.get('/orders/orderId/:id', (req, res) => {
+	console.log('here in get order by id');
+	Order.findOne({ _id: req.params.id }).then((findedObj) => {
+		if (findedObj) {
+			res.status(200).json({
+				order: findedObj
+			})
+		}
+	});
+
+});
 
 
 module.exports = app;

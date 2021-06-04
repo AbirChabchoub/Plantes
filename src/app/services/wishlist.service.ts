@@ -24,6 +24,9 @@ removeFromWishlist(id:any){
 
 }
 
+removeByAdId(id:any){
+  return this.httpClient.delete<{message:any}>(`${this.wishlistUrl}/ads/${id}`)
+}
 
 
 }

@@ -36,7 +36,7 @@ const NavigationItems = [
 				id: 'dashboard',
 				title: 'Dashboard',
 				type: 'item',
-				url: '/dashboard/:id',
+				url: '/dashboard',
 				icon: 'feather icon-home'
 			}
 		]
@@ -81,146 +81,50 @@ const NavigationItems = [
 				title: 'Ajouter une annonce',
 				type: 'item',
 				url: '/addAds',
-				icon: 'feather icon-pie-chart'
+				icon: 'feather icon-file-plus'
 			},
 			{
 				id: 'addCategory',
 				title: 'Ajouter une catégorie',
 				type: 'item',
-				url: '/addCategory',
+				url: '/category',
 				icon: 'feather icon-server'
 			}
 		]
 	},
 	{
-		id: 'pages',
-		title: 'Pages',
+		id: 'navigation',
+		title: 'Gérer le blog',
 		type: 'group',
-		icon: 'feather icon-file-text',
+		icon: 'feather icon-monitor',
 		children: [
 			{
-				id: 'auth',
-				title: 'Authentication',
-				type: 'collapse',
-				icon: 'feather icon-lock',
-				children: [
-					{
-						id: 'signup',
-						title: 'Sign up',
-						type: 'item',
-						url: '/auth/signup',
-						target: true,
-						breadcrumbs: false
-					},
-					{
-						id: 'signin',
-						title: 'Sign in',
-						type: 'item',
-						url: '/auth/signin',
-						target: true,
-						breadcrumbs: false
-					},
-					{
-						id: 'reset-password',
-						title: 'Reset Password',
-						type: 'item',
-						url: '/auth/reset-password',
-						target: true,
-						breadcrumbs: false
-					},
-					{
-						id: 'change-password',
-						title: 'Change Password',
-						type: 'item',
-						url: '/auth/change-password',
-						target: true,
-						breadcrumbs: false
-					}
-				]
-			},
-			{
-				id: 'maintenance',
-				title: 'Maintenance',
-				type: 'collapse',
-				icon: 'feather icon-sliders',
-				children: [
-					{
-						id: 'error',
-						title: 'Error',
-						type: 'item',
-						url: '/maintenance/error',
-						target: true,
-						breadcrumbs: false
-					},
-					{
-						id: 'coming-soon',
-						title: 'Maintenance',
-						type: 'item',
-						url: '/maintenance/coming-soon',
-						target: true,
-						breadcrumbs: false
-					}
-				]
+				id: 'orders',
+				title: 'Gérer les commandes',
+				type: 'item',
+				url: '/adminOrders',
+				icon: 'feather icon-check-circle'
 			}
 		]
 	},
 	{
-		id: 'other',
-		title: 'Other',
+		id: 'Gérer le forum',
+		title: 'Gérer blog et forum',
 		type: 'group',
 		icon: 'feather icon-align-left',
 		children: [
 			{
-				id: 'menu-level',
-				title: 'Menu Levels',
-				type: 'collapse',
-				icon: 'feather icon-menu',
-				children: [
-					{
-						id: 'menu-level-2.1',
-						title: 'Menu Level 2.1',
+				id: 'questions',
+						title: 'Les questions',
 						type: 'item',
-						url: 'javascript:',
-						external: true
-					},
-					{
-						id: 'menu-level-2.2',
-						title: 'Menu Level 2.2',
-						type: 'collapse',
-						children: [
-							{
-								id: 'menu-level-2.2.1',
-								title: 'Menu Level 2.2.1',
-								type: 'item',
-								url: 'javascript:',
-								external: true
-							},
-							{
-								id: 'menu-level-2.2.2',
-								title: 'Menu Level 2.2.2',
-								type: 'item',
-								url: 'javascript:',
-								external: true
-							}
-						]
-					}
-				]
+						url: '/questions',
+						icon: 'feather icon-help-circle'
 			},
 			{
-				id: 'disabled-menu',
-				title: 'Disabled Menu',
+				id: 'blog',
+				title: 'Ajouter un article',
 				type: 'item',
-				url: 'javascript:',
-				classes: 'nav-item disabled',
-				icon: 'feather icon-power',
-				external: true
-			},
-			{
-				id: 'sample-page',
-				title: 'Sample Page',
-				type: 'item',
-				url: '/sample-page',
-				classes: 'nav-item',
+				url: '/adminBlog',
 				icon: 'feather icon-sidebar'
 			}
 		]
